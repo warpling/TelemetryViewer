@@ -55,7 +55,14 @@ struct GroupView: View {
                         }
 
                     } else if let group = groupService.group(withID: groupID) {
-                        InsightGroupEditor(groupID: groupID, appID: group.appID, title: group.title, order: group.order ?? 0)
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(group.title)
+                                .font(.headline)
+                            Text("Select an insight to view its details.")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
+                        .padding()
                     } else {
                         Text("Please select a thing!")
                     }

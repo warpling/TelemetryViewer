@@ -5,7 +5,6 @@
 //  Created by Daniel Jilg on 07.09.20.
 //
 
-import DataTransferObjects
 import SwiftUI
 import TelemetryClient
 
@@ -13,10 +12,6 @@ struct UserSettingsView: View {
     @EnvironmentObject var api: APIClient
 
     @State private var showingAlert = false
-    @State private var userDTO = DTOv1.UserDTO(
-        id: UUID(), organization: nil, firstName: "", lastName: "", email: "", emailIsVerified: false,
-        receiveMarketingEmails: nil, isFoundingUser: false, receiveReports: .never
-    )
 
     var body: some View {
         if api.user != nil {
@@ -82,9 +77,6 @@ struct UserSettingsView: View {
                 }
                 .padding()
                 .onAppear {
-                    if let user = api.user {
-                        userDTO = user
-                    }
                     TelemetryManager.shared.send(TelemetrySignal.userSettingsShown.rawValue, for: api.user?.email)
                 }
             }

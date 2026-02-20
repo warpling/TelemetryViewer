@@ -13,7 +13,7 @@ struct InsightsGrid: View {
     @Binding var selectedInsightID: DTOv2.Insight.ID?
     @Binding var sidebarVisible: Bool
 
-    let insightGroup: DTOv2.Group
+    let insightGroup: InsightGroupInfo
     let isSelectable: Bool
 
     var body: some View {
