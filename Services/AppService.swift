@@ -50,6 +50,11 @@ class AppService: ObservableObject {
         return appDictionary[appID]
     }
 
+    func allApps() async throws -> [AppInfo] {
+        let url = api.urlForPath(apiVersion: .v3, "apps")
+        return try await api.get(url: url)
+    }
+
     func retrieveApp(with appID: DTOv2.App.ID, callback: ((Result<DTOv2.App, TransferError>) -> Void)? = nil) {
         let url = api.urlForPath(apiVersion: .v3, "apps", appID.uuidString)
         api.get(url) { (result: Result<DTOv2.App, TransferError>) in

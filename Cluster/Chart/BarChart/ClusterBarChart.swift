@@ -17,16 +17,20 @@ struct ClusterBarChart: View {
             case .timeseries:
                 if case let .timeSeries(result) = result {
                     BarChartTimeSeries(result: result, query: query)
+                } else {
+                    DashboardLink()
                 }
             case .topN:
                 if case let .topN(result) = result {
                     BarChartTopN(topNQueryResult: result, query: query)
+                } else {
+                    DashboardLink()
                 }
             default:
-                Text("\(query.queryType.rawValue) bar charts are not supported.")
+                DashboardLink()
             }
         } else {
-            Text("Charts require macOS 13.0 or later.")
+            DashboardLink()
         }
     }
 }

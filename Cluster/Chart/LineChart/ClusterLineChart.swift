@@ -17,15 +17,21 @@ struct ClusterLineChart: View {
             switch query.queryType {
             case .timeseries:
                 if case let .timeSeries(result) = result {
-                    LineChartTimeSeries(result: result)
+                    LineChartTimeSeries(result: result, query: query)
                 } else {
-                    Text("Mismatch in query type and result type")
+                    DashboardLink()
+                }
+            case .topN:
+                if case let .topN(result) = result {
+                    LineChartTopN(topNQueryResult: result, query: query)
+                } else {
+                    DashboardLink()
                 }
             default:
-                Text("\(query.queryType.rawValue) bar charts are not supported.")
+                DashboardLink()
             }
         } else {
-            Text("Charts require macOS 13.0 or later.")
+            DashboardLink()
         }
     }
 }

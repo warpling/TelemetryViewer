@@ -28,7 +28,7 @@ class SignalsService: ObservableObject {
     }
 
     func getSignals(for appID: UUID) {
-        let url = api.urlForPath("apps", appID.uuidString, "signals")
+        let url = api.urlForPath(apiVersion: .v3, "apps", appID.uuidString, "signals")
 
         loadingAppIDs.insert(appID)
 
@@ -56,7 +56,7 @@ class SignalsService: ObservableObject {
     func getSignalsAsync(for appID: UUID) async {
         guard loadingAppIDs.contains(appID) == false else { return }
 
-        let url = api.urlForPath("apps", appID.uuidString, "signals")
+        let url = api.urlForPath(apiVersion: .v3, "apps", appID.uuidString, "signals")
         do {
             let signals: [DTOv1.Signal] = try await api.get(url: url)
             signalsForAppID[appID] = signals.map { $0.toIdentifiableSignal() }

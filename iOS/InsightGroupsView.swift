@@ -10,10 +10,6 @@ import SwiftUI
 import TelemetryClient
 
 /// Show insight groups and insights
-///
-/// This view contains a NavigationView despite being included in a navigation stack already. This is a workaround, because otherwise
-/// the bottom bar wouldn't get displayed correctly on iOS 16. To prevent the double Navigation Bar showing, we're hiding one of the
-/// bars using a newly created view modifier. We feel slightly dirty after writing this and hope to remove it at some glorious future day.
 struct InsightGroupsView: View {
     @EnvironmentObject var appService: AppService
     @EnvironmentObject var groupService: GroupService
@@ -27,80 +23,73 @@ struct InsightGroupsView: View {
 
     @Environment(\.horizontalSizeClass) var sizeClass
 
-    private var groupsToolbarPlacement: ToolbarItemPlacement {
-        if sizeClass == .compact {
-            return .bottomBar
-        } else {
-            return .navigation
-        }
-    }
-
     let appID: DTOv2.App.ID
 
+    private var selectedGroupTitle: String {
+        guard let groupID = selectedInsightGroupID else { return "Dashboard" }
+        return groupService.group(withID: groupID)?.title ?? "Dashboard"
+    }
+
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                StatusMessageDisplay()
+        VStack(alignment: .leading, spacing: 0) {
+            StatusMessageDisplay()
 
+            // Group selector header
+            groupSelectorHeader
+                .padding(.horizontal)
+                .padding(.top, 8)
+
+            if queryService.isTestingMode {
                 TestModeIndicator()
+            }
 
-                groupSelector
-                    .padding(.horizontal)
-                    .padding(.bottom)
+            Divider()
 
-                Divider()
-
-                Group {
-                    if selectedInsightGroupID == nil {
-                        EmptyAppView(appID: appID)
-                            .frame(maxWidth: 400)
-                            .padding()
-                    }
-
-                    selectedInsightGroupID.map {
-                        GroupView(groupID: $0, selectedInsightID: $selectedInsightID, sidebarVisible: $sidebarVisible)
-                            .background(Color.Zinc100)
-                    }
+            Group {
+                if selectedInsightGroupID == nil {
+                    EmptyAppView(appID: appID)
+                        .frame(maxWidth: 400)
+                        .padding()
                 }
-            }
 
-            .alwaysHideNavigationBar()
-            .onAppear {
-                selectedInsightGroupID = appService.app(withID: appID)?.insightGroupIDs.first
-                TelemetryManager.send("InsightGroupsAppear")
-            }
-            .task {
-                for groupID in groupService.groupsDictionary.keys {
-                    for insightID in groupService.groupsDictionary[groupID]?.insightIDs ?? [] {
-                        if !(insightService.insightDictionary.keys.contains(insightID)) {
-                            await insightService.retrieveInsight(with: insightID)
-                        }
-                    }
-                }
-            }
-            .onReceive(groupService.objectWillChange) { _ in
-                if let groupID = selectedInsightGroupID {
-                    if !(groupService.groupsDictionary.keys.contains(groupID)) {
-                        selectedInsightGroupID = appService.appDictionary[appID]?.insightGroupIDs.first
-                    }
-                } else {
-                    selectedInsightGroupID = appService.appDictionary[appID]?.insightGroupIDs.first
-                }
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Toggle("Test Mode", isOn: $queryService.isTestingMode.animation())
-                    datePickerButton
+                selectedInsightGroupID.map {
+                    GroupView(groupID: $0, selectedInsightID: $selectedInsightID, sidebarVisible: $sidebarVisible)
+                        .background(Color.Zinc100)
                 }
             }
         }
+        .navigationTitle(appService.app(withID: appID)?.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationTitle(appService.app(withID: appID)?.name ?? "Loading...")
-        .navigationViewStyle(.stack)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                datePickerButton
+            }
+        }
+        .onAppear {
+            selectedInsightGroupID = appService.app(withID: appID)?.insightGroupIDs.first
+            TelemetryManager.send("InsightGroupsAppear")
+        }
+        .task(id: selectedInsightGroupID) {
+            guard let groupID = selectedInsightGroupID else { return }
+            for insightID in groupService.groupsDictionary[groupID]?.insightIDs ?? [] {
+                if !(insightService.insightDictionary.keys.contains(insightID)) {
+                    await insightService.retrieveInsight(with: insightID)
+                }
+            }
+        }
+        .onReceive(groupService.objectWillChange) { _ in
+            if let groupID = selectedInsightGroupID {
+                if !(groupService.groupsDictionary.keys.contains(groupID)) {
+                    selectedInsightGroupID = appService.appDictionary[appID]?.insightGroupIDs.first
+                }
+            } else {
+                selectedInsightGroupID = appService.appDictionary[appID]?.insightGroupIDs.first
+            }
+        }
     }
 
-    private var groupSelector: some View {
-        Picker("Group", selection: $selectedInsightGroupID) {
+    private var groupSelectorHeader: some View {
+        Menu {
             if let app = appService.app(withID: appID) {
                 ForEach(
                     app.insightGroupIDs
@@ -108,15 +97,33 @@ struct InsightGroupsView: View {
                         .sorted(by: { $0.1 < $1.1 }),
                     id: \.0
                 ) { idTuple in
-                    TinyLoadingStateIndicator(
-                        loadingState: groupService.loadingState(for: idTuple.0),
-                        title: groupService.group(withID: idTuple.0)?.title
-                    )
-                    .tag(idTuple.0 as DTOv2.Group.ID?)
+                    Button {
+                        selectedInsightGroupID = idTuple.0
+                    } label: {
+                        HStack {
+                            Text(groupService.group(withID: idTuple.0)?.title ?? "Loading...")
+                            if idTuple.0 == selectedInsightGroupID {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
                 }
             }
+
+            Divider()
+
+            Toggle("Test Mode", isOn: $queryService.isTestingMode.animation())
+        } label: {
+            HStack(spacing: 4) {
+                Text(selectedGroupTitle)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.primary)
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.caption)
+                    .foregroundStyle(Color.secondary)
+            }
         }
-        .pickerStyle(SegmentedPickerStyle())
     }
 
     private var datePickerButton: some View {
@@ -145,29 +152,6 @@ struct InsightGroupsView: View {
             }
         } label: {
             Label("New Group", systemImage: "plus")
-        }
-    }
-}
-
-@available(iOS 16, *)
-struct WithoutNavigationBarIOS16: ViewModifier {
-    func body(content: Content) -> some View {
-        content.toolbar(.hidden, for: .navigationBar)
-    }
-}
-
-struct WithoutNavigationBarLegacy: ViewModifier {
-    func body(content: Content) -> some View {
-        content.navigationBarHidden(true)
-    }
-}
-
-extension View {
-    func alwaysHideNavigationBar() -> some View {
-        if #available(iOS 16, *) {
-            return modifier(WithoutNavigationBarIOS16())
-        } else {
-            return modifier(WithoutNavigationBarLegacy())
         }
     }
 }

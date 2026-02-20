@@ -14,37 +14,57 @@ struct PieChartTopN: View {
     let topNQueryResult: TopNQueryResult
     let query: CustomQuery
 
+    @State private var legendExpanded = false
+
+    private var legendNames: [String] {
+        var seen = Set<String>()
+        var names: [String] = []
+        for row in topNQueryResult.rows {
+            for rowResult in row.result {
+                let name = getMetricName(rowResult: rowResult)
+                if seen.insert(name).inserted {
+                    names.append(name)
+                }
+            }
+        }
+        return names
+    }
+
     var body: some View {
+        VStack(spacing: 4) {
+            Chart {
+                ForEach(topNQueryResult.rows, id: \.self) { (row: TopNQueryResultRow) in
 
-        Chart {
-            ForEach(topNQueryResult.rows, id: \.self) { (row: TopNQueryResultRow) in
+                    ForEach(row.result, id: \.self) { (rowResult: AdaptableQueryResultItem) in
 
-                ForEach(row.result, id: \.self) { (rowResult: AdaptableQueryResultItem) in
-
-                    ForEach(query.aggregations ?? [], id: \.self) { (aggregator: Aggregator) in
-                        if let metricValue = getMetricValue(rowResult: rowResult){
-                            if query.granularity != .all {
-                                getBarMark(
-                                    timeStamp: row.timestamp,
-                                    name: aggregator.name,
-                                    metricValue: metricValue,
-                                    metricName: getMetricName(rowResult: rowResult)
-                                )
-                            } else {
-                                getSectorMark(
-                                    name: aggregator.name,
-                                    metricValue: metricValue,
-                                    metricName: getMetricName(rowResult: rowResult)
-                                )
+                        ForEach(query.aggregations ?? [], id: \.self) { (aggregator: Aggregator) in
+                            if let metricValue = getMetricValue(rowResult: rowResult){
+                                if query.granularity != .all {
+                                    getBarMark(
+                                        timeStamp: row.timestamp,
+                                        name: aggregator.name,
+                                        metricValue: metricValue,
+                                        metricName: getMetricName(rowResult: rowResult)
+                                    )
+                                } else {
+                                    getSectorMark(
+                                        name: aggregator.name,
+                                        metricValue: metricValue,
+                                        metricName: getMetricName(rowResult: rowResult)
+                                    )
+                                }
                             }
                         }
+
                     }
 
                 }
-
             }
+            .chartForegroundStyleScale(range: Color.chartColors)
+            .chartLegend(.hidden)
+
+            CollapsibleLegend(names: legendNames, expanded: $legendExpanded)
         }
-        .chartForegroundStyleScale(range: Color.chartColors)
 
     }
 

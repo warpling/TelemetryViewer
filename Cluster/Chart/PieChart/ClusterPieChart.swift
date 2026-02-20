@@ -18,12 +18,14 @@ struct ClusterPieChart: View {
             case .topN:
                 if case let .topN(result) = result {
                     PieChartTopN(topNQueryResult: result, query: query)
+                } else {
+                    DashboardLink()
                 }
             default:
-                Text("\(query.queryType.rawValue) bar charts are not supported.")
+                DashboardLink()
             }
         } else {
-            Text("Charts require macOS 13.0 or later.")
+            DashboardLink()
         }
     }
 }

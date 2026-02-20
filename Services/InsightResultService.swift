@@ -192,7 +192,7 @@ class InsightResultService: ObservableObject {
             return
         }
 
-        let url = api.urlForPath(apiVersion: .v2, "insights", insight.id.uuidString, "result",
+        let url = api.urlForPath(apiVersion: .v3, "insights", insight.id.uuidString, "result",
                                  Formatter.iso8601noFS.string(from: timeWindowBeginningDate),
                                  Formatter.iso8601noFS.string(from: timeWindowEndDate),
                                  "\(isTestingMode ? "true" : "live")")
@@ -246,7 +246,7 @@ class InsightResultService: ObservableObject {
 
     func performRetrieval(ofInsightWithID insightID: DTOv2.Insight.ID) async throws -> DTOv2.InsightCalculationResult {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<DTOv2.InsightCalculationResult, Error>) in
-            let url = api.urlForPath(apiVersion: .v2, "insights", insightID.uuidString, "result",
+            let url = api.urlForPath(apiVersion: .v3, "insights", insightID.uuidString, "result",
                                      Formatter.iso8601noFS.string(from: timeWindowBeginningDate),
                                      Formatter.iso8601noFS.string(from: timeWindowEndDate),
                                      "\(isTestingMode ? "true" : "live")")
@@ -347,7 +347,7 @@ private extension InsightResultService {
 
         loadingState[insightID] = .loading
 
-        let url = api.urlForPath(apiVersion: .v2, "insights", insightID.uuidString, "result",
+        let url = api.urlForPath(apiVersion: .v3, "insights", insightID.uuidString, "result",
                                  Formatter.iso8601noFS.string(from: timeWindowBeginningDate),
                                  Formatter.iso8601noFS.string(from: timeWindowEndDate))
 

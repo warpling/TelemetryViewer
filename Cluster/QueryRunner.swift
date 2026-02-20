@@ -5,6 +5,7 @@
 //  Created by Lukas on 23.05.24.
 //
 
+import Combine
 import DataTransferObjects
 import SwiftUI
 
@@ -13,19 +14,27 @@ struct QueryRunner: View {
     @EnvironmentObject var queryService: QueryService
 
     let query: CustomQuery
+    let title: String
     let type: InsightDisplayMode
 
     @State var queryResultWrapper: QueryResultWrapper?
     @State var isLoading: Bool = false
     @State var taskID: String = ""
+    @State var errorMessage: String?
+    @State private var isStale: Bool = false
+
+    private let staleThreshold: TimeInterval = 60
 
     var body: some View {
         VStack(spacing: 10){
             if let queryResult = queryResultWrapper?.result {
-                ClusterChart(query: query, result: queryResult, type: type)
+                ClusterChart(query: query, result: queryResult, title: title, type: type)
                     .frame(height: 135)
                     .id(queryResultWrapper)
                     .padding(.horizontal)
+            } else if errorMessage != nil || queryResultWrapper?.error != nil {
+                DashboardLink()
+                    .padding()
             } else {
                 SondrineAnimation()
                     .frame(width: 100, height: 100)
@@ -33,18 +42,39 @@ struct QueryRunner: View {
                     .padding()
             }
 
-            HStack(spacing: 3){
+            HStack(spacing: 3) {
                 if isLoading {
                     ProgressView()
                         .scaleEffect(0.75)
                         .frame(height: 5)
                 }
                 Spacer()
-                if let queryResultWrapper = queryResultWrapper {
-                    Text("Updated")
-                    Text(queryResultWrapper.calculationFinishedAt, style: .relative)
-                    Text("ago")
-
+                if let queryResultWrapper = queryResultWrapper, queryResultWrapper.result != nil {
+                    Button {
+                        guard !isLoading else { return }
+                        Task { await runQuery() }
+                    } label: {
+                        HStack(spacing: 3) {
+                            if isStale {
+                                Image(systemName: "arrow.clockwise")
+                            }
+                            Text("Updated")
+                            Text(queryResultWrapper.calculationFinishedAt, style: .relative)
+                            Text("ago")
+                        }
+                    }
+                    .buttonStyle(.plain)
+                } else if errorMessage != nil || queryResultWrapper?.error != nil {
+                    Button {
+                        guard !isLoading else { return }
+                        Task { await runQuery() }
+                    } label: {
+                        HStack(spacing: 3) {
+                            Image(systemName: "arrow.clockwise")
+                            Text("Failed — Tap to retry")
+                        }
+                    }
+                    .buttonStyle(.plain)
                 } else {
                     Text("Calculating...")
                 }
@@ -56,40 +86,46 @@ struct QueryRunner: View {
         }
         .onAppear {
             Task {
-                do {
-                    try await getQueryResult()
-                } catch {
-                    print(error)
-                }
+                await runQuery()
             }
         }
         .onChange(of: queryService.isTestingMode) { _ in
             Task {
-                do {
-                    try await getQueryResult()
-                } catch {
-                    print(error)
-                }
+                await runQuery()
             }
         }
         .onChange(of: queryService.timeWindowBeginning) { _ in
             Task {
-                do {
-                    try await getQueryResult()
-                } catch {
-                    print(error)
-                }
+                await runQuery()
             }
         }
         .onChange(of: queryService.timeWindowEnd) { _ in
             Task {
-                do {
-                    try await getQueryResult()
-                } catch {
-                    print(error)
-                }
+                await runQuery()
             }
         }
+        .onReceive(Timer.publish(every: 15, on: .main, in: .common).autoconnect()) { _ in
+            updateStaleness()
+        }
+    }
+
+    private func runQuery() async {
+        do {
+            errorMessage = nil
+            try await getQueryResult()
+            updateStaleness()
+        } catch {
+            errorMessage = "Could not load data"
+            print(error)
+        }
+    }
+
+    private func updateStaleness() {
+        guard let wrapper = queryResultWrapper else {
+            isStale = false
+            return
+        }
+        isStale = Date().timeIntervalSince(wrapper.calculationFinishedAt) > staleThreshold
     }
 
     private func getQueryResult() async throws {

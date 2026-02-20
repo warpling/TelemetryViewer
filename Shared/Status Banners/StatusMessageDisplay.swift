@@ -56,12 +56,12 @@ struct StatusMessageDisplay: View {
     }
 
     func loadPublicStatusMessages() {
-        let url = api.urlForPath(apiVersion: .v2, "status", "public-messages")
+        let url = api.urlForPath(apiVersion: .v3, "status", "public-messages")
         load(url: url)
     }
 
     func loadOrganizationStatusMessages() {
-        let url = api.urlForPath(apiVersion: .v2, "status", "organization-messages")
+        let url = api.urlForPath(apiVersion: .v3, "status", "organization-messages")
         load(url: url)
     }
 

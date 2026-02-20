@@ -46,7 +46,7 @@ class OrgService: ObservableObject {
 
     func retrieveOrganisation() async throws -> DTOv2.Organization {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<DTOv2.Organization, Error>) in
-            let url = api.urlForPath(apiVersion: .v2, "organization")
+            let url = api.urlForPath(apiVersion: .v3, "organization")
             api.get(url) { (result: Result<DTOv2.Organization, TransferError>) in
                 switch result {
                 case let .success(org):

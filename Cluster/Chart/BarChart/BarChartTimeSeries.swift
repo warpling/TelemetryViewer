@@ -14,12 +14,16 @@ struct BarChartTimeSeries: View {
     let result: TimeSeriesQueryResult
     let query: CustomQuery
 
+    private var aggregationKey: String {
+        query.aggregations?.first?.name ?? "count"
+    }
+
     var body: some View {
         Chart {
             ForEach(result.rows, id: \.timestamp) { row in
                 BarMark(
                     x: .value("Date", row.timestamp, unit: granularity()),
-                    y: .value("Total Count", row.result["count"]?.value ?? 0)
+                    y: .value("Total Count", row.result[aggregationKey]?.value ?? 0)
                 )
                 .cornerRadius(2)
             }

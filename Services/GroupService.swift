@@ -68,7 +68,7 @@ class GroupService: ObservableObject {
     }
 
     func delete(insightGroupID: UUID, in appID: UUID, callback: ((Result<[String: String], TransferError>) -> Void)? = nil) {
-        let url = api.urlForPath(apiVersion: .v2, "groups", insightGroupID.uuidString)
+        let url = api.urlForPath(apiVersion: .v3, "groups", insightGroupID.uuidString)
 
         api.delete(url) { (result: Result<[String: String], TransferError>) in
             callback?(result)

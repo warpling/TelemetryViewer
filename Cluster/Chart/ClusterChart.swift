@@ -13,6 +13,7 @@ struct ClusterChart: View {
 
     let query: CustomQuery
     let result: QueryResult
+    let title: String
     let type: InsightDisplayMode
 
     var body: some View {
@@ -23,8 +24,12 @@ struct ClusterChart: View {
             ClusterLineChart(query: query, result: result)
         case .pieChart:
             ClusterPieChart(query: query, result: result)
+        case .raw, .number:
+            ClusterRawTable(query: query, result: result)
+        case .funnelChart:
+            ClusterFunnelChart(query: query, result: result)
         default:
-            Text("Not supported")
+            DashboardLink()
         }
     }
 }

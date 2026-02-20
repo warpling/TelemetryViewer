@@ -6,7 +6,7 @@ struct NoAppSelectedView: View {
 
     var body: some View {
         Group {
-            if (orgService.organization?.appIDs.count ?? 0) > 0 {
+            if !appService.appDictionary.isEmpty {
                 Text("Please Select an App")
                     .foregroundColor(.grayColor)
             } else {

@@ -36,18 +36,17 @@ struct LeftSidebarView: View {
         case editApp(app: UUID)
     }
 
-    func getApps(organization: DTOv2.Organization?) {
+    func loadApps() {
         Task {
-            for appID in organization?.appIDs ?? [] {
-                if let app = try? await appService.retrieveApp(withID: appID) {
-                    DispatchQueue.main.async {
-                        app.insightGroupIDs.forEach { groupID in
-                            if !(groupService.groupsDictionary.keys.contains(groupID)) {
-                                groupService.retrieveGroup(with: groupID)
-                            }
+            guard let apps = try? await appService.allApps() else { return }
+            DispatchQueue.main.async {
+                for app in apps {
+                    app.insightGroupIDs.forEach { groupID in
+                        if !(groupService.groupsDictionary.keys.contains(groupID)) {
+                            groupService.retrieveGroup(with: groupID)
                         }
-                        appService.appDictionary[app.id] = app
                     }
+                    appService.appDictionary[app.id] = app
                 }
             }
         }
@@ -56,18 +55,9 @@ struct LeftSidebarView: View {
     var body: some View {
         List {
             Section {
-                if let organization = orgService.organization {
-                    ForEach(organization.appIDs, id: \.self) { appID in
-                        section(for: appID)
-                    }
-                    .onChange(of: orgService.organization) { _ in
-                        getApps(organization: orgService.organization)
-                    }
-                    .task {
-                        getApps(organization: orgService.organization)
-                    }
+                ForEach(Array(appService.appDictionary.keys), id: \.self) { appID in
+                    section(for: appID)
                 }
-
             } header: {
                 Text("Apps")
             }
@@ -131,12 +121,17 @@ struct LeftSidebarView: View {
             }
         }
         .task {
-            if let organization = try? await orgService.retrieveOrganisation() {
-                DispatchQueue.main.async {
-                    orgService.organization = organization
-                    orgService.getOrganisation()
+            // Ensure an org is selected (required for td-organization-id header)
+            let orgs = (try? await orgService.allOrganizations()) ?? []
+            if !orgs.isEmpty {
+                let hasValidSelection = orgs.contains { $0.id.uuidString == api._currentOrganisationID }
+                if !hasValidSelection {
+                    api._currentOrganisationID = orgs.first?.id.uuidString
                 }
             }
+
+            // Load apps directly from v3 endpoint
+            loadApps()
         }
 
         #if os(macOS)

@@ -14,7 +14,7 @@ struct OrganizationInfo: Codable, Equatable {
     var stripeCustomerID: String?
     var stripeMaxSignals: Double?
     var maxSignalsMultiplier: Double?
-    var resolvedMaxSignals: Int64
+    var maxSignals: Int64?
     var isInRestrictedMode: Bool
     var countryCode: String?
     var referralCode: String

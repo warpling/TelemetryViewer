@@ -1,8 +1,6 @@
 //
-//  BarCharTopN.swift
+//  LineChartTopN.swift
 //  Telemetry Viewer (iOS)
-//
-//  Created by Lukas on 23.05.24.
 //
 
 import SwiftUI
@@ -10,7 +8,7 @@ import Charts
 import DataTransferObjects
 
 @available(macOS 13.0, iOS 16.0, *)
-struct BarChartTopN: View {
+struct LineChartTopN: View {
     let topNQueryResult: TopNQueryResult
     let query: CustomQuery
 
@@ -34,12 +32,10 @@ struct BarChartTopN: View {
         VStack(spacing: 4) {
             Chart {
                 ForEach(topNQueryResult.rows, id: \.self) { (row: TopNQueryResultRow) in
-
                     ForEach(row.result, id: \.self) { (rowResult: AdaptableQueryResultItem) in
-
                         ForEach(query.aggregations ?? [], id: \.self) { (aggregator: Aggregator) in
-                            if let metricValue = getMetricValue(rowResult: rowResult){
-                                getBarMark(
+                            if let metricValue = getMetricValue(rowResult: rowResult) {
+                                getLineMark(
                                     timeStamp: row.timestamp,
                                     name: aggregator.name,
                                     metricValue: metricValue,
@@ -47,9 +43,7 @@ struct BarChartTopN: View {
                                 )
                             }
                         }
-
                     }
-
                 }
             }
             .chartForegroundStyleScale(range: Color.chartColors)
@@ -57,19 +51,18 @@ struct BarChartTopN: View {
 
             CollapsibleLegend(names: legendNames, expanded: $legendExpanded)
         }
-
     }
 
-    func getBarMark(timeStamp: Date, name: String, metricValue: Double, metricName: String) -> some ChartContent {
-        return BarMark(
+    func getLineMark(timeStamp: Date, name: String, metricValue: Double, metricName: String) -> some ChartContent {
+        return LineMark(
             x: .value("Date", timeStamp, unit: query.granularityAsCalendarComponent),
             y: .value(name, metricValue)
         )
         .foregroundStyle(by: .value(query.dimension?.name ?? "No value", metricName))
-        .cornerRadius(2)
+        .interpolationMethod(.cardinal)
     }
 
-    func getMetricName(rowResult: AdaptableQueryResultItem) -> String{
+    func getMetricName(rowResult: AdaptableQueryResultItem) -> String {
         let dimensionName = query.dimension?.name ?? "No value"
         let metricName = rowResult.dimensions[dimensionName] ?? "Not found"
         return metricName
@@ -82,5 +75,4 @@ struct BarChartTopN: View {
         let value = rowResult.metrics[metricName]
         return value
     }
-
 }

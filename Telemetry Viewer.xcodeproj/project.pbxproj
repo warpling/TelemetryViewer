@@ -172,6 +172,10 @@
 		804385D72C0739D0004E3285 /* OrganisationSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385D52C0739D0004E3285 /* OrganisationSwitcher.swift */; };
 		8083DD692C05C9C300596926 /* ClusterPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD682C05C9C300596926 /* ClusterPieChart.swift */; };
 		8083DD6B2C05C9FE00596926 /* PieChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */; };
+		981C899E599D9A11A5FD7C1A /* ClusterRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */; };
+		DA671FEFB073728CED7F4EE5 /* ClusterFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */; };
+		022B5F489E5C2114EB181618 /* ClusterRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */; };
+		AB7526451B3C25D3074C6C2C /* ClusterFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */; };
 		8083DD6D2C05EA0100596926 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6C2C05EA0100596926 /* Extensions.swift */; };
 		80AD3E942BFF2A7300BBD7EB /* QueryRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E932BFF2A7300BBD7EB /* QueryRunner.swift */; };
 		80AD3E972BFF2AA200BBD7EB /* ClusterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E962BFF2AA200BBD7EB /* ClusterChart.swift */; };
@@ -180,6 +184,7 @@
 		80AD3EA02BFF306F00BBD7EB /* BarChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9F2BFF306F00BBD7EB /* BarChartTimeSeries.swift */; };
 		80AD3EA32BFF33D900BBD7EB /* ClusterLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA22BFF33D900BBD7EB /* ClusterLineChart.swift */; };
 		80AD3EA52BFF33FF00BBD7EB /* LineChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */; };
+		80AD3EA62BFF340000BBD7EB /* LineChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */; };
 		80AD3EAE2BFF6D2200BBD7EB /* BarCharTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */; };
 		AA0E0EF0E3D252B4A84DC84A /* BarChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9F2BFF306F00BBD7EB /* BarChartTimeSeries.swift */; };
 		AA107E455D00E403ECC4F7C2 /* ClusterBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9D2BFF305100BBD7EB /* ClusterBarChart.swift */; };
@@ -192,6 +197,7 @@
 		AADB1358C359B9796EE9F4D9 /* ClusterLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA22BFF33D900BBD7EB /* ClusterLineChart.swift */; };
 		AAF18659EA72ADDCC8FBBE96 /* PieChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */; };
 		AAFACBA96BEDD532DE0DF299 /* LineChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */; };
+		AAFACBAA6BEDD533DE0DF300 /* LineChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */; };
 		C5173B41283D52E40018CE9F /* InsightsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5173B40283D52E40018CE9F /* InsightsGrid.swift */; };
 		C51CB73627565EB5005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
 		C51CB73C27565F76005A3FB9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A8D8AD270C821A0032560A /* Intents.framework */; platformFilter = maccatalyst; };
@@ -538,6 +544,8 @@
 		8083DD682C05C9C300596926 /* ClusterPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPieChart.swift; sourceTree = "<group>"; };
 		8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartTopN.swift; sourceTree = "<group>"; };
 		8083DD6C2C05EA0100596926 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterRawTable.swift; sourceTree = "<group>"; };
+		8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterFunnelChart.swift; sourceTree = "<group>"; };
 		80AD3E932BFF2A7300BBD7EB /* QueryRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRunner.swift; sourceTree = "<group>"; };
 		80AD3E962BFF2AA200BBD7EB /* ClusterChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterChart.swift; sourceTree = "<group>"; };
 		80AD3E982BFF2B0A00BBD7EB /* ClusterInstrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterInstrument.swift; sourceTree = "<group>"; };
@@ -545,6 +553,7 @@
 		80AD3E9F2BFF306F00BBD7EB /* BarChartTimeSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartTimeSeries.swift; sourceTree = "<group>"; };
 		80AD3EA22BFF33D900BBD7EB /* ClusterLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterLineChart.swift; sourceTree = "<group>"; };
 		80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartTimeSeries.swift; sourceTree = "<group>"; };
+		80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartTopN.swift; sourceTree = "<group>"; };
 		80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCharTopN.swift; sourceTree = "<group>"; };
 		C5173B40283D52E40018CE9F /* InsightsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsGrid.swift; sourceTree = "<group>"; };
 		C51CB73B27565F76005A3FB9 /* TelemetryDeckMacIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TelemetryDeckMacIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -906,8 +915,26 @@
 				8083DD672C05C9AC00596926 /* PieChart */,
 				80AD3EA12BFF33C100BBD7EB /* LineChart */,
 				80AD3E9C2BFF303E00BBD7EB /* BarChart */,
+				0580EE631FB20D0ECC2B7BA6 /* RawTable */,
+				C3DF38F69580F8FC89AA9212 /* FunnelChart */,
 			);
 			path = Chart;
+			sourceTree = "<group>";
+		};
+		0580EE631FB20D0ECC2B7BA6 /* RawTable */ = {
+			isa = PBXGroup;
+			children = (
+				9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */,
+			);
+			path = RawTable;
+			sourceTree = "<group>";
+		};
+		C3DF38F69580F8FC89AA9212 /* FunnelChart */ = {
+			isa = PBXGroup;
+			children = (
+				8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */,
+			);
+			path = FunnelChart;
 			sourceTree = "<group>";
 		};
 		80AD3E9C2BFF303E00BBD7EB /* BarChart */ = {
@@ -925,6 +952,7 @@
 			children = (
 				80AD3EA22BFF33D900BBD7EB /* ClusterLineChart.swift */,
 				80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */,
+				80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */,
 			);
 			path = LineChart;
 			sourceTree = "<group>";
@@ -1771,6 +1799,7 @@
 				80AD3E9E2BFF305100BBD7EB /* ClusterBarChart.swift in Sources */,
 				2B3CC0DC264D4AFE0038B528 /* LexiconService.swift in Sources */,
 				80AD3EA52BFF33FF00BBD7EB /* LineChartTimeSeries.swift in Sources */,
+				80AD3EA62BFF340000BBD7EB /* LineChartTopN.swift in Sources */,
 				8083DD6D2C05EA0100596926 /* Extensions.swift in Sources */,
 				2B1D469E26CC51A8008814A9 /* GroupService.swift in Sources */,
 				2B1D468926CC4423008814A9 /* OrgService.swift in Sources */,
@@ -1819,6 +1848,8 @@
 				C5F4D36228ACF48000EBB667 /* SingleKeyValueView.swift in Sources */,
 				63C4E9582778C54D00344E20 /* SignalListExplanationView.swift in Sources */,
 				8083DD692C05C9C300596926 /* ClusterPieChart.swift in Sources */,
+				981C899E599D9A11A5FD7C1A /* ClusterRawTable.swift in Sources */,
+				DA671FEFB073728CED7F4EE5 /* ClusterFunnelChart.swift in Sources */,
 				2BBFCA25267D05E40013DC74 /* ProgressView+Scale.swift in Sources */,
 				80AD3E942BFF2A7300BBD7EB /* QueryRunner.swift in Sources */,
 				2BBFCA29267D05E40013DC74 /* Binding+OnUpdate.swift in Sources */,
@@ -1895,10 +1926,13 @@
 				AA0E0EF0E3D252B4A84DC84A /* BarChartTimeSeries.swift in Sources */,
 				AADB1358C359B9796EE9F4D9 /* ClusterLineChart.swift in Sources */,
 				AAFACBA96BEDD532DE0DF299 /* LineChartTimeSeries.swift in Sources */,
+				AAFACBAA6BEDD533DE0DF300 /* LineChartTopN.swift in Sources */,
 				AAD0D09FCD37F218395D0B20 /* ClusterPieChart.swift in Sources */,
 				AAF18659EA72ADDCC8FBBE96 /* PieChartTopN.swift in Sources */,
 				AA433C4A50E839DC7D4CB43A /* BarCharTopN.swift in Sources */,
 				AA8C9A1ED69AAABA2C1226A5 /* Extensions.swift in Sources */,
+				022B5F489E5C2114EB181618 /* ClusterRawTable.swift in Sources */,
+				AB7526451B3C25D3074C6C2C /* ClusterFunnelChart.swift in Sources */,
 				2B21FCD826FDC38500A8A55B /* NewInsightMenu.swift in Sources */,
 				C5F4D34728ACF48000EBB667 /* DonutChartView.swift in Sources */,
 				C5F4D36728ACF48000EBB667 /* TextModifiers.swift in Sources */,
@@ -2002,7 +2036,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 547;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
@@ -2033,7 +2067,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 547;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
@@ -2066,7 +2100,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 547;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckWidget/Info.plist;
@@ -2099,7 +2133,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 547;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckWidget/Info.plist;
@@ -2130,7 +2164,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckWidget/TelemetryDeckWidgetExtension (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 680;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckWidget;
@@ -2162,7 +2196,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckWidget/TelemetryDeckWidgetExtension (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 680;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckWidget;
@@ -2193,7 +2227,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckIntents/TelemetryDeckIntents (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 680;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckIntents;
@@ -2222,7 +2256,7 @@
 				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckIntents/TelemetryDeckIntents (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 680;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckIntents;
@@ -2373,7 +2407,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS/Telemetry Viewer (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 744;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -2399,7 +2433,7 @@
 				CODE_SIGN_ENTITLEMENTS = "iOS/Telemetry Viewer (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 744;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -2428,7 +2462,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 740;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
@@ -2456,7 +2490,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 740;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = FL4V655A94;
+				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = macOS/Info.plist;

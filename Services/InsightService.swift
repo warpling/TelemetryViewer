@@ -58,7 +58,7 @@ class InsightService: ObservableObject {
     }
 
     func create(insightWith: DTOv2.Insight, callback: ((Result<DTOv2.Insight, TransferError>) -> Void)? = nil) {
-        let url = api.urlForPath(apiVersion: .v2, "insights")
+        let url = api.urlForPath(apiVersion: .v3, "insights")
 
         api.post(insightWith, to: url, defaultValue: nil) { (result: Result<DTOv2.Insight, TransferError>) in
             callback?(result)
@@ -66,7 +66,7 @@ class InsightService: ObservableObject {
     }
 
     func update(insightID: UUID, in insightGroupID: UUID, in appID: UUID, with insightDTO: DTOv2.Insight, callback: ((Result<DTOv2.Insight, TransferError>) -> Void)? = nil) {
-        let url = api.urlForPath(apiVersion: .v2, "insights", insightID.uuidString)
+        let url = api.urlForPath(apiVersion: .v3, "insights", insightID.uuidString)
 
         api.patch(insightDTO, to: url) { [unowned self] (result: Result<DTOv2.Insight, TransferError>) in
             taskRetrieveInsight(with: insightID)
@@ -76,7 +76,7 @@ class InsightService: ObservableObject {
     }
 
     func delete(insightID: UUID, callback: ((Result<[String: String], TransferError>) -> Void)? = nil) {
-        let url = api.urlForPath(apiVersion: .v2, "insights", insightID.uuidString)
+        let url = api.urlForPath(apiVersion: .v3, "insights", insightID.uuidString)
 
         api.delete(url) { (result: Result<[String: String], TransferError>) in
             callback?(result)
@@ -91,7 +91,7 @@ class InsightService: ObservableObject {
     /// Should the server return an error, or should a communication error occur, this method will call
     /// the callback black with an empty array and inform the APIClient error service about the error.
     func widgetableInsights(callback: @escaping (([DTOv2.AppWithInsights]) -> Void)) {
-        let url = api.urlForPath(apiVersion: .v2, "insights", "widgetableInsights")
+        let url = api.urlForPath(apiVersion: .v3, "insights", "widgetableInsights")
 
         api.get(url) { (result: Result<[DTOv2.AppWithInsights], TransferError>) in
             switch result {
@@ -106,7 +106,7 @@ class InsightService: ObservableObject {
 
     func getInsight(withID insightID: DTOv2.Insight.ID) async throws -> DTOv2.Insight {
         return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<DTOv2.Insight, Error>) in
-            let url = api.urlForPath(apiVersion: .v2, "insights", insightID.uuidString)
+            let url = api.urlForPath(apiVersion: .v3, "insights", insightID.uuidString)
             api.get(url) { (result: Result<DTOv2.Insight, TransferError>) in
                 switch result {
                 case let .success(insight):

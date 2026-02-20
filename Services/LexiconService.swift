@@ -55,7 +55,7 @@ class LexiconService: ObservableObject {
     }
 
     func getSignalTypes(for appID: UUID, callback: ((Result<[DTOv1.LexiconSignalDTO], TransferError>) -> Void)? = nil) {
-        let url = api.urlForPath("apps", appID.uuidString, "lexicon", "signaltypes")
+        let url = api.urlForPath(apiVersion: .v3, "apps", appID.uuidString, "lexicon", "signaltypes")
 
         loadingAppIDs.insert(appID)
 

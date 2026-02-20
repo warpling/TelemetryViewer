@@ -23,7 +23,7 @@ struct ClusterInstrument: View {
                 .foregroundStyle(Color.Zinc600)
                 .padding(.top)
                 .padding(.horizontal)
-            QueryRunner(query: query, type: type)
+            QueryRunner(query: query, title: title, type: type)
         }
         .compositingGroup()
         .background(.background)

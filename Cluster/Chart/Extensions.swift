@@ -6,7 +6,114 @@
 //
 
 import Foundation
+import SwiftUI
 import DataTransferObjects
+
+struct DashboardLink: View {
+    var body: some View {
+        Link(destination: URL(string: "https://dashboard.telemetrydeck.com")!) {
+            HStack(spacing: 4) {
+                Text("View on dashboard.telemetrydeck.com")
+                Image(systemName: "arrow.up.right")
+            }
+            .font(.footnote)
+            .foregroundStyle(Color.Zinc400)
+        }
+    }
+}
+
+@available(macOS 13.0, iOS 16.0, *)
+struct CollapsibleLegend: View {
+    let names: [String]
+    @Binding var expanded: Bool
+
+    private var maxCollapsed: Int { 3 }
+
+    private var shouldCollapse: Bool {
+        names.count > maxCollapsed + 1
+    }
+
+    private var visibleNames: [String] {
+        if shouldCollapse && !expanded {
+            return Array(names.prefix(maxCollapsed))
+        }
+        return names
+    }
+
+    var body: some View {
+        if !names.isEmpty {
+            VStack(alignment: .leading, spacing: 2) {
+                FlowLayout(spacing: 6) {
+                    ForEach(Array(visibleNames.enumerated()), id: \.offset) { index, name in
+                        HStack(spacing: 3) {
+                            Circle()
+                                .fill(Color.chartColors[index % Color.chartColors.count])
+                                .frame(width: 6, height: 6)
+                            Text(name)
+                                .lineLimit(1)
+                        }
+                    }
+
+                    if shouldCollapse {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                expanded.toggle()
+                            }
+                        } label: {
+                            Text(expanded ? "Less" : "+\(names.count - maxCollapsed) more")
+                                .foregroundStyle(Color.Zinc400)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+            .font(.caption2)
+            .foregroundStyle(Color.Zinc600)
+            .padding(.horizontal, 8)
+        }
+    }
+}
+
+@available(macOS 13.0, iOS 16.0, *)
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 6
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let result = arrange(proposal: proposal, subviews: subviews)
+        return result.size
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let result = arrange(proposal: proposal, subviews: subviews)
+        for (index, position) in result.positions.enumerated() {
+            subviews[index].place(at: CGPoint(x: bounds.minX + position.x, y: bounds.minY + position.y), proposal: .unspecified)
+        }
+    }
+
+    private func arrange(proposal: ProposedViewSize, subviews: Subviews) -> (positions: [CGPoint], size: CGSize) {
+        let maxWidth = proposal.width ?? .infinity
+        var positions: [CGPoint] = []
+        var x: CGFloat = 0
+        var y: CGFloat = 0
+        var rowHeight: CGFloat = 0
+        var maxX: CGFloat = 0
+
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x + size.width > maxWidth && x > 0 {
+                x = 0
+                y += rowHeight + spacing
+                rowHeight = 0
+            }
+            positions.append(CGPoint(x: x, y: y))
+            rowHeight = max(rowHeight, size.height)
+            x += size.width + spacing
+            maxX = max(maxX, x)
+        }
+
+        return (positions, CGSize(width: maxX, height: y + rowHeight))
+    }
+}
 
 extension CustomQuery {
     var granularityAsCalendarComponent: Calendar.Component{

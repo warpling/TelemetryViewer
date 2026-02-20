@@ -54,7 +54,13 @@ final class APIClient: ObservableObject {
         }
     }
 
-    @AppStorage("currentOrganisationID") var _currentOrganisationID: String?
+    var _currentOrganisationID: String? {
+        get { UserDefaults.standard.string(forKey: "currentOrganisationID") }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "currentOrganisationID")
+            objectWillChange.send()
+        }
+    }
 
     @Published var registrationStatus: RegistrationStatus?
 

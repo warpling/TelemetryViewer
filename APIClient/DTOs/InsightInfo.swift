@@ -15,6 +15,13 @@ public struct InsightInfo: Codable, Hashable, Identifiable {
         case customQuery
         case funnel
         case experiment
+        case unknown
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            let rawValue = try container.decode(String.self)
+            self = InsightType(rawValue: rawValue) ?? .unknown
+        }
     }
 
     public var id: UUID
