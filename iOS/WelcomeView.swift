@@ -67,6 +67,7 @@ struct WelcomeView: View {
             }
             .padding()
             .navigationTitle("Welcome to TelemetryDeck")
+            .navigationBarTitleDisplayMode(.large)
         }
         .navigationViewStyle(.stack)
         .onAppear {

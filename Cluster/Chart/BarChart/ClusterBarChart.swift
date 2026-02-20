@@ -12,17 +12,21 @@ struct ClusterBarChart: View {
     let result: QueryResult
 
     var body: some View {
-        switch query.queryType {
-        case .timeseries:
-            if case let .timeSeries(result) = result {
-                BarChartTimeSeries(result: result, query: query)
+        if #available(macOS 13.0, iOS 16.0, *) {
+            switch query.queryType {
+            case .timeseries:
+                if case let .timeSeries(result) = result {
+                    BarChartTimeSeries(result: result, query: query)
+                }
+            case .topN:
+                if case let .topN(result) = result {
+                    BarChartTopN(topNQueryResult: result, query: query)
+                }
+            default:
+                Text("\(query.queryType.rawValue) bar charts are not supported.")
             }
-        case .topN:
-            if case let .topN(result) = result {
-                BarChartTopN(topNQueryResult: result, query: query)
-            }
-        default:
-            Text("\(query.queryType.rawValue) bar charts are not supported.")
+        } else {
+            Text("Charts require macOS 13.0 or later.")
         }
     }
 }

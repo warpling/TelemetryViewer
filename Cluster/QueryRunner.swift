@@ -63,7 +63,7 @@ struct QueryRunner: View {
                 }
             }
         }
-        .onChange(of: queryService.isTestingMode) {
+        .onChange(of: queryService.isTestingMode) { _ in
             Task {
                 do {
                     try await getQueryResult()
@@ -72,7 +72,7 @@ struct QueryRunner: View {
                 }
             }
         }
-        .onChange(of: queryService.timeWindowBeginning) {
+        .onChange(of: queryService.timeWindowBeginning) { _ in
             Task {
                 do {
                     try await getQueryResult()
@@ -81,7 +81,7 @@ struct QueryRunner: View {
                 }
             }
         }
-        .onChange(of: queryService.timeWindowEnd) {
+        .onChange(of: queryService.timeWindowEnd) { _ in
             Task {
                 do {
                     try await getQueryResult()

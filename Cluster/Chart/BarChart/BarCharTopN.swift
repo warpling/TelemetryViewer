@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 import DataTransferObjects
 
+@available(macOS 13.0, iOS 16.0, *)
 struct BarChartTopN: View {
     let topNQueryResult: TopNQueryResult
     let query: CustomQuery

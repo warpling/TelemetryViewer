@@ -13,13 +13,17 @@ struct ClusterPieChart: View {
     let result: QueryResult
 
     var body: some View {
-        switch query.queryType {
-        case .topN:
-            if case let .topN(result) = result {
-                PieChartTopN(topNQueryResult: result, query: query)
+        if #available(macOS 14.0, iOS 17.0, *) {
+            switch query.queryType {
+            case .topN:
+                if case let .topN(result) = result {
+                    PieChartTopN(topNQueryResult: result, query: query)
+                }
+            default:
+                Text("\(query.queryType.rawValue) bar charts are not supported.")
             }
-        default:
-            Text("\(query.queryType.rawValue) bar charts are not supported.")
+        } else {
+            Text("Charts require macOS 13.0 or later.")
         }
     }
 }

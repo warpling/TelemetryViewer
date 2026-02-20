@@ -129,7 +129,6 @@
 		2BC522EB2625FCEF00E643AC /* HelpAndFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC522E92625FCEF00E643AC /* HelpAndFeedbackView.swift */; };
 		2BEDE71026A73EA9007247B0 /* MacOS12RecentSignalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDE70F26A73EA9007247B0 /* MacOS12RecentSignalsView.swift */; };
 		2BF2754626AAC5C10051591C /* MacOs12PayloadKeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2754526AAC5C10051591C /* MacOs12PayloadKeysView.swift */; };
-		2BF2BE452763921400A79531 /* CreateNewAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2BE442763921400A79531 /* CreateNewAppView.swift */; };
 		6351A784277C6431003AF559 /* CustomPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A783277C6431003AF559 /* CustomPickers.swift */; };
 		6351A786277C927D003AF559 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A780277C5F29003AF559 /* EditorView.swift */; };
 		6351A789277C9ED8003AF559 /* InsightDisplayMode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A788277C9ED8003AF559 /* InsightDisplayMode+Extensions.swift */; };
@@ -170,6 +169,7 @@
 		804385D32C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
 		804385D42C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
 		804385D62C0739D0004E3285 /* OrganisationSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385D52C0739D0004E3285 /* OrganisationSwitcher.swift */; };
+		804385D72C0739D0004E3285 /* OrganisationSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385D52C0739D0004E3285 /* OrganisationSwitcher.swift */; };
 		8083DD692C05C9C300596926 /* ClusterPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD682C05C9C300596926 /* ClusterPieChart.swift */; };
 		8083DD6B2C05C9FE00596926 /* PieChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */; };
 		8083DD6D2C05EA0100596926 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6C2C05EA0100596926 /* Extensions.swift */; };
@@ -181,6 +181,17 @@
 		80AD3EA32BFF33D900BBD7EB /* ClusterLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA22BFF33D900BBD7EB /* ClusterLineChart.swift */; };
 		80AD3EA52BFF33FF00BBD7EB /* LineChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */; };
 		80AD3EAE2BFF6D2200BBD7EB /* BarCharTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */; };
+		AA0E0EF0E3D252B4A84DC84A /* BarChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9F2BFF306F00BBD7EB /* BarChartTimeSeries.swift */; };
+		AA107E455D00E403ECC4F7C2 /* ClusterBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9D2BFF305100BBD7EB /* ClusterBarChart.swift */; };
+		AA433C4A50E839DC7D4CB43A /* BarCharTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */; };
+		AA5D1EB756B0A56DD95948FA /* QueryRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E932BFF2A7300BBD7EB /* QueryRunner.swift */; };
+		AA6192AE0E0DD862AC534ADE /* ClusterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E962BFF2AA200BBD7EB /* ClusterChart.swift */; };
+		AA8C9A1ED69AAABA2C1226A5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6C2C05EA0100596926 /* Extensions.swift */; };
+		AAC882EE86D87EF1C5CDE681 /* ClusterInstrument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E982BFF2B0A00BBD7EB /* ClusterInstrument.swift */; };
+		AAD0D09FCD37F218395D0B20 /* ClusterPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD682C05C9C300596926 /* ClusterPieChart.swift */; };
+		AADB1358C359B9796EE9F4D9 /* ClusterLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA22BFF33D900BBD7EB /* ClusterLineChart.swift */; };
+		AAF18659EA72ADDCC8FBBE96 /* PieChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */; };
+		AAFACBA96BEDD532DE0DF299 /* LineChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */; };
 		C5173B41283D52E40018CE9F /* InsightsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5173B40283D52E40018CE9F /* InsightsGrid.swift */; };
 		C51CB73627565EB5005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
 		C51CB73C27565F76005A3FB9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A8D8AD270C821A0032560A /* Intents.framework */; platformFilter = maccatalyst; };
@@ -510,7 +521,6 @@
 		2BD21EC8271B3CE500AE52DD /* TelemetryDeckIntents (macOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TelemetryDeckIntents (macOS).entitlements"; sourceTree = "<group>"; };
 		2BEDE70F26A73EA9007247B0 /* MacOS12RecentSignalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOS12RecentSignalsView.swift; sourceTree = "<group>"; };
 		2BF2754526AAC5C10051591C /* MacOs12PayloadKeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOs12PayloadKeysView.swift; sourceTree = "<group>"; };
-		2BF2BE442763921400A79531 /* CreateNewAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewAppView.swift; sourceTree = "<group>"; };
 		4903E9712983EA1500EEDF5E /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		4903E9722983EDAA00EEDF5E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6351A780277C5F29003AF559 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
@@ -1172,7 +1182,6 @@
 				6351A787277C9E67003AF559 /* Insights and Groups */,
 				DC7DEEB4258A3C2800BEA712 /* AppUpdateView.swift */,
 				DCD49406255BFD3000925F5D /* AutoCompletingTextField.swift */,
-				2BF2BE442763921400A79531 /* CreateNewAppView.swift */,
 				DCDC6F05253EE0620012D9A7 /* FilterEditView.swift */,
 				2BA5D50326CD0E5B008FBF8F /* GroupView.swift */,
 				C5173B40283D52E40018CE9F /* InsightsGrid.swift */,
@@ -1470,7 +1479,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`${GIT} rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
+			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 		C51CB799275665FC005A3FB9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1487,7 +1496,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`${GIT} rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
+			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 		C5B917EF2757B6CC004A842B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1504,7 +1513,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`${GIT} rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
+			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 		DC7DEE8A258A334900BEA712 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1521,7 +1530,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`${GIT} rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
+			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 		DC7DEE9D258A355F00BEA712 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1540,7 +1549,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`${GIT} rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
+			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1878,6 +1887,18 @@
 				C5F4D34B28ACF48000EBB667 /* DonutChart.swift in Sources */,
 				2BC2720326207D710045A2FE /* MockData.swift in Sources */,
 				DC24DF3A25DD54780003ADCB /* LeftSidebarView.swift in Sources */,
+				804385D72C0739D0004E3285 /* OrganisationSwitcher.swift in Sources */,
+				AA5D1EB756B0A56DD95948FA /* QueryRunner.swift in Sources */,
+				AA6192AE0E0DD862AC534ADE /* ClusterChart.swift in Sources */,
+				AAC882EE86D87EF1C5CDE681 /* ClusterInstrument.swift in Sources */,
+				AA107E455D00E403ECC4F7C2 /* ClusterBarChart.swift in Sources */,
+				AA0E0EF0E3D252B4A84DC84A /* BarChartTimeSeries.swift in Sources */,
+				AADB1358C359B9796EE9F4D9 /* ClusterLineChart.swift in Sources */,
+				AAFACBA96BEDD532DE0DF299 /* LineChartTimeSeries.swift in Sources */,
+				AAD0D09FCD37F218395D0B20 /* ClusterPieChart.swift in Sources */,
+				AAF18659EA72ADDCC8FBBE96 /* PieChartTopN.swift in Sources */,
+				AA433C4A50E839DC7D4CB43A /* BarCharTopN.swift in Sources */,
+				AA8C9A1ED69AAABA2C1226A5 /* Extensions.swift in Sources */,
 				2B21FCD826FDC38500A8A55B /* NewInsightMenu.swift in Sources */,
 				C5F4D34728ACF48000EBB667 /* DonutChartView.swift in Sources */,
 				C5F4D36728ACF48000EBB667 /* TextModifiers.swift in Sources */,
@@ -1886,7 +1907,6 @@
 				C5F4D33728ACF48000EBB667 /* ChartRangeView.swift in Sources */,
 				2BBFCA04267D05E40013DC74 /* CardView.swift in Sources */,
 				2B21FCE026FDCAE200A8A55B /* InsightsList.swift in Sources */,
-				2BF2BE452763921400A79531 /* CreateNewAppView.swift in Sources */,
 				C5F4D33B28ACF48000EBB667 /* RawChartView.swift in Sources */,
 				DCD67BCF252DB40B00A00C5B /* WelcomeView.swift in Sources */,
 				63C4E9562778C4D100344E20 /* SignalListCell.swift in Sources */,

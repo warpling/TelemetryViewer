@@ -60,7 +60,7 @@ struct LeftSidebarView: View {
                     ForEach(organization.appIDs, id: \.self) { appID in
                         section(for: appID)
                     }
-                    .onChange(of: orgService.organization) {
+                    .onChange(of: orgService.organization) { _ in
                         getApps(organization: orgService.organization)
                     }
                     .task {

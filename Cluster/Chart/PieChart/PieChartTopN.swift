@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 import DataTransferObjects
 
+@available(macOS 14.0, iOS 17.0, *)
 struct PieChartTopN: View {
     let topNQueryResult: TopNQueryResult
     let query: CustomQuery
