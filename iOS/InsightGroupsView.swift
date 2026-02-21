@@ -25,6 +25,19 @@ struct InsightGroupsView: View {
 
     let appID: DTOv2.App.ID
 
+    private var storageKey: String {
+        "selectedGroupID_\(appID.uuidString)"
+    }
+
+    init(appID: DTOv2.App.ID) {
+        self.appID = appID
+        let key = "selectedGroupID_\(appID.uuidString)"
+        if let savedString = UserDefaults.standard.string(forKey: key),
+           let savedID = UUID(uuidString: savedString) {
+            _selectedInsightGroupID = State(initialValue: savedID)
+        }
+    }
+
     private var selectedGroupTitle: String {
         guard let groupID = selectedInsightGroupID else { return "Dashboard" }
         return groupService.group(withID: groupID)?.title ?? "Dashboard"
@@ -66,8 +79,20 @@ struct InsightGroupsView: View {
             }
         }
         .onAppear {
-            selectedInsightGroupID = appService.app(withID: appID)?.insightGroupIDs.first
+            // Validate saved selection against available groups
+            if let currentID = selectedInsightGroupID,
+               let groupIDs = appService.app(withID: appID)?.insightGroupIDs,
+               !groupIDs.contains(currentID) {
+                selectedInsightGroupID = groupIDs.first
+            } else if selectedInsightGroupID == nil {
+                selectedInsightGroupID = appService.app(withID: appID)?.insightGroupIDs.first
+            }
             TelemetryManager.send("InsightGroupsAppear")
+        }
+        .onChange(of: selectedInsightGroupID) { newValue in
+            if let newValue {
+                UserDefaults.standard.set(newValue.uuidString, forKey: storageKey)
+            }
         }
         .task(id: selectedInsightGroupID) {
             guard let groupID = selectedInsightGroupID else { return }
@@ -78,12 +103,14 @@ struct InsightGroupsView: View {
             }
         }
         .onReceive(groupService.objectWillChange) { _ in
+            let appGroupIDs = appService.appDictionary[appID]?.insightGroupIDs ?? []
             if let groupID = selectedInsightGroupID {
-                if !(groupService.groupsDictionary.keys.contains(groupID)) {
-                    selectedInsightGroupID = appService.appDictionary[appID]?.insightGroupIDs.first
+                // Only reset if the group was removed from the app
+                if !appGroupIDs.isEmpty && !appGroupIDs.contains(groupID) {
+                    selectedInsightGroupID = appGroupIDs.first
                 }
-            } else {
-                selectedInsightGroupID = appService.appDictionary[appID]?.insightGroupIDs.first
+            } else if !appGroupIDs.isEmpty {
+                selectedInsightGroupID = appGroupIDs.first
             }
         }
     }
