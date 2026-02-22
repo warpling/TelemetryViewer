@@ -51,7 +51,6 @@ struct QueryRunner: View {
                 Spacer()
                 if let queryResultWrapper = queryResultWrapper, queryResultWrapper.result != nil {
                     Button {
-                        guard !isLoading else { return }
                         Task { await runQuery() }
                     } label: {
                         HStack(spacing: 3) {
@@ -64,9 +63,9 @@ struct QueryRunner: View {
                         }
                     }
                     .buttonStyle(.plain)
+                    .disabled(isLoading)
                 } else if errorMessage != nil || queryResultWrapper?.error != nil {
                     Button {
-                        guard !isLoading else { return }
                         Task { await runQuery() }
                     } label: {
                         HStack(spacing: 3) {
@@ -75,6 +74,7 @@ struct QueryRunner: View {
                         }
                     }
                     .buttonStyle(.plain)
+                    .disabled(isLoading)
                 } else {
                     Text("Calculating...")
                 }
