@@ -17,13 +17,13 @@ struct QueryRunner: View {
     let title: String
     let type: InsightDisplayMode
 
+    @Environment(\.scenePhase) private var scenePhase
+
     @State var queryResultWrapper: QueryResultWrapper?
     @State var isLoading: Bool = false
     @State var taskID: String = ""
     @State var errorMessage: String?
     @State private var isStale: Bool = false
-
-    private let staleThreshold: TimeInterval = 60
 
     var body: some View {
         VStack(spacing: 10){
@@ -107,6 +107,13 @@ struct QueryRunner: View {
         .onReceive(Timer.publish(every: 15, on: .main, in: .common).autoconnect()) { _ in
             updateStaleness()
         }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active, !isLoading,
+               let wrapper = queryResultWrapper,
+               Date().timeIntervalSince(wrapper.calculationFinishedAt) > Timing.queryAutoRefreshThreshold {
+                Task { await runQuery() }
+            }
+        }
     }
 
     private func runQuery() async {
@@ -125,7 +132,7 @@ struct QueryRunner: View {
             isStale = false
             return
         }
-        isStale = Date().timeIntervalSince(wrapper.calculationFinishedAt) > staleThreshold
+        isStale = Date().timeIntervalSince(wrapper.calculationFinishedAt) > Timing.queryStaleThreshold
     }
 
     private func getQueryResult() async throws {
@@ -179,20 +186,24 @@ extension QueryRunner {
     }
 
     private func waitUntilTaskStatusIsSuccessful(_ taskID: String) async throws {
-        // wait for the task to finish caluclating
+        // wait for the task to finish calculating
         var taskStatus: QueryTaskStatus = .running
         while taskStatus != .successful {
             let taskStatusURL = api.urlForPath(apiVersion: .v3, "task", taskID, "status")
 
-            let queryTaskStatus: QueryTaskStatusStruct = try await api.get(url: taskStatusURL)
+            do {
+                let queryTaskStatus: QueryTaskStatusStruct = try await api.get(url: taskStatusURL)
+                taskStatus = queryTaskStatus.status
+            } catch TransferError.decodeFailed {
+                // API may return a status value not in our enum (e.g. "queued").
+                // Treat as still in progress and keep polling.
+            }
 
-            taskStatus = queryTaskStatus.status
+            if taskStatus == .error {
+                throw TransferError.serverError(message: "The server returned an error")
+            }
 
             try await Task.sleep(nanoseconds: 1_000_000_000)
-        }
-
-        if taskStatus == .error {
-            throw TransferError.serverError(message: "The server returned an error")
         }
     }
 }
