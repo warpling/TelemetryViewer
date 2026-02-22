@@ -49,6 +49,7 @@ struct InsightGroupsView: View {
 
                 selectedInsightGroupID.map {
                     GroupView(groupID: $0, selectedInsightID: $selectedInsightID, sidebarVisible: $sidebarVisible)
+                        .id($0)
                 }
             }
         }
