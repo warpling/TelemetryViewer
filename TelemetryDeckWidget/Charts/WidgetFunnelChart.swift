@@ -1,14 +1,17 @@
 //
-//  ClusterFunnelChart.swift
-//  Telemetry Viewer
+//  WidgetFunnelChart.swift
+//  TelemetryDeckWidget
 //
 
-import SwiftUI
 import DataTransferObjects
+import SwiftUI
+import WidgetKit
 
-struct ClusterFunnelChart: View {
+struct WidgetFunnelChart: View {
     let query: CustomQuery
     let result: QueryResult
+
+    @Environment(\.widgetFamily) var family
 
     private var steps: [(name: String, value: Double)] {
         guard case .groupBy(let gbResult) = result,
@@ -16,7 +19,6 @@ struct ClusterFunnelChart: View {
             return []
         }
 
-        // Funnel metrics are named "0_StepName", "1_StepName", etc.
         return firstRow.event.metrics
             .filter { $0.key.first?.isNumber == true }
             .sorted { lhs, rhs in
@@ -25,7 +27,6 @@ struct ClusterFunnelChart: View {
                 return (Int(lhsPrefix) ?? 0) < (Int(rhsPrefix) ?? 0)
             }
             .map { key, value in
-                // Strip the numeric prefix and underscore: "0_Step Name" -> "Step Name"
                 let name: String
                 if let underscoreIndex = key.firstIndex(of: "_") {
                     name = String(key[key.index(after: underscoreIndex)...])
@@ -38,7 +39,9 @@ struct ClusterFunnelChart: View {
 
     var body: some View {
         if steps.isEmpty {
-            DashboardLink()
+            Text("No data")
+                .font(.caption)
+                .foregroundStyle(.secondary)
         } else {
             GeometryReader { geometry in
                 let maxValue = steps.first?.value ?? 1
@@ -55,10 +58,12 @@ struct ClusterFunnelChart: View {
                                 .frame(width: barWidth, height: barHeight)
 
                             HStack(spacing: 4) {
-                                Text(step.name)
-                                    .lineLimit(1)
+                                if family != .systemSmall {
+                                    Text(step.name)
+                                        .lineLimit(1)
+                                }
                                 Text(Self.formatNumber(step.value))
-                                if index > 0 {
+                                if index > 0 && family != .systemSmall {
                                     Text(Self.conversionLabel(from: steps[index - 1].value, to: step.value))
                                         .foregroundStyle(.white.opacity(0.7))
                                 }
