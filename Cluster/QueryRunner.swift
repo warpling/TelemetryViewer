@@ -25,6 +25,7 @@ struct QueryRunner: View {
     @State var errorMessage: String?
     @State private var isStale: Bool = false
     @State private var isCachedResult: Bool = false
+    @State private var activeQueryTask: Task<Void, Never>?
 
     var body: some View {
         VStack(spacing: 10){
@@ -82,26 +83,37 @@ struct QueryRunner: View {
         }
         .onAppear {
             if queryResultWrapper == nil,
-               let cached = DiskCache.load(QueryResultWrapper.self, forKey: Self.cacheKey(for: query)) {
+               let cached = DiskCache.load(QueryResultWrapper.self, forKey: cacheKey()) {
                 queryResultWrapper = cached
                 isCachedResult = true
             }
-            Task {
+            activeQueryTask = Task {
                 await runQuery()
             }
         }
         .onChange(of: queryService.isTestingMode) { _ in
-            Task {
+            activeQueryTask?.cancel()
+            activeQueryTask = Task {
                 await runQuery()
             }
         }
         .onChange(of: queryService.timeWindowBeginning) { _ in
-            Task {
+            #if DEBUG
+            print("📅 [\(title)] timeWindowBeginning changed → \(queryService.timeWindowBeginning)")
+            #endif
+            activeQueryTask?.cancel()
+            queryResultWrapper = nil
+            activeQueryTask = Task {
                 await runQuery()
             }
         }
         .onChange(of: queryService.timeWindowEnd) { _ in
-            Task {
+            #if DEBUG
+            print("📅 [\(title)] timeWindowEnd changed → \(queryService.timeWindowEnd)")
+            #endif
+            activeQueryTask?.cancel()
+            queryResultWrapper = nil
+            activeQueryTask = Task {
                 await runQuery()
             }
         }
@@ -112,7 +124,8 @@ struct QueryRunner: View {
             if newPhase == .active, !isLoading,
                let wrapper = queryResultWrapper,
                Date().timeIntervalSince(wrapper.calculationFinishedAt) > Timing.queryAutoRefreshThreshold {
-                Task { await runQuery() }
+                activeQueryTask?.cancel()
+                activeQueryTask = Task { await runQuery() }
             }
         }
     }
@@ -120,20 +133,42 @@ struct QueryRunner: View {
     private func runQuery() async {
         do {
             errorMessage = nil
+            #if DEBUG
+            print("📊 [\(title)] runQuery: \(queryService.timeWindowBeginning) → \(queryService.timeWindowEnd)")
+            #endif
             try await getQueryResult()
             isCachedResult = false
+            #if DEBUG
+            if let wrapper = queryResultWrapper, let result = wrapper.result {
+                switch result {
+                case .timeSeries(let ts):
+                    let dates = ts.rows.map { $0.timestamp }
+                    print("✅ [\(title)] got \(ts.rows.count) rows: \(dates.first.map { ChartTooltip.formatDate($0) } ?? "?") → \(dates.last.map { ChartTooltip.formatDate($0) } ?? "?")")
+                case .topN(let tn):
+                    let dates = tn.rows.map { $0.timestamp }
+                    print("✅ [\(title)] got \(tn.rows.count) rows: \(dates.first.map { ChartTooltip.formatDate($0) } ?? "?") → \(dates.last.map { ChartTooltip.formatDate($0) } ?? "?")")
+                default:
+                    print("✅ [\(title)] got result type: \(result)")
+                }
+            }
+            #endif
             if let wrapper = queryResultWrapper {
-                DiskCache.save(wrapper, forKey: Self.cacheKey(for: query))
+                DiskCache.save(wrapper, forKey: cacheKey())
             }
             updateStaleness()
+        } catch is CancellationError {
+            #if DEBUG
+            print("🚫 [\(title)] query cancelled")
+            #endif
         } catch {
             errorMessage = "Could not load data"
             print(error)
         }
     }
 
-    private static func cacheKey(for query: CustomQuery) -> String {
-        guard let data = try? JSONEncoder.telemetryEncoder.encode(query) else { return "chart_unknown" }
+    private func cacheKey() -> String {
+        let effectiveQuery = queryWithUserDates()
+        guard let data = try? JSONEncoder.telemetryEncoder.encode(effectiveQuery) else { return "chart_unknown" }
         // Stable djb2 hash from the encoded query data
         var hash: UInt64 = 5381
         for byte in data {
@@ -173,16 +208,18 @@ struct QueryRunner: View {
     private func getQueryResult() async throws {
         isLoading = true
         defer {
-            isLoading = false
+            if !Task.isCancelled {
+                isLoading = false
+            }
         }
 
         taskID = try await beginAsyncCalcV2()
 
-        // Best-effort: show a prior cached result while the new calculation runs.
-        // This fails for new queries with no prior result — that's fine, just continue.
-        try? await getLastSuccessfulValue(taskID)
+        try Task.checkCancellation()
 
         try await waitUntilTaskStatusIsSuccessful(taskID)
+
+        try Task.checkCancellation()
 
         try await getLastSuccessfulValue(taskID)
     }
@@ -190,23 +227,30 @@ struct QueryRunner: View {
 
 extension QueryRunner {
 
-    private func beginAsyncCalcV2() async throws -> String {
-        // create a query task
-        let queryBeginURL = api.urlForPath(apiVersion: .v3, "query", "calculate-async")
-
+    private func queryWithUserDates() -> CustomQuery {
         var queryCopy = query
-
-        if queryCopy.intervals == nil && queryCopy.relativeIntervals == nil{
-            switch queryService.timeWindowBeginning {
-            case .absolute:
-                queryCopy.intervals = [.init(beginningDate: queryService.timeWindowBeginningDate, endDate: queryService.timeWindowEndDate)]
-            default:
-                queryCopy.relativeIntervals = [RelativeTimeInterval(beginningDate: queryService.timeWindowBeginning.toRelativeDate(), endDate: queryService.timeWindowEnd.toRelativeDate())]
-            }
+        switch queryService.timeWindowBeginning {
+        case .absolute:
+            queryCopy.relativeIntervals = nil
+            queryCopy.intervals = [.init(beginningDate: queryService.timeWindowBeginningDate, endDate: queryService.timeWindowEndDate)]
+        default:
+            queryCopy.intervals = nil
+            queryCopy.relativeIntervals = [RelativeTimeInterval(
+                beginningDate: queryService.timeWindowBeginning.toRelativeDate(),
+                endDate: queryService.timeWindowEnd.toRelativeDate()
+            )]
         }
         if queryCopy.testMode == nil {
             queryCopy.testMode = queryService.isTestingMode
         }
+        return queryCopy
+    }
+
+    private func beginAsyncCalcV2() async throws -> String {
+        // create a query task
+        let queryBeginURL = api.urlForPath(apiVersion: .v3, "query", "calculate-async")
+
+        let queryCopy = queryWithUserDates()
 
         let response: [String: String] = try await api.post(data: queryCopy, url: queryBeginURL)
         guard let taskID = response["queryTaskID"] else {
@@ -226,6 +270,8 @@ extension QueryRunner {
         // wait for the task to finish calculating
         var taskStatus: QueryTaskStatus = .running
         while taskStatus != .successful {
+            try Task.checkCancellation()
+
             let taskStatusURL = api.urlForPath(apiVersion: .v3, "task", taskID, "status")
 
             do {
@@ -283,21 +329,22 @@ extension RelativeDateDescription {
         case .end(let of):
             switch of {
             case .current(let calendarComponent):
-                RelativeDate(.end, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: 0)
+                return RelativeDate(.end, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: 0)
             case .previous(let calendarComponent):
-                RelativeDate(.end, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: -1)
+                return RelativeDate(.end, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: -1)
             }
         case .beginning(let of):
             switch of {
             case .current(let calendarComponent):
-                RelativeDate(.beginning, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: 0)
+                return RelativeDate(.beginning, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: 0)
             case .previous(let calendarComponent):
-                RelativeDate(.beginning, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: -1)
+                return RelativeDate(.beginning, of: RelativeDate.RelativeDateComponent.from(calenderComponent: calendarComponent), adding: -1)
             }
         case .goBack(let days):
-            RelativeDate(.beginning, of: .day, adding: -days)
+            return RelativeDate(.beginning, of: .day, adding: -days)
         case .absolute:
-            RelativeDate(.beginning, of: .day, adding: -30)
+            assertionFailure(".absolute dates should use QueryTimeInterval, not toRelativeDate()")
+            return RelativeDate(.beginning, of: .day, adding: -30)
         }
     }
 }

@@ -84,7 +84,7 @@ struct InsightGroupsView: View {
             }
         }
 
-        .navigationTitle(appService.app(withID: appID)?.name ?? "Loading...")
+        .navigationTitle(appService.app(withID: appID)?.name ?? "")
         .toolbar {
             ToolbarItemGroup(placement: groupsToolbarPlacement) {
                 groupSelector
@@ -92,10 +92,15 @@ struct InsightGroupsView: View {
             }
 
             ToolbarItemGroup {
-                Button(queryService.timeIntervalDescription) {
+                Button {
                     TelemetryManager.send("showDatePicker")
                     self.showDatePicker = true
-                }.popover(
+                } label: {
+                    Text(queryService.toolbarLabel)
+                        .contentTransition(.numericText())
+                        .animation(.default, value: queryService.toolbarLabel)
+                }
+                .popover(
                     isPresented: self.$showDatePicker,
                     arrowEdge: .bottom
                 ) {

@@ -39,6 +39,30 @@ class QueryService: ObservableObject {
         return "\(dateFormatter.string(from: timeWindowBeginningDate)) – \(dateFormatter.string(from: timeWindowEndDate))"
     }
 
+    var activePresetLabel: String? {
+        let presets: [(String, RelativeDateDescription, RelativeDateDescription)] = [
+            ("7 Days", .goBack(days: 7), .end(of: .current(.day))),
+            ("30 Days", .goBack(days: 30), .end(of: .current(.day))),
+            ("90 Days", .goBack(days: 90), .end(of: .current(.day))),
+            ("365 Days", .goBack(days: 365), .end(of: .current(.day))),
+            ("Last Week", .beginning(of: .previous(.weekOfYear)), .end(of: .previous(.weekOfYear))),
+            ("This Week", .beginning(of: .current(.weekOfYear)), .end(of: .current(.weekOfYear))),
+            ("Last Month", .beginning(of: .previous(.month)), .end(of: .previous(.month))),
+            ("This Month", .beginning(of: .current(.month)), .end(of: .current(.month))),
+            ("2 Months", .beginning(of: .previous(.month)), .end(of: .current(.month))),
+            ("Last Year", .beginning(of: .previous(.year)), .end(of: .previous(.year))),
+            ("This Year", .beginning(of: .current(.year)), .end(of: .current(.year)))
+        ]
+        for (label, begin, end) in presets where timeWindowBeginning == begin && timeWindowEnd == end {
+            return label
+        }
+        return nil
+    }
+
+    var toolbarLabel: String {
+        activePresetLabel ?? timeIntervalDescription
+    }
+
     init(api: APIClient, errors: ErrorService) {
         self.api = api
         errorService = errors

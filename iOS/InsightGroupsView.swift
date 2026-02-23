@@ -129,7 +129,7 @@ struct InsightGroupsView: View {
                         selectedInsightGroupID = idTuple.0
                     } label: {
                         HStack {
-                            Text(groupService.group(withID: idTuple.0)?.title ?? "Loading...")
+                            Text(groupService.group(withID: idTuple.0)?.title ?? "")
                             if idTuple.0 == selectedInsightGroupID {
                                 Image(systemName: "checkmark")
                             }
@@ -155,13 +155,19 @@ struct InsightGroupsView: View {
     }
 
     private var datePickerButton: some View {
-        Button(queryService.timeIntervalDescription) {
+        Button {
             TelemetryManager.send("showDatePicker")
             self.showDatePicker = true
-        }.popover(
-            isPresented: self.$showDatePicker,
-            arrowEdge: .bottom
-        ) { InsightDataTimeIntervalPicker().padding() }
+        } label: {
+            Text(queryService.toolbarLabel)
+                .contentTransition(.numericText())
+                .animation(.default, value: queryService.toolbarLabel)
+        }
+        .sheet(isPresented: self.$showDatePicker) {
+            InsightDataTimeIntervalPicker()
+                .padding()
+                .presentationDetents([.medium])
+        }
     }
 
     private var newGroupButton: some View {

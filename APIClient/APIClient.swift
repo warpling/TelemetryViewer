@@ -522,6 +522,11 @@ extension APIClient {
 
     @available(macOS 12.0, *)
     private func runAsyncTask<Output: Decodable>(with request: URLRequest) async throws -> Output {
+        #if DEBUG
+            if let httpBody = request.httpBody {
+                print("➡️", httpBody.prettyPrintedJSONString ?? String(data: httpBody, encoding: .utf8) ?? "Undecodable")
+            }
+        #endif
         let data: Data
         do {
             (data, _) = try await URLSession.shared.data(for: request, delegate: nil)

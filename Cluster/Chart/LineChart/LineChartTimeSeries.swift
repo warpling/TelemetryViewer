@@ -40,9 +40,12 @@ struct LineChartTimeSeries: View {
                                 .position(x: snappedX, y: geometry.size.height / 2)
 
                             let value = snappedRow.result[aggregationKey]?.value ?? 0
-                            let tooltipX: CGFloat = snappedX > geometry.size.width / 2
-                                ? 88
-                                : geometry.size.width - 88
+                            let tooltipWidth: CGFloat = 160
+                            let gap: CGFloat = 16
+                            let leftX = snappedX - tooltipWidth / 2 - gap
+                            let tooltipX = leftX - tooltipWidth / 2 >= 0
+                                ? leftX
+                                : snappedX + tooltipWidth / 2 + gap
                             ChartTooltip(
                                 entries: [.init(color: .telemetryOrange, label: aggregationKey, value: value)],
                                 dateLabel: ChartTooltip.formatDate(snappedRow.timestamp)

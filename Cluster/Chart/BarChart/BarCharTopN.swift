@@ -53,9 +53,12 @@ struct BarChartTopN: View {
                                     .position(x: snappedX, y: geometry.size.height / 2)
 
                                 let entries = tooltipEntries(for: selectedDate)
-                                let tooltipX: CGFloat = snappedX > geometry.size.width / 2
-                                    ? 88
-                                    : geometry.size.width - 88
+                                let tooltipWidth: CGFloat = 160
+                                let gap: CGFloat = 16
+                                let leftX = snappedX - tooltipWidth / 2 - gap
+                                let tooltipX = leftX - tooltipWidth / 2 >= 0
+                                    ? leftX
+                                    : snappedX + tooltipWidth / 2 + gap
                                 ChartTooltip(
                                     entries: entries,
                                     dateLabel: ChartTooltip.formatDate(snappedRow.timestamp)

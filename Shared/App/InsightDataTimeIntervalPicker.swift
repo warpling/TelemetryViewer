@@ -9,23 +9,24 @@ import SwiftUI
 
 struct InsightDataTimeIntervalPicker: View {
     @EnvironmentObject var queryService: QueryService
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack {
             HStack {
-                Button("7 Days") {
+                presetButton("7 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 7)
                 }
-                Button("30 Days") {
+                presetButton("30 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 30)
                 }
-                Button("90 Days") {
+                presetButton("90 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 90)
                 }
-                Button("365 Days") {
+                presetButton("365 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 365)
                 }
@@ -34,31 +35,37 @@ struct InsightDataTimeIntervalPicker: View {
             Divider()
 
             HStack {
-                Button("Last Week") { queryService.timeWindowEnd = .end(of: .previous(.weekOfYear))
+                presetButton("Last Week") {
+                    queryService.timeWindowEnd = .end(of: .previous(.weekOfYear))
                     queryService.timeWindowBeginning = .beginning(of: .previous(.weekOfYear))
                 }
-                Button("This Week") { queryService.timeWindowEnd = .end(of: .current(.weekOfYear))
+                presetButton("This Week") {
+                    queryService.timeWindowEnd = .end(of: .current(.weekOfYear))
                     queryService.timeWindowBeginning = .beginning(of: .current(.weekOfYear))
                 }
             }
             HStack {
-                Button("Last Month") { queryService.timeWindowEnd = .end(of: .previous(.month))
+                presetButton("Last Month") {
+                    queryService.timeWindowEnd = .end(of: .previous(.month))
                     queryService.timeWindowBeginning = .beginning(of: .previous(.month))
                 }
-                Button("This Month") { queryService.timeWindowEnd = .end(of: .current(.month))
+                presetButton("This Month") {
+                    queryService.timeWindowEnd = .end(of: .current(.month))
                     queryService.timeWindowBeginning = .beginning(of: .current(.month))
                 }
-                Button("2 Months") {
+                presetButton("2 Months") {
                     queryService.timeWindowEnd = .end(of: .current(.month))
                     queryService.timeWindowBeginning = .beginning(of: .previous(.month))
                 }
             }
 
             HStack {
-                Button("Last Year") { queryService.timeWindowEnd = .end(of: .previous(.year))
+                presetButton("Last Year") {
+                    queryService.timeWindowEnd = .end(of: .previous(.year))
                     queryService.timeWindowBeginning = .beginning(of: .previous(.year))
                 }
-                Button("This Year") { queryService.timeWindowEnd = .end(of: .current(.year))
+                presetButton("This Year") {
+                    queryService.timeWindowEnd = .end(of: .current(.year))
                     queryService.timeWindowBeginning = .beginning(of: .current(.year))
                 }
             }
@@ -74,12 +81,37 @@ struct InsightDataTimeIntervalPicker: View {
             )
 
             Divider()
-            HStack {
-                DatePicker("From", selection: pickerTimeWindowBeginningBinding, in: ...queryService.timeWindowEndDate, displayedComponents: .date)
-                Divider()
-                DatePicker("Until", selection: pickerTimeWindowEndBinding, in: ...Date(), displayedComponents: .date)
+                .padding(.top, 4)
+            HStack(alignment: .top, spacing: 12) {
+                VStack(alignment: .center, spacing: 2) {
+                    Text("From").font(.caption).foregroundStyle(.secondary)
+                    DatePicker("", selection: pickerTimeWindowBeginningBinding, in: ...queryService.timeWindowEndDate, displayedComponents: .date)
+                        .labelsHidden()
+                }
+                Image(systemName: "arrow.right")
+                    .font(.caption)
+                    .foregroundStyle(.tertiary)
+                    .padding(.top, 22)
+                VStack(alignment: .center, spacing: 2) {
+                    Text("Until").font(.caption).foregroundStyle(.secondary)
+                    DatePicker("", selection: pickerTimeWindowEndBinding, in: ...Date(), displayedComponents: .date)
+                        .labelsHidden()
+                }
             }
+            .padding(.top, 4)
         }
-        .buttonStyle(SmallSecondaryButtonStyle())
+    }
+
+    @ViewBuilder
+    private func presetButton(_ label: String, action: @escaping () -> Void) -> some View {
+        let combined = {
+            action()
+            dismiss()
+        }
+        if queryService.activePresetLabel == label {
+            Button(label, action: combined).buttonStyle(SmallPrimaryButtonStyle())
+        } else {
+            Button(label, action: combined).buttonStyle(SmallSecondaryButtonStyle())
+        }
     }
 }

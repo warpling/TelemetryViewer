@@ -35,15 +35,12 @@ struct SmallPrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
-            .foregroundColor(configuration.isPressed ?Color.telemetryOrange.opacity(0.5) : Color.telemetryOrange)
+            .foregroundColor(configuration.isPressed ? Color.white.opacity(0.7) : .white)
             .font(Font.system(size: 12, weight: .semibold, design: .default))
             .padding(4)
-            .overlay(
+            .background(
                 RoundedRectangle(cornerRadius: 15)
-                    .stroke(
-                        configuration.isPressed ?Color.telemetryOrange.opacity(0.5) : Color.telemetryOrange,
-                        lineWidth: 1
-                    )
+                    .fill(configuration.isPressed ? Color.telemetryOrange.opacity(0.7) : Color.telemetryOrange)
             )
     }
 }
