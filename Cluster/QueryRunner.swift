@@ -24,14 +24,17 @@ struct QueryRunner: View {
     @State var taskID: String = ""
     @State var errorMessage: String?
     @State private var isStale: Bool = false
+    @State private var isCachedResult: Bool = false
 
     var body: some View {
         VStack(spacing: 10){
             if let queryResult = queryResultWrapper?.result {
                 ClusterChart(query: query, result: queryResult, title: title, type: type)
-                    .frame(height: 135)
+                    .frame(height: Self.chartHeight(for: type, result: queryResult))
                     .id(queryResultWrapper)
                     .padding(.horizontal)
+                    .saturation(isCachedResult ? 0.1 : 1.0)
+                    .opacity(isCachedResult ? 0.4 : 1.0)
             } else if errorMessage != nil || queryResultWrapper?.error != nil {
                 DashboardLink()
                     .padding()
@@ -53,14 +56,7 @@ struct QueryRunner: View {
                     Button {
                         Task { await runQuery() }
                     } label: {
-                        HStack(spacing: 3) {
-                            if isStale {
-                                Image(systemName: "arrow.clockwise")
-                            }
-                            Text("Updated")
-                            Text(queryResultWrapper.calculationFinishedAt, style: .relative)
-                            Text("ago")
-                        }
+                        RelativeTimestampLabel(date: queryResultWrapper.calculationFinishedAt, showRefreshIcon: isStale)
                     }
                     .buttonStyle(.plain)
                     .disabled(isLoading)
@@ -85,6 +81,11 @@ struct QueryRunner: View {
             .background(Color.Zinc50)
         }
         .onAppear {
+            if queryResultWrapper == nil,
+               let cached = DiskCache.load(QueryResultWrapper.self, forKey: Self.cacheKey(for: query)) {
+                queryResultWrapper = cached
+                isCachedResult = true
+            }
             Task {
                 await runQuery()
             }
@@ -120,10 +121,44 @@ struct QueryRunner: View {
         do {
             errorMessage = nil
             try await getQueryResult()
+            isCachedResult = false
+            if let wrapper = queryResultWrapper {
+                DiskCache.save(wrapper, forKey: Self.cacheKey(for: query))
+            }
             updateStaleness()
         } catch {
             errorMessage = "Could not load data"
             print(error)
+        }
+    }
+
+    private static func cacheKey(for query: CustomQuery) -> String {
+        guard let data = try? JSONEncoder.telemetryEncoder.encode(query) else { return "chart_unknown" }
+        // Stable djb2 hash from the encoded query data
+        var hash: UInt64 = 5381
+        for byte in data {
+            hash = ((hash &<< 5) &+ hash) &+ UInt64(byte)
+        }
+        return "chart_\(hash)"
+    }
+
+    private static let defaultChartHeight: CGFloat = 135
+    private static let maxChartHeight: CGFloat = 270
+
+    private static func chartHeight(for type: InsightDisplayMode, result: QueryResult) -> CGFloat {
+        switch type {
+        case .funnelChart:
+            if case .groupBy(let gbResult) = result,
+               let firstRow = gbResult.rows.first {
+                let stepCount = firstRow.event.metrics.filter { $0.key.first?.isNumber == true }.count
+                let needed = CGFloat(stepCount) * 26 + CGFloat(max(0, stepCount - 1)) * 2
+                return min(max(needed, defaultChartHeight), maxChartHeight)
+            }
+            return defaultChartHeight
+        case .raw:
+            return defaultChartHeight
+        default:
+            return defaultChartHeight
         }
     }
 
@@ -143,7 +178,9 @@ struct QueryRunner: View {
 
         taskID = try await beginAsyncCalcV2()
 
-        try await getLastSuccessfulValue(taskID)
+        // Best-effort: show a prior cached result while the new calculation runs.
+        // This fails for new queries with no prior result — that's fine, just continue.
+        try? await getLastSuccessfulValue(taskID)
 
         try await waitUntilTaskStatusIsSuccessful(taskID)
 
@@ -205,6 +242,38 @@ extension QueryRunner {
 
             try await Task.sleep(nanoseconds: 1_000_000_000)
         }
+    }
+}
+
+private struct RelativeTimestampLabel: View {
+    let date: Date
+    let showRefreshIcon: Bool
+
+    var body: some View {
+        TimelineView(PeriodicTimelineSchedule(from: .now, by: 60)) { context in
+            HStack(spacing: 3) {
+                if showRefreshIcon {
+                    Image(systemName: "arrow.clockwise")
+                }
+                Text(Self.relativeTimeLabel(from: date, to: context.date))
+            }
+        }
+    }
+
+    private static let formatter: DateComponentsFormatter = {
+        let f = DateComponentsFormatter()
+        f.allowedUnits = [.day, .hour, .minute]
+        f.unitsStyle = .short
+        f.maximumUnitCount = 1
+        return f
+    }()
+
+    private static func relativeTimeLabel(from date: Date, to now: Date) -> String {
+        let interval = max(60, now.timeIntervalSince(date))
+        if let str = formatter.string(from: interval) {
+            return "Updated \(str) ago"
+        }
+        return "Updated just now"
     }
 }
 
