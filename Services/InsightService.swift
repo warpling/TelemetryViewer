@@ -98,6 +98,7 @@ class InsightService: ObservableObject {
             case let .success(appWithInsightList):
                 callback(appWithInsightList)
             case let .failure(transferError):
+                print("[Widget] widgetableInsights failed: \(transferError.localizedDescription)")
                 callback([])
                 self.api.handleError(transferError)
             }

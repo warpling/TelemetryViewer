@@ -52,12 +52,19 @@ final class APIClient: ObservableObject {
             self.userToken = userToken
             getUserInformation()
         }
+
+        // Migrate currentOrganisationID from standard to shared UserDefaults
+        if let orgID = UserDefaults.standard.string(forKey: "currentOrganisationID"),
+           userDefaults?.string(forKey: "currentOrganisationID") == nil {
+            userDefaults?.set(orgID, forKey: "currentOrganisationID")
+            UserDefaults.standard.removeObject(forKey: "currentOrganisationID")
+        }
     }
 
     var _currentOrganisationID: String? {
-        get { UserDefaults.standard.string(forKey: "currentOrganisationID") }
+        get { userDefaults?.string(forKey: "currentOrganisationID") }
         set {
-            UserDefaults.standard.set(newValue, forKey: "currentOrganisationID")
+            userDefaults?.set(newValue, forKey: "currentOrganisationID")
             objectWillChange.send()
         }
     }

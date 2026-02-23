@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022B5F489E5C2114EB181618 /* ClusterRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */; };
+		0B2E7EEBFE46B68302FBA077 /* TelemetryDashboardEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A0DFDDAFAFD7AB463FD29 /* TelemetryDashboardEntityQuery.swift */; };
+		0D3D84B1BED8E6EDB2CF640A /* WidgetLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9B212D6926C431AE9BA6D1 /* WidgetLineChart.swift */; };
+		153B36366223514A2867F91A /* WidgetBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309765E93E33D06500A6BC87 /* WidgetBarChart.swift */; };
+		22235D43E320BE3E11843229 /* RefreshWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140BA87E7C3B1AE72403C937 /* RefreshWidgetIntent.swift */; };
+		276C26653CF0D9D663C34847 /* TelemetryWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915AC171BF568E3B61B4564E /* TelemetryWidgetIntent.swift */; };
 		2B0050922703617B009C609C /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00509027035C85009C609C /* Color+Hex.swift */; };
 		2B0050932703617B009C609C /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00509027035C85009C609C /* Color+Hex.swift */; };
 		2B043C34271B491B00DDB255 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = 2B043C33271B491B00DDB255 /* TelemetryClient */; };
-		2B043C36271B492900DDB255 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = 2B043C35271B492900DDB255 /* TelemetryClient */; };
-		2B0769D82722EA260024D8A7 /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0769D72722EA260024D8A7 /* DataTransferObjects */; };
 		2B0769DA2722EA2F0024D8A7 /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0769D92722EA2F0024D8A7 /* DataTransferObjects */; };
 		2B0769DC2722EA350024D8A7 /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0769DB2722EA350024D8A7 /* DataTransferObjects */; };
 		2B0769DE2722EA3B0024D8A7 /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = 2B0769DD2722EA3B0024D8A7 /* DataTransferObjects */; };
@@ -54,23 +58,18 @@
 		2B6431952739A5BB009A33C4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318D2739A5BB009A33C4 /* APIClient.swift */; };
 		2B6431962739A5BB009A33C4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318D2739A5BB009A33C4 /* APIClient.swift */; };
 		2B6431972739A5BB009A33C4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318D2739A5BB009A33C4 /* APIClient.swift */; };
-		2B6431982739A5BB009A33C4 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318D2739A5BB009A33C4 /* APIClient.swift */; };
 		2B6431992739A5BB009A33C4 /* Data+JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */; };
 		2B64319A2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */; };
 		2B64319B2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */; };
-		2B64319C2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */; };
 		2B6431A12739A5BB009A33C4 /* CacheLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431902739A5BB009A33C4 /* CacheLayer.swift */; };
 		2B6431A22739A5BB009A33C4 /* CacheLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431902739A5BB009A33C4 /* CacheLayer.swift */; };
 		2B6431A32739A5BB009A33C4 /* CacheLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431902739A5BB009A33C4 /* CacheLayer.swift */; };
-		2B6431A42739A5BB009A33C4 /* CacheLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431902739A5BB009A33C4 /* CacheLayer.swift */; };
 		2B6431A52739A5BB009A33C4 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431912739A5BB009A33C4 /* AsyncOperation.swift */; };
 		2B6431A62739A5BB009A33C4 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431912739A5BB009A33C4 /* AsyncOperation.swift */; };
 		2B6431A72739A5BB009A33C4 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431912739A5BB009A33C4 /* AsyncOperation.swift */; };
-		2B6431A82739A5BB009A33C4 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431912739A5BB009A33C4 /* AsyncOperation.swift */; };
 		2B6431A92739A5BB009A33C4 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431922739A5BB009A33C4 /* Caching.swift */; };
 		2B6431AA2739A5BB009A33C4 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431922739A5BB009A33C4 /* Caching.swift */; };
 		2B6431AB2739A5BB009A33C4 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431922739A5BB009A33C4 /* Caching.swift */; };
-		2B6431AC2739A5BB009A33C4 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431922739A5BB009A33C4 /* Caching.swift */; };
 		2B670C0026BD8BF7005DA07E /* SidebarSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B670BFF26BD8BF7005DA07E /* SidebarSplitView.swift */; };
 		2B74555E27230648002CBB45 /* ChartDataSet+InsightCalculationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74555D27230648002CBB45 /* ChartDataSet+InsightCalculationResult.swift */; };
 		2B74555F27230648002CBB45 /* ChartDataSet+InsightCalculationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74555D27230648002CBB45 /* ChartDataSet+InsightCalculationResult.swift */; };
@@ -129,53 +128,57 @@
 		2BC522EB2625FCEF00E643AC /* HelpAndFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC522E92625FCEF00E643AC /* HelpAndFeedbackView.swift */; };
 		2BEDE71026A73EA9007247B0 /* MacOS12RecentSignalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEDE70F26A73EA9007247B0 /* MacOS12RecentSignalsView.swift */; };
 		2BF2754626AAC5C10051591C /* MacOs12PayloadKeysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2754526AAC5C10051591C /* MacOs12PayloadKeysView.swift */; };
+		2E3AA58EF42BD21AD4D4C10A /* RefreshWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140BA87E7C3B1AE72403C937 /* RefreshWidgetIntent.swift */; };
+		2E898215136C9172D8A16135 /* TelemetryDashboardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BF26494156C044921C443 /* TelemetryDashboardEntity.swift */; };
+		41CC209D092027078BBA6D49 /* TelemetryAppEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C31AEB89ADAC267E82ED7C /* TelemetryAppEntityQuery.swift */; };
+		4A3C69779768D63936115B1E /* WidgetRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18101EE89D15E833CD6B07CF /* WidgetRawTable.swift */; };
+		4BDB3B41819E2AA9B1B72BA2 /* WidgetLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9B212D6926C431AE9BA6D1 /* WidgetLineChart.swift */; };
+		4E2983F20A26D50344C8E10B /* TelemetryWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB109D2E128D19CED88F30EB /* TelemetryWidgetEntry.swift */; };
+		4EE4B300EB182FBB5F0BE51D /* TelemetryAppEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C31AEB89ADAC267E82ED7C /* TelemetryAppEntityQuery.swift */; };
+		530E38199E7BABF24AE7330E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6C2C05EA0100596926 /* Extensions.swift */; };
 		6351A784277C6431003AF559 /* CustomPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A783277C6431003AF559 /* CustomPickers.swift */; };
 		6351A786277C927D003AF559 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A780277C5F29003AF559 /* EditorView.swift */; };
 		6351A789277C9ED8003AF559 /* InsightDisplayMode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A788277C9ED8003AF559 /* InsightDisplayMode+Extensions.swift */; };
 		6351A78A277C9EDA003AF559 /* InsightDisplayMode+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6351A788277C9ED8003AF559 /* InsightDisplayMode+Extensions.swift */; };
+		638FAC0054DF86A3347958F3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6C2C05EA0100596926 /* Extensions.swift */; };
 		63C4E9522778C00000344E20 /* SignalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4E9512778C00000344E20 /* SignalList.swift */; };
 		63C4E9552778C4CE00344E20 /* SignalListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4E9542778C4CE00344E20 /* SignalListCell.swift */; };
 		63C4E9562778C4D100344E20 /* SignalListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4E9542778C4CE00344E20 /* SignalListCell.swift */; };
 		63C4E9582778C54D00344E20 /* SignalListExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4E9572778C54D00344E20 /* SignalListExplanationView.swift */; };
 		63C4E9592778D0D100344E20 /* SignalListExplanationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4E9572778C54D00344E20 /* SignalListExplanationView.swift */; };
+		697C5F993BB7A847FECD9CCA /* TelemetryWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8FE1746F791A66744CA80D /* TelemetryWidgetProvider.swift */; };
+		69E600AD58D44A789BAE5CF1 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351456071814508BB88D337 /* AppConstants.swift */; };
+		6D772495F7E5EE2D05B2BFF0 /* TelemetryInsightEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77F6DB6836F72588A18AC81 /* TelemetryInsightEntityQuery.swift */; };
+		6F4D887896A9ACFB4DB0FC64 /* WidgetPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE8DE7BFB7CDDB8CCC781F /* WidgetPieChart.swift */; };
+		71474764878D59A828D3FBBE /* WidgetPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE8DE7BFB7CDDB8CCC781F /* WidgetPieChart.swift */; };
+		776466D1CCEAF7686E24BC71 /* WidgetFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69109AF576A7D21581775B4 /* WidgetFunnelChart.swift */; };
+		7A15BF8B5C6A6897176EE659 /* TelemetryDashboardEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86A0DFDDAFAFD7AB463FD29 /* TelemetryDashboardEntityQuery.swift */; };
+		7E82F3EF062860123AC2EFFE /* TelemetryDashboardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6BF26494156C044921C443 /* TelemetryDashboardEntity.swift */; };
+		7FFDA4CF72D64BD3B390698A /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351456071814508BB88D337 /* AppConstants.swift */; };
 		80427FE12BFE2AF4007E89CC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDC2BFE2AF4007E89CC /* AppInfo.swift */; };
 		80427FE22BFE2AF4007E89CC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDC2BFE2AF4007E89CC /* AppInfo.swift */; };
 		80427FE32BFE2AF4007E89CC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDC2BFE2AF4007E89CC /* AppInfo.swift */; };
 		80427FE42BFE2AF4007E89CC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDC2BFE2AF4007E89CC /* AppInfo.swift */; };
-		80427FE52BFE2AF4007E89CC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDC2BFE2AF4007E89CC /* AppInfo.swift */; };
-		80427FE62BFE2AF4007E89CC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDC2BFE2AF4007E89CC /* AppInfo.swift */; };
 		80427FE72BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDD2BFE2AF4007E89CC /* InsightGroupInfo.swift */; };
 		80427FE82BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDD2BFE2AF4007E89CC /* InsightGroupInfo.swift */; };
 		80427FE92BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDD2BFE2AF4007E89CC /* InsightGroupInfo.swift */; };
 		80427FEA2BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDD2BFE2AF4007E89CC /* InsightGroupInfo.swift */; };
-		80427FEB2BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDD2BFE2AF4007E89CC /* InsightGroupInfo.swift */; };
-		80427FEC2BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDD2BFE2AF4007E89CC /* InsightGroupInfo.swift */; };
 		80427FED2BFE2AF4007E89CC /* InsightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDE2BFE2AF4007E89CC /* InsightInfo.swift */; };
 		80427FEE2BFE2AF4007E89CC /* InsightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDE2BFE2AF4007E89CC /* InsightInfo.swift */; };
 		80427FEF2BFE2AF4007E89CC /* InsightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDE2BFE2AF4007E89CC /* InsightInfo.swift */; };
 		80427FF02BFE2AF4007E89CC /* InsightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDE2BFE2AF4007E89CC /* InsightInfo.swift */; };
-		80427FF12BFE2AF4007E89CC /* InsightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDE2BFE2AF4007E89CC /* InsightInfo.swift */; };
-		80427FF22BFE2AF4007E89CC /* InsightInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDE2BFE2AF4007E89CC /* InsightInfo.swift */; };
 		80427FF32BFE2AF4007E89CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDF2BFE2AF4007E89CC /* UserInfo.swift */; };
 		80427FF42BFE2AF4007E89CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDF2BFE2AF4007E89CC /* UserInfo.swift */; };
 		80427FF52BFE2AF4007E89CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDF2BFE2AF4007E89CC /* UserInfo.swift */; };
 		80427FF62BFE2AF4007E89CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDF2BFE2AF4007E89CC /* UserInfo.swift */; };
-		80427FF72BFE2AF4007E89CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDF2BFE2AF4007E89CC /* UserInfo.swift */; };
-		80427FF82BFE2AF4007E89CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80427FDF2BFE2AF4007E89CC /* UserInfo.swift */; };
 		804385CF2C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
 		804385D02C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
 		804385D12C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
 		804385D22C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
-		804385D32C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
-		804385D42C073763004E3285 /* OrganizationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385CE2C073763004E3285 /* OrganizationInfo.swift */; };
 		804385D62C0739D0004E3285 /* OrganisationSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385D52C0739D0004E3285 /* OrganisationSwitcher.swift */; };
 		804385D72C0739D0004E3285 /* OrganisationSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804385D52C0739D0004E3285 /* OrganisationSwitcher.swift */; };
 		8083DD692C05C9C300596926 /* ClusterPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD682C05C9C300596926 /* ClusterPieChart.swift */; };
 		8083DD6B2C05C9FE00596926 /* PieChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */; };
-		981C899E599D9A11A5FD7C1A /* ClusterRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */; };
-		DA671FEFB073728CED7F4EE5 /* ClusterFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */; };
-		022B5F489E5C2114EB181618 /* ClusterRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */; };
-		AB7526451B3C25D3074C6C2C /* ClusterFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */; };
 		8083DD6D2C05EA0100596926 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6C2C05EA0100596926 /* Extensions.swift */; };
 		80AD3E942BFF2A7300BBD7EB /* QueryRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E932BFF2A7300BBD7EB /* QueryRunner.swift */; };
 		80AD3E972BFF2AA200BBD7EB /* ClusterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E962BFF2AA200BBD7EB /* ClusterChart.swift */; };
@@ -186,6 +189,18 @@
 		80AD3EA52BFF33FF00BBD7EB /* LineChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */; };
 		80AD3EA62BFF340000BBD7EB /* LineChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */; };
 		80AD3EAE2BFF6D2200BBD7EB /* BarCharTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */; };
+		893C41529D5BE0DB71E5ECA3 /* WidgetClusterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F127A112E91BDD7696CFAEB /* WidgetClusterChart.swift */; };
+		8C5694F6301649B28CCE6841 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351456071814508BB88D337 /* AppConstants.swift */; };
+		8E04F66B4794D96D7C280396 /* WidgetRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18101EE89D15E833CD6B07CF /* WidgetRawTable.swift */; };
+		94C06CB2152F46F8ADDFA4CA /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E351456071814508BB88D337 /* AppConstants.swift */; };
+		981C899E599D9A11A5FD7C1A /* ClusterRawTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */; };
+		9F26933FFB88FE1C74CF2AB9 /* TelemetryInsightEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2A37116C2A668C583C241 /* TelemetryInsightEntity.swift */; };
+		A130428DF02AF070CD7665D0 /* TelemetryInsightEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC2A37116C2A668C583C241 /* TelemetryInsightEntity.swift */; };
+		A2F8D0316ABE04F0ED5FA2FC /* WidgetFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69109AF576A7D21581775B4 /* WidgetFunnelChart.swift */; };
+		A2FFE0C249403A24C655E214 /* TelemetryInsightEntityQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D77F6DB6836F72588A18AC81 /* TelemetryInsightEntityQuery.swift */; };
+		A34312449887B112690A348A /* TelemetryWidgetIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915AC171BF568E3B61B4564E /* TelemetryWidgetIntent.swift */; };
+		A41705F960EC5EB9193E19B2 /* WidgetClusterChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F127A112E91BDD7696CFAEB /* WidgetClusterChart.swift */; };
+		A65F52A7566733D41E4C5AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE239FE24D3687D00053370 /* Assets.xcassets */; };
 		AA0E0EF0E3D252B4A84DC84A /* BarChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9F2BFF306F00BBD7EB /* BarChartTimeSeries.swift */; };
 		AA107E455D00E403ECC4F7C2 /* ClusterBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3E9D2BFF305100BBD7EB /* ClusterBarChart.swift */; };
 		AA433C4A50E839DC7D4CB43A /* BarCharTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */; };
@@ -200,30 +215,21 @@
 		AAF18659EA72ADDCC8FBBE96 /* PieChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */; };
 		AAFACBA96BEDD532DE0DF299 /* LineChartTimeSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */; };
 		AAFACBAA6BEDD533DE0DF300 /* LineChartTopN.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */; };
+		AB7526451B3C25D3074C6C2C /* ClusterFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */; };
+		C0AE939A0B344B40207A673F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCE239FE24D3687D00053370 /* Assets.xcassets */; };
 		C5173B41283D52E40018CE9F /* InsightsGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5173B40283D52E40018CE9F /* InsightsGrid.swift */; };
-		C51CB73627565EB5005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
-		C51CB73C27565F76005A3FB9 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A8D8AD270C821A0032560A /* Intents.framework */; platformFilter = maccatalyst; };
-		C51CB7472756609E005A3FB9 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D8B0270C821A0032560A /* IntentHandler.swift */; };
 		C51CB74D275660E0005A3FB9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD86AE8254EF0B5008F63CB /* WidgetKit.framework */; platformFilter = maccatalyst; };
 		C51CB74E275660E0005A3FB9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD86AEA254EF0B5008F63CB /* SwiftUI.framework */; platformFilter = maccatalyst; };
 		C51CB75C275660F5005A3FB9 /* TelemetryDeckWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D867270C5D7B0032560A /* TelemetryDeckWidget.swift */; };
 		C51CB75D275660F9005A3FB9 /* TelemetryDeckWidgetEntryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B78C82B2722F839000924A0 /* TelemetryDeckWidgetEntryViews.swift */; };
 		C51CB75E275660FC005A3FB9 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D8A4270C6FB70032560A /* MockData.swift */; };
-		C51CB75F27566102005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
-		C51CB76027566103005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
 		C51CB76127566107005A3FB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A8D86A270C5D800032560A /* Assets.xcassets */; };
-		C51CB76327566148005A3FB9 /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = C51CB76227566148005A3FB9 /* DataTransferObjects */; };
-		C51CB76727566158005A3FB9 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = C51CB76627566158005A3FB9 /* TelemetryClient */; };
 		C51CB76927566199005A3FB9 /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = C51CB76827566199005A3FB9 /* DataTransferObjects */; };
 		C51CB76D27566199005A3FB9 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = C51CB76C27566199005A3FB9 /* TelemetryClient */; };
 		C51CB76E275661EF005A3FB9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318D2739A5BB009A33C4 /* APIClient.swift */; };
-		C51CB76F275661F0005A3FB9 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318D2739A5BB009A33C4 /* APIClient.swift */; };
-		C51CB77027566202005A3FB9 /* CacheLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431902739A5BB009A33C4 /* CacheLayer.swift */; };
 		C51CB77127566203005A3FB9 /* CacheLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431902739A5BB009A33C4 /* CacheLayer.swift */; };
 		C51CB77227566205005A3FB9 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431922739A5BB009A33C4 /* Caching.swift */; };
-		C51CB77327566206005A3FB9 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431922739A5BB009A33C4 /* Caching.swift */; };
 		C51CB77427566209005A3FB9 /* Data+JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */; };
-		C51CB7752756620A005A3FB9 /* Data+JSONPrettyPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */; };
 		C51CB77627566226005A3FB9 /* LoadingStateIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D46A326CCF9CB008814A9 /* LoadingStateIndicator.swift */; };
 		C51CB77727566228005A3FB9 /* OrderSetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBFC9DC267D05E30013DC74 /* OrderSetter.swift */; };
 		C51CB7782756622C005A3FB9 /* OptionalToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BBFC9E0267D05E30013DC74 /* OptionalToggle.swift */; };
@@ -243,16 +249,10 @@
 		C51CB78627566261005A3FB9 /* ChartDataSet+InsightCalculationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B74555D27230648002CBB45 /* ChartDataSet+InsightCalculationResult.swift */; };
 		C51CB78727566264005A3FB9 /* ChartDataPoint+InsightCalculationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B745561272306DD002CBB45 /* ChartDataPoint+InsightCalculationResult.swift */; };
 		C51CB78827566275005A3FB9 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D469726CC4C5D008814A9 /* ErrorService.swift */; };
-		C51CB78927566275005A3FB9 /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D469726CC4C5D008814A9 /* ErrorService.swift */; };
 		C51CB78A27566278005A3FB9 /* InsightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D46A026CC52DD008814A9 /* InsightService.swift */; };
-		C51CB78B27566279005A3FB9 /* InsightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D46A026CC52DD008814A9 /* InsightService.swift */; };
 		C51CB78C2756627C005A3FB9 /* InsightResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5D50926CDAA58008FBF8F /* InsightResultService.swift */; };
-		C51CB78F27566296005A3FB9 /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D14218273471EE0029CA03 /* ConditionalViewModifier.swift */; };
-		C51CB79027566296005A3FB9 /* ConditionalViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D14218273471EE0029CA03 /* ConditionalViewModifier.swift */; };
 		C51CB7912756646D005A3FB9 /* TelemetrySignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */; };
-		C51CB7922756646E005A3FB9 /* TelemetrySignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */; };
 		C51CB794275664B2005A3FB9 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431912739A5BB009A33C4 /* AsyncOperation.swift */; };
-		C51CB795275664B3005A3FB9 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6431912739A5BB009A33C4 /* AsyncOperation.swift */; };
 		C51CB79627566504005A3FB9 /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00509027035C85009C609C /* Color+Hex.swift */; };
 		C51CB79827566548005A3FB9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = C51CB79727566548005A3FB9 /* Shimmer */; };
 		C5551E5227C3CBEB005847B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5551E5127C3CBEB005847B6 /* Assets.xcassets */; };
@@ -260,27 +260,18 @@
 		C5551E5427C3CBEB005847B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5551E5127C3CBEB005847B6 /* Assets.xcassets */; };
 		C5551E5527C3CBEB005847B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5551E5127C3CBEB005847B6 /* Assets.xcassets */; };
 		C581F4E0271B22FD0031E99C /* Color+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00509027035C85009C609C /* Color+Hex.swift */; };
-		C581F4E5271B29470031E99C /* InsightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D46A026CC52DD008814A9 /* InsightService.swift */; };
-		C581F4E6271B29780031E99C /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D469726CC4C5D008814A9 /* ErrorService.swift */; };
-		C581F4F5271B2B6B0031E99C /* TelemetrySignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */; };
 		C598487727CFBB7A00026772 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C598487627CFBB7A00026772 /* QueryService.swift */; };
 		C598487827CFBB7A00026772 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C598487627CFBB7A00026772 /* QueryService.swift */; };
 		C5A8D864270C5D7A0032560A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD86AE8254EF0B5008F63CB /* WidgetKit.framework */; platformFilter = maccatalyst; };
 		C5A8D865270C5D7A0032560A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD86AEA254EF0B5008F63CB /* SwiftUI.framework */; platformFilter = maccatalyst; };
 		C5A8D868270C5D7B0032560A /* TelemetryDeckWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D867270C5D7B0032560A /* TelemetryDeckWidget.swift */; };
 		C5A8D86B270C5D800032560A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5A8D86A270C5D800032560A /* Assets.xcassets */; };
-		C5A8D86D270C5D800032560A /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
-		C5A8D86E270C5D800032560A /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
 		C5A8D871270C5D800032560A /* TelemetryDeckWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C5A8D863270C5D7A0032560A /* TelemetryDeckWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C5A8D87C270C65F90032560A /* InsightResultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5D50926CDAA58008FBF8F /* InsightResultService.swift */; };
 		C5A8D87D270C65F90032560A /* InsightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D46A026CC52DD008814A9 /* InsightService.swift */; };
 		C5A8D882270C66190032560A /* ErrorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1D469726CC4C5D008814A9 /* ErrorService.swift */; };
 		C5A8D892270C68790032560A /* TelemetrySignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */; };
 		C5A8D8A5270C6FB70032560A /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D8A4270C6FB70032560A /* MockData.swift */; };
-		C5A8D8AE270C821A0032560A /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A8D8AD270C821A0032560A /* Intents.framework */; platformFilter = maccatalyst; };
-		C5A8D8B1270C821A0032560A /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D8B0270C821A0032560A /* IntentHandler.swift */; };
-		C5A8D8C6270C821B0032560A /* TelemetryDeckIntents.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C5A8D8AC270C821A0032560A /* TelemetryDeckIntents.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C5A8D8CD270C84430032560A /* TelemetryDeckWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */; };
 		C5AD4B6427D3928600CD7E4C /* DataTransferObjects in Frameworks */ = {isa = PBXBuildFile; productRef = C5AD4B6327D3928600CD7E4C /* DataTransferObjects */; };
 		C5CD58912810368100671359 /* ThreeCirclesInATrenchcode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5551E5727C3CC78005847B6 /* ThreeCirclesInATrenchcode.swift */; };
 		C5CD58922810368100671359 /* SondrineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5551E5827C3CC78005847B6 /* SondrineAnimation.swift */; };
@@ -376,10 +367,8 @@
 		C5F4D36728ACF48000EBB667 /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32828ACF48000EBB667 /* TextModifiers.swift */; };
 		C5F4D36828ACF48000EBB667 /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32828ACF48000EBB667 /* TextModifiers.swift */; };
 		C5F4D36928ACF48000EBB667 /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32828ACF48000EBB667 /* TextModifiers.swift */; };
-		C5F4D36E28ACF64600EBB667 /* ChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32228ACF48000EBB667 /* ChartDataSet.swift */; };
-		C5F4D36F28ACF64600EBB667 /* ChartDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32128ACF48000EBB667 /* ChartDataPoint.swift */; };
-		C5F4D37028ACF64700EBB667 /* ChartDataSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32228ACF48000EBB667 /* ChartDataSet.swift */; };
-		C5F4D37128ACF64700EBB667 /* ChartDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F4D32128ACF48000EBB667 /* ChartDataPoint.swift */; };
+		CEF304E15577BACEB9461044 /* TelemetryAppEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23B5A1AA98586194D0A253 /* TelemetryAppEntity.swift */; };
+		DA671FEFB073728CED7F4EE5 /* ClusterFunnelChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */; };
 		DC24DF3325DD54090003ADCB /* NoAppSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24DF3225DD54090003ADCB /* NoAppSelectedView.swift */; };
 		DC24DF3425DD54090003ADCB /* NoAppSelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24DF3225DD54090003ADCB /* NoAppSelectedView.swift */; };
 		DC24DF3925DD54780003ADCB /* LeftSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24DF3825DD54780003ADCB /* LeftSidebarView.swift */; };
@@ -393,6 +382,10 @@
 		DC627EF025A35B6A00C1DF33 /* EmptyAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC627EEE25A35B6A00C1DF33 /* EmptyAppView.swift */; };
 		DC7DEEB6258A3C2800BEA712 /* AppUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DEEB4258A3C2800BEA712 /* AppUpdateView.swift */; };
 		DC815F3D24E283640095A047 /* SignalList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC815F3B24E283640095A047 /* SignalList.swift */; };
+		DC8A7B0C2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A7B0B2F4C3CE7008D5ED7 /* DiskCache.swift */; };
+		DC8A7B0D2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A7B0B2F4C3CE7008D5ED7 /* DiskCache.swift */; };
+		DC8A7B0E2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A7B0B2F4C3CE7008D5ED7 /* DiskCache.swift */; };
+		DC8A7B0F2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8A7B0B2F4C3CE7008D5ED7 /* DiskCache.swift */; };
 		DC92395B25E5B5D600D1729C /* Telemetry_ViewerApp_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC92395A25E5B5D600D1729C /* Telemetry_ViewerApp_macOS.swift */; };
 		DC98AABC250BC30200FF26FD /* TelemetrySignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */; };
 		DC98AABD250BC30200FF26FD /* TelemetrySignalTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */; };
@@ -427,6 +420,10 @@
 		DCF7CD43254A092100BFA23B /* LexiconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF7CD3F254A08B900BFA23B /* LexiconView.swift */; };
 		DCF7CD47254A0DB300BFA23B /* LexiconItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF7CD46254A0DB300BFA23B /* LexiconItemView.swift */; };
 		DCF7CD48254A0DB300BFA23B /* LexiconItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF7CD46254A0DB300BFA23B /* LexiconItemView.swift */; };
+		E7C1D205AE1FC321F0528A4A /* WidgetBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309765E93E33D06500A6BC87 /* WidgetBarChart.swift */; };
+		E9CB4EA82FFFDFFBC196B986 /* TelemetryWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB109D2E128D19CED88F30EB /* TelemetryWidgetEntry.swift */; };
+		F4C623895DAEF049F57E0075 /* TelemetryAppEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B23B5A1AA98586194D0A253 /* TelemetryAppEntity.swift */; };
+		F792656A720E24DAA5080C26 /* TelemetryWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8FE1746F791A66744CA80D /* TelemetryWidgetProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -436,13 +433,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = C5A8D862270C5D7A0032560A;
 			remoteInfo = TelemetryDeckWidgetExtension;
-		};
-		C5A8D8C4270C821B0032560A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DCE239F724D3687C00053370 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C5A8D8AB270C821A0032560A;
-			remoteInfo = TelemetryDeckIntents;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -454,7 +444,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				C5A8D871270C5D800032560A /* TelemetryDeckWidgetExtension.appex in Embed Foundation Extensions */,
-				C5A8D8C6270C821B0032560A /* TelemetryDeckIntents.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +451,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00C31AEB89ADAC267E82ED7C /* TelemetryAppEntityQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryAppEntityQuery.swift; sourceTree = "<group>"; };
+		140BA87E7C3B1AE72403C937 /* RefreshWidgetIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshWidgetIntent.swift; path = TelemetryDeckWidget/AppIntents/RefreshWidgetIntent.swift; sourceTree = SOURCE_ROOT; };
+		18101EE89D15E833CD6B07CF /* WidgetRawTable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetRawTable.swift; sourceTree = "<group>"; };
+		1B6BF26494156C044921C443 /* TelemetryDashboardEntity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryDashboardEntity.swift; sourceTree = "<group>"; };
+		1D8FE1746F791A66744CA80D /* TelemetryWidgetProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryWidgetProvider.swift; sourceTree = "<group>"; };
 		2B00509027035C85009C609C /* Color+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Hex.swift"; sourceTree = "<group>"; };
 		2B135E1526E113E000CC0A40 /* Optional+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+RawRepresentable.swift"; sourceTree = "<group>"; };
 		2B1D468826CC4423008814A9 /* OrgService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrgService.swift; sourceTree = "<group>"; };
@@ -529,8 +523,12 @@
 		2BD21EC8271B3CE500AE52DD /* TelemetryDeckIntents (macOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TelemetryDeckIntents (macOS).entitlements"; sourceTree = "<group>"; };
 		2BEDE70F26A73EA9007247B0 /* MacOS12RecentSignalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOS12RecentSignalsView.swift; sourceTree = "<group>"; };
 		2BF2754526AAC5C10051591C /* MacOs12PayloadKeysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOs12PayloadKeysView.swift; sourceTree = "<group>"; };
+		2F127A112E91BDD7696CFAEB /* WidgetClusterChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetClusterChart.swift; sourceTree = "<group>"; };
+		309765E93E33D06500A6BC87 /* WidgetBarChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetBarChart.swift; sourceTree = "<group>"; };
+		3AC2A37116C2A668C583C241 /* TelemetryInsightEntity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryInsightEntity.swift; sourceTree = "<group>"; };
 		4903E9712983EA1500EEDF5E /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		4903E9722983EDAA00EEDF5E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5A9B212D6926C431AE9BA6D1 /* WidgetLineChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetLineChart.swift; sourceTree = "<group>"; };
 		6351A780277C5F29003AF559 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
 		6351A783277C6431003AF559 /* CustomPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickers.swift; sourceTree = "<group>"; };
 		6351A788277C9ED8003AF559 /* InsightDisplayMode+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InsightDisplayMode+Extensions.swift"; sourceTree = "<group>"; };
@@ -546,9 +544,6 @@
 		8083DD682C05C9C300596926 /* ClusterPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterPieChart.swift; sourceTree = "<group>"; };
 		8083DD6A2C05C9FE00596926 /* PieChartTopN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartTopN.swift; sourceTree = "<group>"; };
 		8083DD6C2C05EA0100596926 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		AABB001122334455AABB0011 /* ChartTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTooltip.swift; sourceTree = "<group>"; };
-		9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterRawTable.swift; sourceTree = "<group>"; };
-		8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterFunnelChart.swift; sourceTree = "<group>"; };
 		80AD3E932BFF2A7300BBD7EB /* QueryRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRunner.swift; sourceTree = "<group>"; };
 		80AD3E962BFF2AA200BBD7EB /* ClusterChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterChart.swift; sourceTree = "<group>"; };
 		80AD3E982BFF2B0A00BBD7EB /* ClusterInstrument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterInstrument.swift; sourceTree = "<group>"; };
@@ -558,6 +553,14 @@
 		80AD3EA42BFF33FF00BBD7EB /* LineChartTimeSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartTimeSeries.swift; sourceTree = "<group>"; };
 		80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartTopN.swift; sourceTree = "<group>"; };
 		80AD3EAD2BFF6D2200BBD7EB /* BarCharTopN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCharTopN.swift; sourceTree = "<group>"; };
+		8B23B5A1AA98586194D0A253 /* TelemetryAppEntity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryAppEntity.swift; sourceTree = "<group>"; };
+		8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterFunnelChart.swift; sourceTree = "<group>"; };
+		8FFE8DE7BFB7CDDB8CCC781F /* WidgetPieChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetPieChart.swift; sourceTree = "<group>"; };
+		915AC171BF568E3B61B4564E /* TelemetryWidgetIntent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryWidgetIntent.swift; sourceTree = "<group>"; };
+		9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterRawTable.swift; sourceTree = "<group>"; };
+		A86A0DFDDAFAFD7AB463FD29 /* TelemetryDashboardEntityQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryDashboardEntityQuery.swift; sourceTree = "<group>"; };
+		AABB001122334455AABB0011 /* ChartTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTooltip.swift; sourceTree = "<group>"; };
+		B69109AF576A7D21581775B4 /* WidgetFunnelChart.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetFunnelChart.swift; sourceTree = "<group>"; };
 		C5173B40283D52E40018CE9F /* InsightsGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsGrid.swift; sourceTree = "<group>"; };
 		C51CB73B27565F76005A3FB9 /* TelemetryDeckMacIntents.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TelemetryDeckMacIntents.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C51CB74C275660E0005A3FB9 /* TelemetryDeckMacWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TelemetryDeckMacWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -595,6 +598,7 @@
 		C5F4D32528ACF48000EBB667 /* BigNumberFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigNumberFormatter.swift; sourceTree = "<group>"; };
 		C5F4D32628ACF48000EBB667 /* SingleKeyValueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleKeyValueView.swift; sourceTree = "<group>"; };
 		C5F4D32828ACF48000EBB667 /* TextModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
+		D77F6DB6836F72588A18AC81 /* TelemetryInsightEntityQuery.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryInsightEntityQuery.swift; sourceTree = "<group>"; };
 		DC24DF3225DD54090003ADCB /* NoAppSelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoAppSelectedView.swift; sourceTree = "<group>"; };
 		DC24DF3825DD54780003ADCB /* LeftSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidebarView.swift; sourceTree = "<group>"; };
 		DC45BB1B24E27F12004E6392 /* SignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalView.swift; sourceTree = "<group>"; };
@@ -603,6 +607,7 @@
 		DC7DEEAB258A3B9B00BEA712 /* UpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateService.swift; sourceTree = "<group>"; };
 		DC7DEEB4258A3C2800BEA712 /* AppUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateView.swift; sourceTree = "<group>"; };
 		DC815F3B24E283640095A047 /* SignalList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalList.swift; sourceTree = "<group>"; };
+		DC8A7B0B2F4C3CE7008D5ED7 /* DiskCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskCache.swift; sourceTree = "<group>"; };
 		DC92395A25E5B5D600D1729C /* Telemetry_ViewerApp_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telemetry_ViewerApp_macOS.swift; sourceTree = "<group>"; };
 		DC98AABB250BC30200FF26FD /* TelemetrySignalTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetrySignalTypes.swift; sourceTree = "<group>"; };
 		DC9A92AF255C1CD100E92C89 /* AutoCompletingTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoCompletingTextField.swift; sourceTree = "<group>"; };
@@ -629,19 +634,11 @@
 		DCEC64AF26025AAF00BEF69C /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		DCF7CD3F254A08B900BFA23B /* LexiconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconView.swift; sourceTree = "<group>"; };
 		DCF7CD46254A0DB300BFA23B /* LexiconItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexiconItemView.swift; sourceTree = "<group>"; };
+		E351456071814508BB88D337 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		EB109D2E128D19CED88F30EB /* TelemetryWidgetEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TelemetryWidgetEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C51CB73827565F76005A3FB9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C51CB76727566158005A3FB9 /* TelemetryClient in Frameworks */,
-				C51CB76327566148005A3FB9 /* DataTransferObjects in Frameworks */,
-				C51CB73C27565F76005A3FB9 /* Intents.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C51CB749275660E0005A3FB9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -662,16 +659,6 @@
 				C5A8D865270C5D7A0032560A /* SwiftUI.framework in Frameworks */,
 				2B043C34271B491B00DDB255 /* TelemetryClient in Frameworks */,
 				C5A8D864270C5D7A0032560A /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5A8D8A9270C821A0032560A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C5A8D8AE270C821A0032560A /* Intents.framework in Frameworks */,
-				2B0769D82722EA260024D8A7 /* DataTransferObjects in Frameworks */,
-				2B043C36271B492900DDB255 /* TelemetryClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +685,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0580EE631FB20D0ECC2B7BA6 /* RawTable */ = {
+			isa = PBXGroup;
+			children = (
+				9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */,
+			);
+			path = RawTable;
+			sourceTree = "<group>";
+		};
 		2B1D469626CC484D008814A9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +795,7 @@
 				2B6431922739A5BB009A33C4 /* Caching.swift */,
 				2B64318E2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift */,
 				80427FE02BFE2AF4007E89CC /* DTOs */,
+				DC8A7B0B2F4C3CE7008D5ED7 /* DiskCache.swift */,
 			);
 			path = APIClient;
 			sourceTree = "<group>";
@@ -925,22 +921,6 @@
 			path = Chart;
 			sourceTree = "<group>";
 		};
-		0580EE631FB20D0ECC2B7BA6 /* RawTable */ = {
-			isa = PBXGroup;
-			children = (
-				9CF81F4AE6E680D291CF78F7 /* ClusterRawTable.swift */,
-			);
-			path = RawTable;
-			sourceTree = "<group>";
-		};
-		C3DF38F69580F8FC89AA9212 /* FunnelChart */ = {
-			isa = PBXGroup;
-			children = (
-				8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */,
-			);
-			path = FunnelChart;
-			sourceTree = "<group>";
-		};
 		80AD3E9C2BFF303E00BBD7EB /* BarChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +939,44 @@
 				80AD3EA72BFF340100BBD7EB /* LineChartTopN.swift */,
 			);
 			path = LineChart;
+			sourceTree = "<group>";
+		};
+		896FDBC262E5494A95F0AC07 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				2F127A112E91BDD7696CFAEB /* WidgetClusterChart.swift */,
+				309765E93E33D06500A6BC87 /* WidgetBarChart.swift */,
+				5A9B212D6926C431AE9BA6D1 /* WidgetLineChart.swift */,
+				8FFE8DE7BFB7CDDB8CCC781F /* WidgetPieChart.swift */,
+				18101EE89D15E833CD6B07CF /* WidgetRawTable.swift */,
+				B69109AF576A7D21581775B4 /* WidgetFunnelChart.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		A02660FD38306BDF71B61C4A /* AppIntents */ = {
+			isa = PBXGroup;
+			children = (
+				8B23B5A1AA98586194D0A253 /* TelemetryAppEntity.swift */,
+				1B6BF26494156C044921C443 /* TelemetryDashboardEntity.swift */,
+				3AC2A37116C2A668C583C241 /* TelemetryInsightEntity.swift */,
+				00C31AEB89ADAC267E82ED7C /* TelemetryAppEntityQuery.swift */,
+				A86A0DFDDAFAFD7AB463FD29 /* TelemetryDashboardEntityQuery.swift */,
+				D77F6DB6836F72588A18AC81 /* TelemetryInsightEntityQuery.swift */,
+				915AC171BF568E3B61B4564E /* TelemetryWidgetIntent.swift */,
+				1D8FE1746F791A66744CA80D /* TelemetryWidgetProvider.swift */,
+				EB109D2E128D19CED88F30EB /* TelemetryWidgetEntry.swift */,
+				140BA87E7C3B1AE72403C937 /* RefreshWidgetIntent.swift */,
+			);
+			path = AppIntents;
+			sourceTree = "<group>";
+		};
+		C3DF38F69580F8FC89AA9212 /* FunnelChart */ = {
+			isa = PBXGroup;
+			children = (
+				8DA2CAD35A31CB33FF5AFFEB /* ClusterFunnelChart.swift */,
+			);
+			path = FunnelChart;
 			sourceTree = "<group>";
 		};
 		C5551E5627C3CC78005847B6 /* Sondrine Animation */ = {
@@ -982,6 +1000,8 @@
 				C5A8D869270C5D7B0032560A /* TelemetryDeckWidget.intentdefinition */,
 				C5A8D86A270C5D800032560A /* Assets.xcassets */,
 				C5A8D86C270C5D800032560A /* Info.plist */,
+				A02660FD38306BDF71B61C4A /* AppIntents */,
+				896FDBC262E5494A95F0AC07 /* Charts */,
 			);
 			path = TelemetryDeckWidget;
 			sourceTree = "<group>";
@@ -1155,6 +1175,7 @@
 		DCE239FB24D3687C00053370 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E351456071814508BB88D337 /* AppConstants.swift */,
 				DC627EEA25A35B5E00C1DF33 /* App */,
 				2B462810272AF06800515530 /* Empty Status Views */,
 				2B462813272AF22200515530 /* Help + Feedback */,
@@ -1242,28 +1263,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C51CB73A27565F76005A3FB9 /* TelemetryDeckMacIntents */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C51CB74427565F76005A3FB9 /* Build configuration list for PBXNativeTarget "TelemetryDeckMacIntents" */;
-			buildPhases = (
-				C51CB73727565F76005A3FB9 /* Sources */,
-				C5B917EF2757B6CC004A842B /* ShellScript */,
-				C51CB73827565F76005A3FB9 /* Frameworks */,
-				C51CB73927565F76005A3FB9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TelemetryDeckMacIntents;
-			packageProductDependencies = (
-				C51CB76227566148005A3FB9 /* DataTransferObjects */,
-				C51CB76627566158005A3FB9 /* TelemetryClient */,
-			);
-			productName = TelemetryDeckMacIntents;
-			productReference = C51CB73B27565F76005A3FB9 /* TelemetryDeckMacIntents.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		C51CB74B275660E0005A3FB9 /* TelemetryDeckMacWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C51CB759275660E2005A3FB9 /* Build configuration list for PBXNativeTarget "TelemetryDeckMacWidgetExtension" */;
@@ -1309,27 +1308,6 @@
 			productReference = C5A8D863270C5D7A0032560A /* TelemetryDeckWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		C5A8D8AB270C821A0032560A /* TelemetryDeckIntents */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C5A8D8CA270C821B0032560A /* Build configuration list for PBXNativeTarget "TelemetryDeckIntents" */;
-			buildPhases = (
-				C5A8D8A8270C821A0032560A /* Sources */,
-				C5A8D8A9270C821A0032560A /* Frameworks */,
-				C5A8D8AA270C821A0032560A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TelemetryDeckIntents;
-			packageProductDependencies = (
-				2B043C35271B492900DDB255 /* TelemetryClient */,
-				2B0769D72722EA260024D8A7 /* DataTransferObjects */,
-			);
-			productName = TelemetryDeckIntents;
-			productReference = C5A8D8AC270C821A0032560A /* TelemetryDeckIntents.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		DCE23A0224D3687D00053370 /* Telemetry Viewer (iOS) */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCE23A1724D3687D00053370 /* Build configuration list for PBXNativeTarget "Telemetry Viewer (iOS)" */;
@@ -1345,7 +1323,6 @@
 			dependencies = (
 				809E189D2C009A1400E83D74 /* PBXTargetDependency */,
 				C5A8D870270C5D800032560A /* PBXTargetDependency */,
-				C5A8D8C5270C821B0032560A /* PBXTargetDependency */,
 			);
 			name = "Telemetry Viewer (iOS)";
 			packageProductDependencies = (
@@ -1390,16 +1367,10 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
-					C51CB73A27565F76005A3FB9 = {
-						CreatedOnToolsVersion = 13.1;
-					};
 					C51CB74B275660E0005A3FB9 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 					C5A8D862270C5D7A0032560A = {
-						CreatedOnToolsVersion = 13.0;
-					};
-					C5A8D8AB270C821A0032560A = {
 						CreatedOnToolsVersion = 13.0;
 					};
 					DCE23A0224D3687D00053370 = {
@@ -1432,26 +1403,18 @@
 				DCE23A0A24D3687D00053370 /* Telemetry Viewer (macOS) */,
 				C5A8D862270C5D7A0032560A /* TelemetryDeckWidgetExtension */,
 				C51CB74B275660E0005A3FB9 /* TelemetryDeckMacWidgetExtension */,
-				C5A8D8AB270C821A0032560A /* TelemetryDeckIntents */,
-				C51CB73A27565F76005A3FB9 /* TelemetryDeckMacIntents */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C51CB73927565F76005A3FB9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C51CB74A275660E0005A3FB9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C5551E5527C3CBEB005847B6 /* Assets.xcassets in Resources */,
 				C51CB76127566107005A3FB9 /* Assets.xcassets in Resources */,
+				A65F52A7566733D41E4C5AFA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1461,13 +1424,7 @@
 			files = (
 				C5551E5427C3CBEB005847B6 /* Assets.xcassets in Resources */,
 				C5A8D86B270C5D800032560A /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5A8D8AA270C821A0032560A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				C0AE939A0B344B40207A673F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1530,23 +1487,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
 		};
-		C5B917EF2757B6CC004A842B /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Use Xcode's copy of the Git binary\nGIT=`xcrun -find git`\n\n# Use the commit count as CFBundleVersion\nGIT_COMMIT_COUNT=`\"${GIT}\" rev-list --count HEAD`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${GIT_COMMIT_COUNT}\" \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n";
-		};
 		DC7DEE8A258A334900BEA712 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1586,35 +1526,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C51CB73727565F76005A3FB9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C51CB77027566202005A3FB9 /* CacheLayer.swift in Sources */,
-				C51CB795275664B3005A3FB9 /* AsyncOperation.swift in Sources */,
-				C51CB7472756609E005A3FB9 /* IntentHandler.swift in Sources */,
-				C51CB75F27566102005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */,
-				C51CB7752756620A005A3FB9 /* Data+JSONPrettyPrint.swift in Sources */,
-				80427FF82BFE2AF4007E89CC /* UserInfo.swift in Sources */,
-				C51CB79027566296005A3FB9 /* ConditionalViewModifier.swift in Sources */,
-				C51CB77327566206005A3FB9 /* Caching.swift in Sources */,
-				C51CB76F275661F0005A3FB9 /* APIClient.swift in Sources */,
-				C51CB78B27566279005A3FB9 /* InsightService.swift in Sources */,
-				C5F4D37028ACF64700EBB667 /* ChartDataSet.swift in Sources */,
-				80427FEC2BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */,
-				804385D42C073763004E3285 /* OrganizationInfo.swift in Sources */,
-				C51CB78927566275005A3FB9 /* ErrorService.swift in Sources */,
-				C51CB7922756646E005A3FB9 /* TelemetrySignalTypes.swift in Sources */,
-				C5F4D37128ACF64700EBB667 /* ChartDataPoint.swift in Sources */,
-				80427FF22BFE2AF4007E89CC /* InsightInfo.swift in Sources */,
-				80427FE62BFE2AF4007E89CC /* AppInfo.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		C51CB748275660E0005A3FB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FFDA4CF72D64BD3B390698A /* AppConstants.swift in Sources */,
 				C51CB77127566203005A3FB9 /* CacheLayer.swift in Sources */,
 				C51CB78127566248005A3FB9 /* Buttonstyles.swift in Sources */,
 				C51CB77A27566232005A3FB9 /* ListItemView.swift in Sources */,
@@ -1660,8 +1576,8 @@
 				C51CB77C2756623B005A3FB9 /* Helpers.swift in Sources */,
 				C5CD58922810368100671359 /* SondrineAnimation.swift in Sources */,
 				C5F4D35528ACF48000EBB667 /* ChartDataPoint.swift in Sources */,
-				C51CB76027566103005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */,
 				C51CB78627566261005A3FB9 /* ChartDataSet+InsightCalculationResult.swift in Sources */,
+				DC8A7B0F2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */,
 				C5F4D33528ACF48000EBB667 /* LineChartView.swift in Sources */,
 				C51CB78527566258005A3FB9 /* ConditionalViewModifier.swift in Sources */,
 				C5F4D33D28ACF48000EBB667 /* RawChartView.swift in Sources */,
@@ -1671,6 +1587,23 @@
 				C51CB7912756646D005A3FB9 /* TelemetrySignalTypes.swift in Sources */,
 				80427FF62BFE2AF4007E89CC /* UserInfo.swift in Sources */,
 				C5F4D36128ACF48000EBB667 /* BigNumberFormatter.swift in Sources */,
+				F4C623895DAEF049F57E0075 /* TelemetryAppEntity.swift in Sources */,
+				7E82F3EF062860123AC2EFFE /* TelemetryDashboardEntity.swift in Sources */,
+				A130428DF02AF070CD7665D0 /* TelemetryInsightEntity.swift in Sources */,
+				41CC209D092027078BBA6D49 /* TelemetryAppEntityQuery.swift in Sources */,
+				0B2E7EEBFE46B68302FBA077 /* TelemetryDashboardEntityQuery.swift in Sources */,
+				A2FFE0C249403A24C655E214 /* TelemetryInsightEntityQuery.swift in Sources */,
+				276C26653CF0D9D663C34847 /* TelemetryWidgetIntent.swift in Sources */,
+				F792656A720E24DAA5080C26 /* TelemetryWidgetProvider.swift in Sources */,
+				4E2983F20A26D50344C8E10B /* TelemetryWidgetEntry.swift in Sources */,
+				893C41529D5BE0DB71E5ECA3 /* WidgetClusterChart.swift in Sources */,
+				153B36366223514A2867F91A /* WidgetBarChart.swift in Sources */,
+				0D3D84B1BED8E6EDB2CF640A /* WidgetLineChart.swift in Sources */,
+				71474764878D59A828D3FBBE /* WidgetPieChart.swift in Sources */,
+				8E04F66B4794D96D7C280396 /* WidgetRawTable.swift in Sources */,
+				776466D1CCEAF7686E24BC71 /* WidgetFunnelChart.swift in Sources */,
+				530E38199E7BABF24AE7330E /* Extensions.swift in Sources */,
+				22235D43E320BE3E11843229 /* RefreshWidgetIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1678,6 +1611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69E600AD58D44A789BAE5CF1 /* AppConstants.swift in Sources */,
 				C5CE3D52271AFCE2005232EC /* LoadingStateIndicator.swift in Sources */,
 				C5CE3D5A271AFCE2005232EC /* Binding+OnUpdate.swift in Sources */,
 				2B78C82C2722F839000924A0 /* TelemetryDeckWidgetEntryViews.swift in Sources */,
@@ -1695,7 +1629,6 @@
 				C5CE3D53271AFCE2005232EC /* DashedCardView.swift in Sources */,
 				C5CE3D4D271AFCB6005232EC /* Color.swift in Sources */,
 				C5F4D33828ACF48000EBB667 /* ChartRangeView.swift in Sources */,
-				C5A8D86D270C5D800032560A /* TelemetryDeckWidget.intentdefinition in Sources */,
 				C5CE3D50271AFCE2005232EC /* CardView.swift in Sources */,
 				2B64319B2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift in Sources */,
 				C5CE3D4E271AFCE2005232EC /* DetailSidebar.swift in Sources */,
@@ -1725,6 +1658,7 @@
 				C5F4D35428ACF48000EBB667 /* ChartDataPoint.swift in Sources */,
 				C5CE3D5D271AFCE2005232EC /* CustomSection.swift in Sources */,
 				2B74556027230648002CBB45 /* ChartDataSet+InsightCalculationResult.swift in Sources */,
+				DC8A7B0E2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */,
 				C5F4D33428ACF48000EBB667 /* LineChartView.swift in Sources */,
 				C5CE3D57271AFCE2005232EC /* Buttonstyles.swift in Sources */,
 				C5F4D33C28ACF48000EBB667 /* RawChartView.swift in Sources */,
@@ -1734,31 +1668,23 @@
 				C581F4E0271B22FD0031E99C /* Color+Hex.swift in Sources */,
 				80427FF52BFE2AF4007E89CC /* UserInfo.swift in Sources */,
 				C5F4D36028ACF48000EBB667 /* BigNumberFormatter.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C5A8D8A8270C821A0032560A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C581F4E6271B29780031E99C /* ErrorService.swift in Sources */,
-				C581F4F5271B2B6B0031E99C /* TelemetrySignalTypes.swift in Sources */,
-				C5A8D8B1270C821A0032560A /* IntentHandler.swift in Sources */,
-				C5A8D8CD270C84430032560A /* TelemetryDeckWidget.intentdefinition in Sources */,
-				C581F4E5271B29470031E99C /* InsightService.swift in Sources */,
-				80427FF72BFE2AF4007E89CC /* UserInfo.swift in Sources */,
-				2B6431A42739A5BB009A33C4 /* CacheLayer.swift in Sources */,
-				2B6431982739A5BB009A33C4 /* APIClient.swift in Sources */,
-				2B6431A82739A5BB009A33C4 /* AsyncOperation.swift in Sources */,
-				2B64319C2739A5BB009A33C4 /* Data+JSONPrettyPrint.swift in Sources */,
-				C5F4D36E28ACF64600EBB667 /* ChartDataSet.swift in Sources */,
-				80427FEB2BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */,
-				804385D32C073763004E3285 /* OrganizationInfo.swift in Sources */,
-				2B6431AC2739A5BB009A33C4 /* Caching.swift in Sources */,
-				C51CB78F27566296005A3FB9 /* ConditionalViewModifier.swift in Sources */,
-				C5F4D36F28ACF64600EBB667 /* ChartDataPoint.swift in Sources */,
-				80427FF12BFE2AF4007E89CC /* InsightInfo.swift in Sources */,
-				80427FE52BFE2AF4007E89CC /* AppInfo.swift in Sources */,
+				CEF304E15577BACEB9461044 /* TelemetryAppEntity.swift in Sources */,
+				2E898215136C9172D8A16135 /* TelemetryDashboardEntity.swift in Sources */,
+				9F26933FFB88FE1C74CF2AB9 /* TelemetryInsightEntity.swift in Sources */,
+				4EE4B300EB182FBB5F0BE51D /* TelemetryAppEntityQuery.swift in Sources */,
+				7A15BF8B5C6A6897176EE659 /* TelemetryDashboardEntityQuery.swift in Sources */,
+				6D772495F7E5EE2D05B2BFF0 /* TelemetryInsightEntityQuery.swift in Sources */,
+				A34312449887B112690A348A /* TelemetryWidgetIntent.swift in Sources */,
+				697C5F993BB7A847FECD9CCA /* TelemetryWidgetProvider.swift in Sources */,
+				E9CB4EA82FFFDFFBC196B986 /* TelemetryWidgetEntry.swift in Sources */,
+				A41705F960EC5EB9193E19B2 /* WidgetClusterChart.swift in Sources */,
+				E7C1D205AE1FC321F0528A4A /* WidgetBarChart.swift in Sources */,
+				4BDB3B41819E2AA9B1B72BA2 /* WidgetLineChart.swift in Sources */,
+				6F4D887896A9ACFB4DB0FC64 /* WidgetPieChart.swift in Sources */,
+				4A3C69779768D63936115B1E /* WidgetRawTable.swift in Sources */,
+				A2F8D0316ABE04F0ED5FA2FC /* WidgetFunnelChart.swift in Sources */,
+				638FAC0054DF86A3347958F3 /* Extensions.swift in Sources */,
+				2E3AA58EF42BD21AD4D4C10A /* RefreshWidgetIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1766,6 +1692,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94C06CB2152F46F8ADDFA4CA /* AppConstants.swift in Sources */,
 				2B21FCDD26FDCA6A00A8A55B /* GroupView.swift in Sources */,
 				2BBFCA09267D05E40013DC74 /* Color.swift in Sources */,
 				80AD3EAE2BFF6D2200BBD7EB /* BarCharTopN.swift in Sources */,
@@ -1787,7 +1714,6 @@
 				80427FE72BFE2AF4007E89CC /* InsightGroupInfo.swift in Sources */,
 				2B1D469826CC4C5D008814A9 /* ErrorService.swift in Sources */,
 				2BBFCA01267D05E40013DC74 /* DashedCardView.swift in Sources */,
-				C5A8D86E270C5D800032560A /* TelemetryDeckWidget.intentdefinition in Sources */,
 				80AD3E992BFF2B0A00BBD7EB /* ClusterInstrument.swift in Sources */,
 				C5F4D36628ACF48000EBB667 /* TextModifiers.swift in Sources */,
 				2B61B94E264C08D4003F62C4 /* SignalsService.swift in Sources */,
@@ -1875,6 +1801,7 @@
 				2B135E1626E113E000CC0A40 /* Optional+RawRepresentable.swift in Sources */,
 				C5CD589E2810368400671359 /* SondrineAnimation.swift in Sources */,
 				2BBFCA2B267D05E40013DC74 /* MacNavigationView.swift in Sources */,
+				DC8A7B0C2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */,
 				2B21FCD726FDC38500A8A55B /* NewInsightMenu.swift in Sources */,
 				2B6431A52739A5BB009A33C4 /* AsyncOperation.swift in Sources */,
 				C5F4D34228ACF48000EBB667 /* BarChartView.swift in Sources */,
@@ -1887,13 +1814,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5694F6301649B28CCE6841 /* AppConstants.swift in Sources */,
 				C5F4D34F28ACF48000EBB667 /* DonutChartLegend.swift in Sources */,
 				C5173B41283D52E40018CE9F /* InsightsGrid.swift in Sources */,
 				2BBFCA26267D05E40013DC74 /* ProgressView+Scale.swift in Sources */,
 				2B0050922703617B009C609C /* Color+Hex.swift in Sources */,
 				DCD52C4B2541FFE3003F12C6 /* ColSpan.swift in Sources */,
 				C5F4D32B28ACF48000EBB667 /* ChartHoverLabel.swift in Sources */,
-				C51CB73627565EB5005A3FB9 /* TelemetryDeckWidget.intentdefinition in Sources */,
 				2BC522EB2625FCEF00E643AC /* HelpAndFeedbackView.swift in Sources */,
 				DC5F3A8A25A364C00057AA59 /* EmptyInsightGroupView.swift in Sources */,
 				2B46280C2728699E00515530 /* StatusMessageContainer.swift in Sources */,
@@ -1964,6 +1891,7 @@
 				DCDC6F0D253EEB9B0012D9A7 /* Optional+Bound.swift in Sources */,
 				C5F4D35B28ACF48000EBB667 /* ValueUnitAndTitleView.swift in Sources */,
 				2BA5D50526CD0E5B008FBF8F /* GroupView.swift in Sources */,
+				DC8A7B0D2F4C3CE7008D5ED7 /* DiskCache.swift in Sources */,
 				C5F4D32F28ACF48000EBB667 /* ChartBottomView.swift in Sources */,
 				2B1D469C26CC4F45008814A9 /* AppService.swift in Sources */,
 				2BBFCA12267D05E40013DC74 /* DetailSidebar.swift in Sources */,
@@ -2025,76 +1953,9 @@
 			target = C5A8D862270C5D7A0032560A /* TelemetryDeckWidgetExtension */;
 			targetProxy = C5A8D86F270C5D800032560A /* PBXContainerItemProxy */;
 		};
-		C5A8D8C5270C821B0032560A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C5A8D8AB270C821A0032560A /* TelemetryDeckIntents */;
-			targetProxy = C5A8D8C4270C821B0032560A /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		C51CB74527565F76005A3FB9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckIntents/TelemetryDeckIntents (macOS).entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = JVBMY6T275;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckMacIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID).TelemetryDeckMacIntents";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		C51CB74627565F76005A3FB9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckIntents/TelemetryDeckIntents (macOS).entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 547;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = JVBMY6T275;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckMacIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID).TelemetryDeckMacIntents";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		C51CB75A275660E2005A3FB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2117,7 +1978,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID).TelemetryDeckMacWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2150,7 +2011,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID).TelemetryDeckMacWidget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2175,7 +2036,7 @@
 				INFOPLIST_FILE = TelemetryDeckWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2207,7 +2068,7 @@
 				INFOPLIST_FILE = TelemetryDeckWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2219,65 +2080,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		C5A8D8CB270C821B0032560A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckIntents/TelemetryDeckIntents (iOS).entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 680;
-				DEVELOPMENT_TEAM = JVBMY6T275;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID).TelemetryDeckIntents";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		C5A8D8CC270C821B0032560A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
-				CODE_SIGN_ENTITLEMENTS = "TelemetryDeckIntents/TelemetryDeckIntents (iOS).entitlements";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 680;
-				DEVELOPMENT_TEAM = JVBMY6T275;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TelemetryDeckIntents/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = TelemetryDeckIntents;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID).TelemetryDeckIntents";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2416,7 +2218,7 @@
 				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2442,7 +2244,7 @@
 				DEVELOPMENT_TEAM = JVBMY6T275;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2476,7 +2278,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID)";
 				PRODUCT_NAME = "TelemetryDeck Viewer";
@@ -2504,7 +2306,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(DEVELOPER_BUNDLE_ID)";
 				PRODUCT_NAME = "TelemetryDeck Viewer";
@@ -2516,15 +2318,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C51CB74427565F76005A3FB9 /* Build configuration list for PBXNativeTarget "TelemetryDeckMacIntents" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C51CB74527565F76005A3FB9 /* Debug */,
-				C51CB74627565F76005A3FB9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C51CB759275660E2005A3FB9 /* Build configuration list for PBXNativeTarget "TelemetryDeckMacWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2539,15 +2332,6 @@
 			buildConfigurations = (
 				C5A8D873270C5D800032560A /* Debug */,
 				C5A8D874270C5D800032560A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C5A8D8CA270C821B0032560A /* Build configuration list for PBXNativeTarget "TelemetryDeckIntents" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C5A8D8CB270C821B0032560A /* Debug */,
-				C5A8D8CC270C821B0032560A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2622,15 +2406,6 @@
 			package = DC9C082F252CD622001C0F94 /* XCRemoteSwiftPackageReference "SwiftClient" */;
 			productName = TelemetryClient;
 		};
-		2B043C35271B492900DDB255 /* TelemetryClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC9C082F252CD622001C0F94 /* XCRemoteSwiftPackageReference "SwiftClient" */;
-			productName = TelemetryClient;
-		};
-		2B0769D72722EA260024D8A7 /* DataTransferObjects */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DataTransferObjects;
-		};
 		2B0769D92722EA2F0024D8A7 /* DataTransferObjects */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DataTransferObjects;
@@ -2652,15 +2427,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 809E189B2C00998C00E83D74 /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintBuildToolPlugin";
-		};
-		C51CB76227566148005A3FB9 /* DataTransferObjects */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DataTransferObjects;
-		};
-		C51CB76627566158005A3FB9 /* TelemetryClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC9C082F252CD622001C0F94 /* XCRemoteSwiftPackageReference "SwiftClient" */;
-			productName = TelemetryClient;
 		};
 		C51CB76827566199005A3FB9 /* DataTransferObjects */ = {
 			isa = XCSwiftPackageProductDependency;

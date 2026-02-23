@@ -72,6 +72,7 @@ struct Telemetry_ViewerApp: App {
     }
 
     // telemetryviewer://login/<bearertoken>
+    // telemetryviewer://insights/<appUUID>
     func handleIncomingURL(url: URL) {
         guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
               let host = components.host,
@@ -81,6 +82,13 @@ struct Telemetry_ViewerApp: App {
         if host == "login" {
             guard let bearerToken = path.split(separator: "/", maxSplits: 1).last else { return }
             api.login(bearerToken: String(bearerToken))
+        } else if host == "insights" {
+            guard let appIDString = path.split(separator: "/", maxSplits: 1).last,
+                  let appUUID = UUID(uuidString: String(appIDString)) else { return }
+            let selection = LeftSidebarView.Selection.insights(app: appUUID)
+            if let data = try? JSONEncoder().encode(selection) {
+                UserDefaults.standard.set(data, forKey: "sidebarSelection")
+            }
         }
     }
 }
