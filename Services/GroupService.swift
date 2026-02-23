@@ -32,7 +32,7 @@ class GroupService: ObservableObject {
         // after 60 seconds, clear the error, allowing another load
         switch loadingState {
         case let .error(_, date):
-            if date < Date() - 60 {
+            if date < Date() - Timing.errorRetryCooldown {
                 self.loadingState[groupID] = .idle
                 return .idle
             }

@@ -16,9 +16,9 @@ struct InsightResultWrap {
 class CacheLayer: ObservableObject {
     let queue: DispatchQueue = .init(label: "CacheLayer")
 
-    let organizationCache = Cache<String, DTOv2.Organization>(entryLifetime: 1200)
-    let appCache = Cache<DTOv2.App.ID, DTOv2.App>(entryLifetime: 1200)
-    let groupCache = Cache<DTOv2.Group.ID, DTOv2.Group>(entryLifetime: 600)
-    let insightCache = Cache<DTOv2.Insight.ID, DTOv2.Insight>(entryLifetime: 300)
-    let insightCalculationResultCache = Cache<String, InsightResultWrap>(entryLifetime: 1200)
+    let organizationCache = Cache<String, DTOv2.Organization>(entryLifetime: Timing.organizationCacheTTL)
+    let appCache = Cache<DTOv2.App.ID, DTOv2.App>(entryLifetime: Timing.appCacheTTL)
+    let groupCache = Cache<DTOv2.Group.ID, DTOv2.Group>(entryLifetime: Timing.groupCacheTTL)
+    let insightCache = Cache<DTOv2.Insight.ID, DTOv2.Insight>(entryLifetime: Timing.insightCacheTTL)
+    let insightCalculationResultCache = Cache<String, InsightResultWrap>(entryLifetime: Timing.insightResultCacheTTL)
 }

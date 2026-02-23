@@ -165,7 +165,7 @@ class InsightResultService: ObservableObject {
         // after 60 seconds, clear the error, allowing another load
         switch loadingState {
         case .error(_, let date):
-            if date < Date() - 60 {
+            if date < Date() - Timing.errorRetryCooldown {
                 self.loadingState[insightID] = .idle
                 return .idle
             }
