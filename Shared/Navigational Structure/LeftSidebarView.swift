@@ -48,6 +48,7 @@ struct LeftSidebarView: View {
                     }
                     appService.appDictionary[app.id] = app
                 }
+                appService.saveAppsToDisk()
             }
         }
     }
@@ -112,6 +113,8 @@ struct LeftSidebarView: View {
                             appService.appDictionary = [:]
                             groupService.groupsDictionary = [:]
                             insightService.insightDictionary = [:]
+                            appService.clearCache()
+                            DiskCache.clear()
                         },
                         secondaryButton: .cancel()
                     )

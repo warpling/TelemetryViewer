@@ -21,12 +21,27 @@ class AppService: ObservableObject {
     @Published var appDictionary: [AppInfo.ID: AppInfo] = [:]
     @Published var loadingStateDictionary: [AppInfo.ID: LoadingState] = [:]
 
+    private static let diskCacheKey = "cachedApps"
+
     init(api: APIClient, errors: ErrorService, orgService: OrgService) {
         self.api = api
         errorService = errors
         self.orgService = orgService
 
         loadingCancellable = loadingState.objectWillChange.receive(on: DispatchQueue.main).sink { [weak self] in self?.objectWillChange.send() }
+
+        // Restore cached apps from disk so the sidebar isn't empty on launch
+        if let cached = DiskCache.load([AppInfo.ID: AppInfo].self, forKey: Self.diskCacheKey) {
+            self.appDictionary = cached
+        }
+    }
+
+    func saveAppsToDisk() {
+        DiskCache.save(appDictionary, forKey: Self.diskCacheKey)
+    }
+
+    func clearCache() {
+        DiskCache.remove(forKey: Self.diskCacheKey)
     }
 
     func loadingState(for appID: DTOv2.App.ID) -> LoadingState {
