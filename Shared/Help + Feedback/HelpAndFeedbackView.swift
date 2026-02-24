@@ -80,6 +80,9 @@ struct FeedbackView: View {
             )
         }
         .navigationTitle("Help & Feedback")
+        #if os(macOS)
+        .toolbar(removing: .title)
+        #endif
         .onAppear {
             TelemetryManager.send("FeedbackViewAppear")
         }

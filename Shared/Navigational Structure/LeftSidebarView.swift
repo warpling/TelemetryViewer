@@ -110,7 +110,9 @@ struct LeftSidebarView: View {
                 AppUpdateView()
             }
         #endif
+            #if os(iOS)
             .navigationTitle("TelemetryDeck")
+            #endif
             .listStyle(.sidebar)
             .toolbar {
                 ToolbarItemGroup {

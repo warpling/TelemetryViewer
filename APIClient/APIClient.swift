@@ -34,6 +34,10 @@ final class APIClient: ObservableObject {
         guard let baseBundleID = Bundle.main.infoDictionary?["TELEMETRYDECK_DEVELOPER_BUNDLE_ID"] as? String else {
             fatalError("TELEMETRYDECK_DEVELOPER_BUNDLE_ID must be set in the Info.plist")
         }
+        // Shared App Group container for passing auth tokens to widget extensions.
+        // Note: On macOS debug builds, this may trigger a "would like to access data from
+        // other apps" prompt if your DEVELOPER_BUNDLE_ID isn't registered with a matching
+        // App Group in your provisioning profile. This doesn't happen in production builds.
         let appGroupID = "group.\(baseBundleID).shared"
         let userDefaults = UserDefaults(suiteName: appGroupID)
         self.userDefaults = userDefaults

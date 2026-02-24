@@ -61,6 +61,7 @@ struct SignalList: View {
                 }
             }
             .navigationTitle("Recent Signals")
+            .toolbar(removing: .title)
             .onAppear {
                 signalsService.getSignals(for: appID)
             }

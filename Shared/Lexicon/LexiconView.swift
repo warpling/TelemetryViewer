@@ -103,6 +103,9 @@ struct LexiconView: View {
             list
                 .listRowBackground(Color.clear)
                 .navigationTitle("Signal Types")
+                #if os(macOS)
+                .toolbar(removing: .title)
+                #endif
                 .onAppear {
                     lexiconService.getPayloadKeys(for: appID)
                     lexiconService.getSignalTypes(for: appID)

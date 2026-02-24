@@ -10,7 +10,9 @@ import TelemetryClient
 
 @main
 struct Telemetry_ViewerApp: App {
+    #if os(iOS)
     @Environment(\.scenePhase) var scenePhase
+    #endif
 
     let api: APIClient
     let cacheLayer: CacheLayer
@@ -24,6 +26,10 @@ struct Telemetry_ViewerApp: App {
     let lexiconService: LexiconService
     let queryService: QueryService
 
+    #if os(macOS)
+    let updateService: UpdateService
+    #endif
+
     var body: some Scene {
         WindowGroup {
             RootView()
@@ -36,16 +42,47 @@ struct Telemetry_ViewerApp: App {
                 .environmentObject(appService)
                 .environmentObject(groupService)
                 .environmentObject(insightService)
+                .environmentObject(iconFinderService)
                 .environmentObject(signalsService)
                 .environmentObject(lexiconService)
-                .environmentObject(iconFinderService)
                 .environmentObject(queryService)
+                #if os(macOS)
+                .environmentObject(updateService)
+                #endif
         }
+        #if os(macOS)
+        .commands {
+            SidebarCommands()
+
+            CommandGroup(replacing: CommandGroupPlacement.help) {
+                Button("Online Docs for Telemetry") {
+                    NSWorkspace.shared.open(URL(string: "https://telemetrydeck.com/pages/docs.html")!)
+                }
+            }
+
+            CommandGroup(after: CommandGroupPlacement.appSettings) {
+                Button("Check for Update") {
+                    updateService.checkForUpdate()
+                }
+            }
+        }
+        #endif
+        #if os(iOS)
         .onChange(of: scenePhase) { _, newScenePhase in
             if newScenePhase == .active {
                 TelemetryManager.generateNewSession()
             }
         }
+        #endif
+
+        #if os(macOS)
+        Settings {
+            MacSettingsView()
+                .environmentObject(api)
+                .environmentObject(updateService)
+                .environmentObject(orgService)
+        }
+        #endif
     }
 
     init() {
@@ -57,16 +94,21 @@ struct Telemetry_ViewerApp: App {
         self.appService = AppService(api: api, errors: errors, orgService: orgService)
         self.groupService = GroupService(api: api, errors: errors)
         self.insightService = InsightService(api: api, errors: errors)
-
+        self.iconFinderService = IconFinderService(api: api)
         self.signalsService = SignalsService(api: api)
         self.lexiconService = LexiconService(api: api)
-
         self.queryService = QueryService(api: api, errors: errors)
 
-        self.iconFinderService = IconFinderService(api: api)
+        #if os(macOS)
+        self.updateService = UpdateService()
+        #endif
 
         let configuration = TelemetryManagerConfiguration(appID: "79167A27-EBBF-4012-9974-160624E5D07B")
         TelemetryManager.initialize(with: configuration)
+
+        #if os(macOS)
+        updateService.checkForUpdate()
+        #endif
 
         UserDefaults.standard.register(defaults: ["isTestingMode": true])
     }

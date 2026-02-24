@@ -49,6 +49,7 @@ struct RootView: View {
                         NoAppSelectedView()
                     }
                 }
+                .id(sidebarSelection)
             }
             .alert(isPresented: $api.userLoginFailed, content: loginFailedView)
             .onAppear {

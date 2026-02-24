@@ -35,5 +35,8 @@ struct NoAppSelectedView: View {
                 .frame(maxWidth: 400)
             }
         }
+        #if os(macOS)
+        .toolbar(removing: .title)
+        #endif
     }
 }

@@ -64,7 +64,7 @@
          <EnvironmentVariable
             key = "API_URL"
             value = "local"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
