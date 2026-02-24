@@ -16,6 +16,7 @@ struct LeftSidebarView: View {
     @EnvironmentObject var insightService: InsightService
     @State private var showingAlert = false
     @State private var showingOrgSheet = false
+    @State private var showingHelpSheet = false
     @State private var currentOrgName: String?
 
     #if os(macOS)
@@ -83,12 +84,19 @@ struct LeftSidebarView: View {
                 .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
             }
             .buttonStyle(.plain)
+            #if os(macOS)
+            .popover(isPresented: $showingOrgSheet, arrowEdge: .top) {
+                orgSheet
+            }
+            #endif
             .padding(.horizontal)
             .padding(.bottom, 4)
         }
+        #if os(iOS)
         .sheet(isPresented: $showingOrgSheet) {
             orgSheet
         }
+        #endif
         .task {
             // Ensure an org is selected (required for td-organization-id header)
             let orgs = (try? await orgService.allOrganizations()) ?? []
@@ -105,6 +113,12 @@ struct LeftSidebarView: View {
             loadApps()
         }
 
+        .sheet(isPresented: $showingHelpSheet) {
+            FeedbackView()
+                #if os(macOS)
+                .frame(minWidth: 500, minHeight: 400)
+                #endif
+        }
         #if os(macOS)
             .sheet(isPresented: $updateService.shouldShowUpdateNowScreen) {
                 AppUpdateView()
@@ -117,12 +131,6 @@ struct LeftSidebarView: View {
             .toolbar {
                 ToolbarItemGroup {
                     #if os(macOS)
-                        Button(action: toggleSidebar) {
-                            Image(systemName: "sidebar.left")
-                                .help("Toggle Sidebar")
-                        }
-                        .help("Toggle the left sidebar")
-
                         Spacer()
                     #endif
                 }
@@ -167,6 +175,60 @@ struct LeftSidebarView: View {
     }
 
     private var orgSheet: some View {
+        #if os(macOS)
+        VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 2) {
+                OrganisationSwitcher()
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
+
+                Divider().padding(.horizontal)
+
+                Button {
+                    showingOrgSheet = false
+                    showingHelpSheet = true
+                } label: {
+                    Label("Help & Feedback", systemImage: "ladybug.fill")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+
+                Divider().padding(.horizontal)
+
+                Button {
+                    showingAlert = true
+                } label: {
+                    Label("Log Out \(api.user?.firstName ?? "User")", systemImage: "rectangle.portrait.and.arrow.right")
+                        .foregroundStyle(.red)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+            }
+            .padding(.vertical, 4)
+        }
+        .frame(minWidth: 260)
+        .alert("Really Log Out?", isPresented: $showingAlert) {
+            Button("Log Out", role: .destructive) {
+                showingOrgSheet = false
+                api.logout()
+                orgService.organization = nil
+                appService.appDictionary = [:]
+                groupService.groupsDictionary = [:]
+                insightService.insightDictionary = [:]
+                appService.clearCache()
+                DiskCache.clear()
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("You can log back in again later")
+        }
+        #else
         NavigationStack {
             List {
                 Section {
@@ -174,7 +236,6 @@ struct LeftSidebarView: View {
                 }
 
                 Section {
-                    #if os(iOS)
                     Button {
                         URL(string: "https://dashboard.telemetrydeck.com/user/organization")!.open()
                     } label: {
@@ -198,7 +259,6 @@ struct LeftSidebarView: View {
                             }
                         }
                     }
-                    #endif
 
                     Button {
                         showingOrgSheet = false
@@ -217,9 +277,7 @@ struct LeftSidebarView: View {
                 }
             }
             .navigationTitle(currentOrgName ?? "Organization")
-            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
-            #endif
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") { showingOrgSheet = false }
@@ -241,12 +299,8 @@ struct LeftSidebarView: View {
                 Text("You can log back in again later")
             }
         }
+        #endif
     }
 
-    #if os(macOS)
-        private func toggleSidebar() {
-            NSApp.keyWindow?.firstResponder?
-                .tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
-        }
-    #endif
+
 }

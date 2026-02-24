@@ -32,17 +32,16 @@ struct HelpAndFeedbackLink: View {
                 Image(systemName: "chevron.right").foregroundColor(.grayColor)
             }
             .padding()
-
-            #if os(macOS)
-            Divider()
-            #endif
         })
             .buttonStyle(CardButtonStyle(isSelected: false, customAccentColor: nil))
     }
 }
 
 struct FeedbackView: View {
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
+        NavigationStack {
         List {
             HelpAndFeedbackLink(
                 title: "Documentation",
@@ -81,10 +80,15 @@ struct FeedbackView: View {
         }
         .navigationTitle("Help & Feedback")
         #if os(macOS)
-        .toolbar(removing: .title)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Done") { dismiss() }
+            }
+        }
         #endif
         .onAppear {
             TelemetryManager.send("FeedbackViewAppear")
+        }
         }
     }
 }

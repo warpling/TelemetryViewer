@@ -84,8 +84,7 @@ struct InsightGroupsView: View {
             }
         }
 
-        .navigationTitle("")
-        .toolbar(removing: .title)
+        .navigationTitle(appService.app(withID: appID)?.name ?? "")
         .toolbar {
             ToolbarItemGroup(placement: groupsToolbarPlacement) {
                 groupSelector

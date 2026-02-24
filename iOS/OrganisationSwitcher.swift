@@ -15,34 +15,26 @@ struct OrganisationSwitcher: View {
     @State var organizations: [OrganizationInfo] = []
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 0){
-                Menu {
-                    ForEach(organizations, id: \.id) { org in
-                        Button(action: {
-                            api._currentOrganisationID = org.id.uuidString
-                            orgService.getOrganisation()
-                        }, label: {
-                            Text(org.name)
-                        })
-                    }
-                } label: {
-                    Text(getCurrentOrgName())
-                        .tint(.primary)
-                }
-                .task {
-                    organizations = (try? await orgService.allOrganizations()) ?? []
-                }
-                Text("Tap to switch organization")
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+        Menu {
+            ForEach(organizations, id: \.id) { org in
+                Button(action: {
+                    api._currentOrganisationID = org.id.uuidString
+                    orgService.getOrganisation()
+                }, label: {
+                    Text(org.name)
+                })
             }
-
-            Spacer()
-
-            Image(systemName: "person.3")
-                .foregroundStyle(Color.telemetryOrange)
-
+        } label: {
+            Label {
+                Text(getCurrentOrgName())
+                    .tint(.primary)
+            } icon: {
+                Image(systemName: "person.3.fill")
+                    .foregroundStyle(Color.telemetryOrange)
+            }
+        }
+        .task {
+            organizations = (try? await orgService.allOrganizations()) ?? []
         }
     }
 
