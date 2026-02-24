@@ -83,16 +83,12 @@ struct DateRangeMenu: View {
         }
     }
 
-    @ViewBuilder
     private func presetItem(_ label: String, action: @escaping () -> Void) -> some View {
-        Button {
-            action()
-        } label: {
-            if queryService.activePresetLabel == label {
-                Label(label, systemImage: "checkmark")
-            } else {
-                Text(label)
-            }
+        Toggle(isOn: Binding(
+            get: { queryService.activePresetLabel == label },
+            set: { if $0 { action() } }
+        )) {
+            Text(label)
         }
     }
 }
