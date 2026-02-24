@@ -155,19 +155,10 @@ struct InsightGroupsView: View {
     }
 
     private var datePickerButton: some View {
-        Button {
-            TelemetryManager.send("showDatePicker")
-            self.showDatePicker = true
-        } label: {
-            Text(queryService.toolbarLabel)
-                .contentTransition(.numericText())
-                .animation(.default, value: queryService.toolbarLabel)
-        }
-        .sheet(isPresented: self.$showDatePicker) {
-            InsightDataTimeIntervalPicker()
-                .padding()
-                .presentationDetents([.medium])
-        }
+        DateRangeMenu(showDatePicker: $showDatePicker)
+            .popover(isPresented: $showDatePicker, arrowEdge: .bottom) {
+                CustomDateRangePicker()
+            }
     }
 
     private var newGroupButton: some View {

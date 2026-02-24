@@ -92,22 +92,13 @@ struct InsightGroupsView: View {
             }
 
             ToolbarItemGroup {
-                Button {
-                    TelemetryManager.send("showDatePicker")
-                    self.showDatePicker = true
-                } label: {
-                    Text(queryService.toolbarLabel)
-                        .contentTransition(.numericText())
-                        .animation(.default, value: queryService.toolbarLabel)
-                }
-                .popover(
-                    isPresented: self.$showDatePicker,
-                    arrowEdge: .bottom
-                ) {
-                    InsightDataTimeIntervalPicker()
-                    .padding()
-                    .background(Material.regular)
-                }
+                DateRangeMenu(showDatePicker: $showDatePicker)
+                    .popover(
+                        isPresented: $showDatePicker,
+                        arrowEdge: .bottom
+                    ) {
+                        CustomDateRangePicker()
+                    }
 
                 TestingModeToggle()
 

@@ -6,112 +6,201 @@
 //
 
 import SwiftUI
+import TelemetryClient
 
-struct InsightDataTimeIntervalPicker: View {
+struct DateRangeMenu: View {
     @EnvironmentObject var queryService: QueryService
-    @Environment(\.dismiss) private var dismiss
+    @Binding var showDatePicker: Bool
 
     var body: some View {
-        VStack {
-            HStack {
-                presetButton("7 Days") {
+        Menu {
+            Section("Quick Ranges") {
+                presetItem("7 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 7)
                 }
-                presetButton("30 Days") {
+                presetItem("30 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 30)
                 }
-                presetButton("90 Days") {
+                presetItem("90 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 90)
                 }
-                presetButton("365 Days") {
+                presetItem("365 Days") {
                     queryService.timeWindowEnd = .end(of: .current(.day))
                     queryService.timeWindowBeginning = .goBack(days: 365)
                 }
             }
 
-            Divider()
-
-            HStack {
-                presetButton("Last Week") {
-                    queryService.timeWindowEnd = .end(of: .previous(.weekOfYear))
-                    queryService.timeWindowBeginning = .beginning(of: .previous(.weekOfYear))
-                }
-                presetButton("This Week") {
+            Section("Relative") {
+                presetItem("This Week") {
                     queryService.timeWindowEnd = .end(of: .current(.weekOfYear))
                     queryService.timeWindowBeginning = .beginning(of: .current(.weekOfYear))
                 }
-            }
-            HStack {
-                presetButton("Last Month") {
-                    queryService.timeWindowEnd = .end(of: .previous(.month))
-                    queryService.timeWindowBeginning = .beginning(of: .previous(.month))
+                presetItem("Last Week") {
+                    queryService.timeWindowEnd = .end(of: .previous(.weekOfYear))
+                    queryService.timeWindowBeginning = .beginning(of: .previous(.weekOfYear))
                 }
-                presetButton("This Month") {
+                presetItem("This Month") {
                     queryService.timeWindowEnd = .end(of: .current(.month))
                     queryService.timeWindowBeginning = .beginning(of: .current(.month))
                 }
-                presetButton("2 Months") {
+                presetItem("Last Month") {
+                    queryService.timeWindowEnd = .end(of: .previous(.month))
+                    queryService.timeWindowBeginning = .beginning(of: .previous(.month))
+                }
+                presetItem("2 Months") {
                     queryService.timeWindowEnd = .end(of: .current(.month))
                     queryService.timeWindowBeginning = .beginning(of: .previous(.month))
                 }
-            }
-
-            HStack {
-                presetButton("Last Year") {
-                    queryService.timeWindowEnd = .end(of: .previous(.year))
-                    queryService.timeWindowBeginning = .beginning(of: .previous(.year))
-                }
-                presetButton("This Year") {
+                presetItem("This Year") {
                     queryService.timeWindowEnd = .end(of: .current(.year))
                     queryService.timeWindowBeginning = .beginning(of: .current(.year))
                 }
+                presetItem("Last Year") {
+                    queryService.timeWindowEnd = .end(of: .previous(.year))
+                    queryService.timeWindowBeginning = .beginning(of: .previous(.year))
+                }
             }
-
-            let pickerTimeWindowBeginningBinding = Binding(
-                get: { self.queryService.timeWindowBeginningDate },
-                set: { self.queryService.timeWindowBeginning = .absolute(date: $0) }
-            )
-
-            let pickerTimeWindowEndBinding = Binding(
-                get: { self.queryService.timeWindowEndDate },
-                set: { self.queryService.timeWindowEnd = .absolute(date: $0) }
-            )
 
             Divider()
-                .padding(.top, 4)
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .center, spacing: 2) {
-                    Text("From").font(.caption).foregroundStyle(.secondary)
-                    DatePicker("", selection: pickerTimeWindowBeginningBinding, in: ...queryService.timeWindowEndDate, displayedComponents: .date)
-                        .labelsHidden()
-                }
-                Image(systemName: "arrow.right")
-                    .font(.caption)
-                    .foregroundStyle(.tertiary)
-                    .padding(.top, 22)
-                VStack(alignment: .center, spacing: 2) {
-                    Text("Until").font(.caption).foregroundStyle(.secondary)
-                    DatePicker("", selection: pickerTimeWindowEndBinding, in: ...Date(), displayedComponents: .date)
-                        .labelsHidden()
+
+            Button {
+                TelemetryManager.send("showDatePicker")
+                showDatePicker = true
+            } label: {
+                if queryService.activePresetLabel == nil {
+                    Label("Custom Range...", systemImage: "checkmark")
+                } else {
+                    Text("Custom Range...")
                 }
             }
-            .padding(.top, 4)
+        } label: {
+            Text(queryService.toolbarLabel)
+                .contentTransition(.numericText())
+                .animation(.default, value: queryService.toolbarLabel)
         }
     }
 
     @ViewBuilder
-    private func presetButton(_ label: String, action: @escaping () -> Void) -> some View {
-        let combined = {
+    private func presetItem(_ label: String, action: @escaping () -> Void) -> some View {
+        Button {
             action()
-            dismiss()
+        } label: {
+            if queryService.activePresetLabel == label {
+                Label(label, systemImage: "checkmark")
+            } else {
+                Text(label)
+            }
         }
-        if queryService.activePresetLabel == label {
-            Button(label, action: combined).buttonStyle(SmallPrimaryButtonStyle())
-        } else {
-            Button(label, action: combined).buttonStyle(SmallSecondaryButtonStyle())
+    }
+}
+
+struct CustomDateRangePicker: View {
+    @EnvironmentObject var queryService: QueryService
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var startDate: Date = Date()
+    @State private var endDate: Date = Date()
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            HStack(alignment: .top, spacing: 16) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("START DATE")
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.secondary)
+                    DatePicker("", selection: $startDate, in: ...endDate, displayedComponents: .date)
+                        #if os(macOS)
+                        .datePickerStyle(.field)
+                        #endif
+                        .labelsHidden()
+                        .fixedSize()
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                #if os(macOS)
+                                .fill(Color(nsColor: .controlBackgroundColor))
+                                #else
+                                .fill(Color(.secondarySystemBackground))
+                                #endif
+                        )
+                }
+
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("END DATE")
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .foregroundStyle(.secondary)
+                    DatePicker("", selection: $endDate, in: ...Date(), displayedComponents: .date)
+                        #if os(macOS)
+                        .datePickerStyle(.field)
+                        #endif
+                        .labelsHidden()
+                        .fixedSize()
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                #if os(macOS)
+                                .fill(Color(nsColor: .controlBackgroundColor))
+                                #else
+                                .fill(Color(.secondarySystemBackground))
+                                #endif
+                        )
+                }
+            }
+
+            #if os(macOS)
+            HStack(spacing: 12) {
+                Spacer()
+
+                Button("Cancel", role: .cancel) {
+                    dismiss()
+                }
+                .keyboardShortcut(.cancelAction)
+
+                Button("Apply") {
+                    queryService.timeWindowBeginning = .absolute(date: startDate)
+                    queryService.timeWindowEnd = .absolute(date: endDate)
+                    dismiss()
+                }
+                .keyboardShortcut(.defaultAction)
+            }
+            #else
+            HStack(spacing: 12) {
+                Button(role: .cancel) {
+                    dismiss()
+                } label: {
+                    Text("Cancel")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
+
+                Button {
+                    queryService.timeWindowBeginning = .absolute(date: startDate)
+                    queryService.timeWindowEnd = .absolute(date: endDate)
+                    dismiss()
+                } label: {
+                    Text("Apply")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
+            }
+            #endif
+        }
+        .padding()
+        #if os(macOS)
+        .fixedSize()
+        #endif
+        .onAppear {
+            startDate = queryService.timeWindowBeginningDate
+            endDate = queryService.timeWindowEndDate
         }
     }
 }
