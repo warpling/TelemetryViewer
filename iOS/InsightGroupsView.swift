@@ -158,6 +158,7 @@ struct InsightGroupsView: View {
         DateRangeMenu(showDatePicker: $showDatePicker)
             .popover(isPresented: $showDatePicker, arrowEdge: .bottom) {
                 CustomDateRangePicker()
+                    .presentationCompactAdaptation(.popover)
             }
     }
 

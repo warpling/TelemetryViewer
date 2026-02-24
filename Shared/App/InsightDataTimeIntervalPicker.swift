@@ -111,19 +111,15 @@ struct CustomDateRangePicker: View {
                     DatePicker("", selection: $startDate, in: ...endDate, displayedComponents: .date)
                         #if os(macOS)
                         .datePickerStyle(.field)
-                        #endif
-                        .labelsHidden()
                         .fixedSize()
                         .padding(.horizontal, 10)
                         .padding(.vertical, 8)
                         .background(
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                #if os(macOS)
                                 .fill(Color(nsColor: .controlBackgroundColor))
-                                #else
-                                .fill(Color(.secondarySystemBackground))
-                                #endif
                         )
+                        #endif
+                        .labelsHidden()
                 }
 
                 VStack(alignment: .leading, spacing: 6) {
@@ -134,19 +130,15 @@ struct CustomDateRangePicker: View {
                     DatePicker("", selection: $endDate, in: ...Date(), displayedComponents: .date)
                         #if os(macOS)
                         .datePickerStyle(.field)
-                        #endif
-                        .labelsHidden()
                         .fixedSize()
                         .padding(.horizontal, 10)
                         .padding(.vertical, 8)
                         .background(
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                #if os(macOS)
                                 .fill(Color(nsColor: .controlBackgroundColor))
-                                #else
-                                .fill(Color(.secondarySystemBackground))
-                                #endif
                         )
+                        #endif
+                        .labelsHidden()
                 }
             }
 
