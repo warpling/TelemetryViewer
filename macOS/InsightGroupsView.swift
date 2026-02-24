@@ -67,7 +67,7 @@ struct InsightGroupsView: View {
             }
             TelemetryManager.send("InsightGroupsAppear")
         }
-        .onChange(of: selectedInsightGroupID) { newValue in
+        .onChange(of: selectedInsightGroupID) { _, newValue in
             if let newValue {
                 UserDefaults.standard.set(newValue.uuidString, forKey: storageKey)
             }

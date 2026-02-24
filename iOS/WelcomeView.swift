@@ -26,7 +26,7 @@ struct WelcomeView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 15) {
                 HStack {
                     Spacer()
@@ -69,7 +69,6 @@ struct WelcomeView: View {
             .navigationTitle("Welcome to TelemetryDeck")
             .navigationBarTitleDisplayMode(.large)
         }
-        .navigationViewStyle(.stack)
         .onAppear {
             TelemetryManager.send("WelcomeViewAppear", with: ["welcomeScreenCohort": welcomeScreenCohort])
         }

@@ -113,7 +113,7 @@ struct LexiconView: View {
 
 struct LexiconView_Previews: PreviewProvider {
     static var previews: some View {
-        return NavigationView {
+        return NavigationStack {
             LexiconView(appID: UUID())
                 .environmentObject(MockLexiconService() as LexiconService)
         }

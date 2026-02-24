@@ -91,13 +91,13 @@ struct QueryRunner: View {
                 await runQuery()
             }
         }
-        .onChange(of: queryService.isTestingMode) { _ in
+        .onChange(of: queryService.isTestingMode) { _, _ in
             activeQueryTask?.cancel()
             activeQueryTask = Task {
                 await runQuery()
             }
         }
-        .onChange(of: queryService.timeWindowBeginning) { _ in
+        .onChange(of: queryService.timeWindowBeginning) { _, _ in
             #if DEBUG
             print("📅 [\(title)] timeWindowBeginning changed → \(queryService.timeWindowBeginning)")
             #endif
@@ -107,7 +107,7 @@ struct QueryRunner: View {
                 await runQuery()
             }
         }
-        .onChange(of: queryService.timeWindowEnd) { _ in
+        .onChange(of: queryService.timeWindowEnd) { _, _ in
             #if DEBUG
             print("📅 [\(title)] timeWindowEnd changed → \(queryService.timeWindowEnd)")
             #endif
@@ -120,7 +120,7 @@ struct QueryRunner: View {
         .onReceive(Timer.publish(every: 15, on: .main, in: .common).autoconnect()) { _ in
             updateStaleness()
         }
-        .onChange(of: scenePhase) { newPhase in
+        .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active, !isLoading,
                let wrapper = queryResultWrapper,
                Date().timeIntervalSince(wrapper.calculationFinishedAt) > Timing.queryAutoRefreshThreshold {

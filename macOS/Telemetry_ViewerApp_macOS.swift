@@ -104,8 +104,9 @@ struct Telemetry_ViewerApp: App {
             guard let appIDString = path.split(separator: "/", maxSplits: 1).last,
                   let appUUID = UUID(uuidString: String(appIDString)) else { return }
             let selection = LeftSidebarView.Selection.insights(app: appUUID)
-            if let data = try? JSONEncoder().encode(selection) {
-                UserDefaults.standard.set(data, forKey: "sidebarSelection")
+            if let data = try? JSONEncoder().encode(selection),
+               let string = String(data: data, encoding: .utf8) {
+                UserDefaults.standard.set(string, forKey: "sidebarSelection")
             }
         }
     }

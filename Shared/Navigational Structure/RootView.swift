@@ -14,6 +14,9 @@ struct RootView: View {
     @EnvironmentObject var orgService: OrgService
     @EnvironmentObject var appService: AppService
 
+    // swiftlint:disable:next redundant_optional_initialization
+    @AppStorage("sidebarSelection") var sidebarSelection: LeftSidebarView.Selection? = nil
+
     var body: some View {
         if api.userNotLoggedIn {
             #if os(iOS)
@@ -29,9 +32,23 @@ struct RootView: View {
             }
             #endif
         } else {
-            NavigationView {
-                LeftSidebarView()
-                NoAppSelectedView()
+            NavigationSplitView {
+                LeftSidebarView(sidebarSelection: $sidebarSelection)
+            } detail: {
+                NavigationStack {
+                    switch sidebarSelection {
+                    case .insights(let appID):
+                        InsightGroupsView(appID: appID)
+                    case .signalTypes(let appID):
+                        LexiconView(appID: appID)
+                    case .recentSignals(let appID):
+                        SignalList(appID: appID)
+                    case .feedback:
+                        FeedbackView()
+                    case .getStarted, .plansAndPricing, .newApp, .editApp, nil:
+                        NoAppSelectedView()
+                    }
+                }
             }
             .alert(isPresented: $api.userLoginFailed, content: loginFailedView)
             .onAppear {

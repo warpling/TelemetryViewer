@@ -15,15 +15,17 @@ struct LeftSidebarView: View {
     @EnvironmentObject var groupService: GroupService
     @EnvironmentObject var insightService: InsightService
     @State private var showingAlert = false
+    @State private var showingOrgSheet = false
+    @State private var currentOrgName: String?
 
     #if os(macOS)
         @EnvironmentObject var updateService: UpdateService
     #endif
 
-    // swiftlint:disable redundant_optional_initialization
+    // swiftlint:disable:next redundant_optional_initialization
     @AppStorage("sidebarSelectionExpandedSections") var expandedSections: [DTOv2.App.ID: Bool]? = nil
-    @AppStorage("sidebarSelection") var sidebarSelection: LeftSidebarView.Selection? = nil
-    // swiftlint:enable redundant_optional_initialization
+
+    @Binding var sidebarSelection: Selection?
 
     enum Selection: Codable, Hashable {
         case getStarted
@@ -54,7 +56,7 @@ struct LeftSidebarView: View {
     }
 
     var body: some View {
-        List {
+        List(selection: $sidebarSelection) {
             Section {
                 ForEach(Array(appService.appDictionary.keys), id: \.self) { appID in
                     section(for: appID)
@@ -63,65 +65,29 @@ struct LeftSidebarView: View {
                 Text("Apps")
             }
 
-            Section {
-                OrganisationSwitcher()
-
-                #if os(iOS)
-                    Button {
-                        URL(string: "https://dashboard.telemetrydeck.com/user/organization")!.open()
-                    } label: {
-                        HStack {
-                            Label("Organization Settings", systemImage: "app.badge")
-                            Spacer()
-                            Image(systemName: "arrow.up.right.square")
-                                .foregroundColor(.gray)
-                        }
-                    }
-
-                    if api.user != nil {
-                        Button {
-                            URL(string: "https://dashboard.telemetrydeck.com/user/profile")!.open()
-                        } label: {
-                            HStack {
-                                Label("User Settings", systemImage: "gear")
-                                Spacer()
-                                Image(systemName: "arrow.up.right.square")
-                                    .foregroundColor(.gray)
-                            }
-                        }
-                    }
-                #endif
-
-                NavigationLink(tag: Selection.feedback, selection: $sidebarSelection) {
-                    FeedbackView()
-                } label: {
-                    Label("Help & Feedback", systemImage: "ladybug.fill")
+        }
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                showingOrgSheet = true
+            } label: {
+                HStack {
+                    Text(currentOrgName ?? "Organization")
+                        .fontWeight(.medium)
+                        .lineLimit(1)
+                    Spacer()
+                    Image(systemName: "ellipsis.circle")
+                        .foregroundStyle(.secondary)
                 }
-
-                Button {
-                    showingAlert = true
-                } label: {
-                    Label("Log Out \(api.user?.firstName ?? "User")", systemImage: "rectangle.portrait.and.arrow.right")
-                }
-                .alert(isPresented: $showingAlert) {
-                    Alert(
-                        title: Text("Really Log Out?"),
-                        message: Text("You can log back in again later"),
-                        primaryButton: .destructive(Text("Log Out")) {
-                            api.logout()
-                            orgService.organization = nil
-                            appService.appDictionary = [:]
-                            groupService.groupsDictionary = [:]
-                            insightService.insightDictionary = [:]
-                            appService.clearCache()
-                            DiskCache.clear()
-                        },
-                        secondaryButton: .cancel()
-                    )
-                }
-            } header: {
-                Text("Meta")
+                .padding(.horizontal, 12)
+                .padding(.vertical, 10)
+                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
             }
+            .buttonStyle(.plain)
+            .padding(.horizontal)
+            .padding(.bottom, 4)
+        }
+        .sheet(isPresented: $showingOrgSheet) {
+            orgSheet
         }
         .task {
             // Ensure an org is selected (required for td-organization-id header)
@@ -131,6 +97,8 @@ struct LeftSidebarView: View {
                 if !hasValidSelection {
                     api._currentOrganisationID = orgs.first?.id.uuidString
                 }
+                currentOrgName = orgs.first(where: { $0.id.uuidString == api._currentOrganisationID })?.name
+                    ?? orgs.first?.name
             }
 
             // Load apps directly from v3 endpoint
@@ -142,7 +110,7 @@ struct LeftSidebarView: View {
                 AppUpdateView()
             }
         #endif
-        .navigationTitle("TelemetryDeck")
+            .navigationTitle("TelemetryDeck")
             .listStyle(.sidebar)
             .toolbar {
                 ToolbarItemGroup {
@@ -174,26 +142,17 @@ struct LeftSidebarView: View {
     func section(for appID: DTOv2.App.ID) -> some View {
         DisclosureGroup(isExpanded: self.binding(for: appID)) {
             if let app = appService.appDictionary[appID] {
-                NavigationLink(tag: Selection.insights(app: app.id), selection: $sidebarSelection) {
-                    InsightGroupsView(appID: app.id)
-                } label: {
+                NavigationLink(value: Selection.insights(app: app.id)) {
                     Label("Insights", systemImage: "chart.bar.xaxis")
                 }
-                .tag(Selection.insights(app: appID))
 
-                NavigationLink(tag: Selection.signalTypes(app: app.id), selection: $sidebarSelection) {
-                    LexiconView(appID: app.id)
-                } label: {
+                NavigationLink(value: Selection.signalTypes(app: app.id)) {
                     Label("Signal Types", systemImage: "book")
                 }
-                .tag(Selection.signalTypes(app: appID))
 
-                NavigationLink(tag: Selection.recentSignals(app: app.id), selection: $sidebarSelection) {
-                    SignalList(appID: app.id)
-                } label: {
+                NavigationLink(value: Selection.recentSignals(app: app.id)) {
                     Label("Recent Signals", systemImage: "list.triangle")
                 }
-                .tag(Selection.recentSignals(app: appID))
 
             } else {
                 TinyLoadingStateIndicator(loadingState: appService.loadingStateDictionary[appID] ?? .idle, title: "Insights")
@@ -201,7 +160,84 @@ struct LeftSidebarView: View {
                 TinyLoadingStateIndicator(loadingState: appService.loadingStateDictionary[appID] ?? .idle, title: "Recent Signals")
             }
         } label: {
-            LabelLoadingStateIndicator(loadingState: appService.loadingStateDictionary[appID] ?? .idle, title: appService.appDictionary[appID]?.name, systemImage: "sensor.tag.radiowaves.forward")
+            TinyLoadingStateIndicator(loadingState: appService.loadingStateDictionary[appID] ?? .idle, title: appService.appDictionary[appID]?.name)
+        }
+    }
+
+    private var orgSheet: some View {
+        NavigationStack {
+            List {
+                Section {
+                    OrganisationSwitcher()
+                }
+
+                Section {
+                    #if os(iOS)
+                    Button {
+                        URL(string: "https://dashboard.telemetrydeck.com/user/organization")!.open()
+                    } label: {
+                        HStack {
+                            Label("Organization Settings", systemImage: "app.badge")
+                            Spacer()
+                            Image(systemName: "arrow.up.right.square")
+                                .foregroundColor(.gray)
+                        }
+                    }
+
+                    if api.user != nil {
+                        Button {
+                            URL(string: "https://dashboard.telemetrydeck.com/user/profile")!.open()
+                        } label: {
+                            HStack {
+                                Label("User Settings", systemImage: "gear")
+                                Spacer()
+                                Image(systemName: "arrow.up.right.square")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                    #endif
+
+                    Button {
+                        showingOrgSheet = false
+                        sidebarSelection = .feedback
+                    } label: {
+                        Label("Help & Feedback", systemImage: "ladybug.fill")
+                    }
+                }
+
+                Section {
+                    Button(role: .destructive) {
+                        showingAlert = true
+                    } label: {
+                        Label("Log Out \(api.user?.firstName ?? "User")", systemImage: "rectangle.portrait.and.arrow.right")
+                    }
+                }
+            }
+            .navigationTitle(currentOrgName ?? "Organization")
+            #if os(iOS)
+            .navigationBarTitleDisplayMode(.inline)
+            #endif
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done") { showingOrgSheet = false }
+                }
+            }
+            .alert("Really Log Out?", isPresented: $showingAlert) {
+                Button("Log Out", role: .destructive) {
+                    showingOrgSheet = false
+                    api.logout()
+                    orgService.organization = nil
+                    appService.appDictionary = [:]
+                    groupService.groupsDictionary = [:]
+                    insightService.insightDictionary = [:]
+                    appService.clearCache()
+                    DiskCache.clear()
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("You can log back in again later")
+            }
         }
     }
 

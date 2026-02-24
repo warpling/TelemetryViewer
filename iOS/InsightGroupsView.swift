@@ -47,16 +47,9 @@ struct InsightGroupsView: View {
         VStack(alignment: .leading, spacing: 0) {
             StatusMessageDisplay()
 
-            // Group selector header
-            groupSelectorHeader
-                .padding(.horizontal)
-                .padding(.top, 8)
-
             if queryService.isTestingMode {
                 TestModeIndicator()
             }
-
-            Divider()
 
             Group {
                 if selectedInsightGroupID == nil {
@@ -72,9 +65,12 @@ struct InsightGroupsView: View {
                 }
             }
         }
-        .navigationTitle(appService.app(withID: appID)?.name ?? "")
+        .navigationTitle(selectedGroupTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                groupSelectorHeader
+            }
             ToolbarItem(placement: .navigationBarTrailing) {
                 datePickerButton
             }
@@ -90,7 +86,7 @@ struct InsightGroupsView: View {
             }
             TelemetryManager.send("InsightGroupsAppear")
         }
-        .onChange(of: selectedInsightGroupID) { newValue in
+        .onChange(of: selectedInsightGroupID) { _, newValue in
             if let newValue {
                 UserDefaults.standard.set(newValue.uuidString, forKey: storageKey)
             }
@@ -144,11 +140,10 @@ struct InsightGroupsView: View {
         } label: {
             HStack(spacing: 4) {
                 Text(selectedGroupTitle)
-                    .font(.title2)
-                    .fontWeight(.semibold)
+                    .font(.headline)
                     .foregroundStyle(Color.primary)
                 Image(systemName: "chevron.up.chevron.down")
-                    .font(.caption)
+                    .font(.caption2)
                     .foregroundStyle(Color.secondary)
             }
         }

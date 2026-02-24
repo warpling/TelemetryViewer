@@ -69,7 +69,7 @@ struct GroupView: View {
                 }
                 .frame(maxWidth: 250, maxHeight: .infinity)
                 .transition(.move(edge: .trailing))
-                .onChange(of: groupID) { _ in
+                .onChange(of: groupID) { _, _ in
                     sidebarVisible = false
                 }
             }

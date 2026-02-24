@@ -107,7 +107,7 @@ struct PreviewPickerItem: PickerItem {
 struct DetailedPicker_Previews: PreviewProvider {
     @State static var asd = PreviewPickerItem(explanation: "Picker", name: "Test")
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 DetailedPicker(
                     title: "DetailedPicker",
