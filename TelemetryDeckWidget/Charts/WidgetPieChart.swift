@@ -80,8 +80,8 @@ struct WidgetPieChart: View {
         var entries: [(label: String, value: Double)] = []
         for row in result.rows {
             for item in row.result {
-                guard let value = item.metrics[metricName] else { continue }
-                let label = item.dimensions[dimensionName] ?? "Unknown"
+                guard let value = item.metrics[metricName],
+                      let label = item.dimensions[dimensionName] else { continue }
                 entries.append((label, value))
             }
         }
@@ -95,8 +95,8 @@ struct WidgetPieChart: View {
         var items: [ChartItem] = []
         for row in result.rows {
             for item in row.result.prefix(itemLimit) {
-                guard let value = item.metrics[metricName] else { continue }
-                let label = item.dimensions[dimensionName] ?? "Unknown"
+                guard let value = item.metrics[metricName],
+                      let label = item.dimensions[dimensionName] else { continue }
                 items.append(ChartItem(
                     id: "\(row.timestamp.timeIntervalSince1970)-\(label)",
                     timestamp: row.timestamp,

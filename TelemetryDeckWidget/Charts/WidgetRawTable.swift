@@ -27,8 +27,8 @@ struct WidgetRawTable: View {
             let dimensionName = query.dimension?.name ?? "No value"
             let metricName = query.metric?.name ?? query.aggregations?.first?.name ?? "count"
             return topNResult.rows.flatMap { row in
-                row.result.map { item in
-                    let label = item.dimensions[dimensionName] ?? "Unknown"
+                row.result.compactMap { item in
+                    guard let label = item.dimensions[dimensionName] else { return nil }
                     let value = item.metrics[metricName] ?? 0
                     return (label, value)
                 }

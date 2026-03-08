@@ -24,8 +24,7 @@ struct LineChartTopN: View {
         var names: [String] = []
         for row in topNQueryResult.rows {
             for rowResult in row.result {
-                let name = getMetricName(rowResult: rowResult)
-                if seen.insert(name).inserted {
+                if let name = getMetricName(rowResult: rowResult), seen.insert(name).inserted {
                     names.append(name)
                 }
             }
@@ -87,12 +86,13 @@ struct LineChartTopN: View {
             ForEach(topNQueryResult.rows, id: \.self) { (row: TopNQueryResultRow) in
                 ForEach(row.result, id: \.self) { (rowResult: AdaptableQueryResultItem) in
                     ForEach(query.aggregations ?? [], id: \.self) { (aggregator: Aggregator) in
-                        if let metricValue = getMetricValue(rowResult: rowResult) {
+                        if let metricValue = getMetricValue(rowResult: rowResult),
+                           let metricName = getMetricName(rowResult: rowResult) {
                             getLineMark(
                                 timeStamp: row.timestamp,
                                 name: aggregator.name,
                                 metricValue: metricValue,
-                                metricName: getMetricName(rowResult: rowResult)
+                                metricName: metricName
                             )
                         }
                     }
@@ -101,12 +101,13 @@ struct LineChartTopN: View {
 
             if let selectedDate, let row = closestRow(to: selectedDate) {
                 ForEach(row.result, id: \.self) { (item: AdaptableQueryResultItem) in
-                    if let value = getMetricValue(rowResult: item) {
+                    if let value = getMetricValue(rowResult: item),
+                       let metricName = getMetricName(rowResult: item) {
                         PointMark(
                             x: .value("Date", row.timestamp, unit: query.granularityAsCalendarComponent),
                             y: .value("value", value)
                         )
-                        .foregroundStyle(by: .value(query.dimension?.name ?? "No value", getMetricName(rowResult: item)))
+                        .foregroundStyle(by: .value(query.dimension?.name ?? "No value", metricName))
                         .symbolSize(36)
                     }
                 }
@@ -124,8 +125,8 @@ struct LineChartTopN: View {
     private func tooltipEntries(for date: Date) -> [ChartTooltip.Entry] {
         guard let row = closestRow(to: date) else { return [] }
         return row.result.compactMap { item in
-            guard let value = getMetricValue(rowResult: item) else { return nil }
-            let label = getMetricName(rowResult: item)
+            guard let value = getMetricValue(rowResult: item),
+                  let label = getMetricName(rowResult: item) else { return nil }
             let colorIndex = legendNames.firstIndex(of: label) ?? 0
             let color = Color.chartColors[colorIndex % Color.chartColors.count]
             return ChartTooltip.Entry(color: color, label: label, value: value)
@@ -141,10 +142,9 @@ struct LineChartTopN: View {
         .interpolationMethod(.cardinal)
     }
 
-    func getMetricName(rowResult: AdaptableQueryResultItem) -> String {
+    func getMetricName(rowResult: AdaptableQueryResultItem) -> String? {
         let dimensionName = query.dimension?.name ?? "No value"
-        let metricName = rowResult.dimensions[dimensionName] ?? "Not found"
-        return metricName
+        return rowResult.dimensions[dimensionName]
     }
 
     func getMetricValue(rowResult: AdaptableQueryResultItem) -> Double? {

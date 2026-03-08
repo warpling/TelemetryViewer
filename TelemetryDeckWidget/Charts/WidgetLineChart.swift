@@ -100,8 +100,8 @@ struct WidgetLineChart: View {
         var items: [ChartItem] = []
         for row in result.rows {
             for item in limitedItems(row.result) {
-                guard let value = item.metrics[metricName] else { continue }
-                let label = item.dimensions[dimensionName] ?? "Unknown"
+                guard let value = item.metrics[metricName],
+                      let label = item.dimensions[dimensionName] else { continue }
                 items.append(ChartItem(
                     id: "\(row.timestamp.timeIntervalSince1970)-\(label)",
                     timestamp: row.timestamp,
