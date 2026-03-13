@@ -64,8 +64,13 @@ struct InsightsGrid: View {
             .first
     }
 
-    private static let viewportItemCount = 3
+    private static let estimatedItemHeight: CGFloat = 220
     private static let staggerInterval: TimeInterval = 0.15
+
+    private static var viewportItemCount: Int {
+        let screenHeight = NSScreen.main?.visibleFrame.height ?? 800
+        return max(1, Int(screenHeight / estimatedItemHeight))
+    }
 
     var body: some View {
         let insights = insightGroup.insights ?? []
