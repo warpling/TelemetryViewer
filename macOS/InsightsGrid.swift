@@ -65,7 +65,7 @@ struct InsightsGrid: View {
     }
 
     var body: some View {
-        VStack {
+        LazyVStack {
             ForEach(insightGroup.insights ?? [], id: \.id) { insight in
                 if let query = insight.query,
                    !Self.unsupportedDisplayModes.contains(insight.displayMode) {
