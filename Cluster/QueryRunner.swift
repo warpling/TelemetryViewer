@@ -48,17 +48,12 @@ struct QueryRunner: View {
             }
 
             HStack(spacing: 3) {
-                if isLoading {
-                    ProgressView()
-                        .scaleEffect(0.75)
-                        .frame(height: 5)
-                }
                 Spacer()
                 if let queryResultWrapper = queryResultWrapper, queryResultWrapper.result != nil {
                     Button {
                         Task { await runQuery() }
                     } label: {
-                        RelativeTimestampLabel(date: queryResultWrapper.calculationFinishedAt, showRefreshIcon: isStale)
+                        RelativeTimestampLabel(date: queryResultWrapper.calculationFinishedAt, isLoading: isLoading, showRefreshIcon: isStale)
                     }
                     .buttonStyle(.plain)
                     .disabled(isLoading)
@@ -298,16 +293,22 @@ extension QueryRunner {
 
 private struct RelativeTimestampLabel: View {
     let date: Date
+    var isLoading: Bool = false
     let showRefreshIcon: Bool
 
     var body: some View {
         TimelineView(PeriodicTimelineSchedule(from: .now, by: 60)) { context in
             HStack(spacing: 3) {
-                if showRefreshIcon {
+                if isLoading {
+                    ProgressView()
+                        .scaleEffect(0.6)
+                        .frame(width: 12, height: 12)
+                } else if showRefreshIcon {
                     Image(systemName: "arrow.clockwise")
                 }
                 Text(Self.relativeTimeLabel(from: date, to: context.date))
             }
+            .animation(.easeInOut(duration: 0.2), value: isLoading)
         }
     }
 
