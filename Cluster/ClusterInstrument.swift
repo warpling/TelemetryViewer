@@ -14,6 +14,7 @@ struct ClusterInstrument: View {
     let query: CustomQuery
     let title: String
     let type: InsightDisplayMode
+    var initialLoadDelay: TimeInterval = 0
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -23,7 +24,7 @@ struct ClusterInstrument: View {
                 .foregroundStyle(Color.Zinc600)
                 .padding(.top)
                 .padding(.horizontal)
-            QueryRunner(query: query, title: title, type: type)
+            QueryRunner(query: query, title: title, type: type, initialLoadDelay: initialLoadDelay)
         }
         .compositingGroup()
         .background(.background)

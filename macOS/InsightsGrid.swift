@@ -64,21 +64,36 @@ struct InsightsGrid: View {
             .first
     }
 
+    private static let estimatedItemHeight: CGFloat = 220
+    private static let staggerInterval: TimeInterval = 0.15
+
+    private static var viewportItemCount: Int {
+        let screenHeight = NSScreen.main?.visibleFrame.height ?? 800
+        return max(1, Int(screenHeight / estimatedItemHeight))
+    }
+
     var body: some View {
+        let insights = insightGroup.insights ?? []
         VStack {
-            ForEach(insightGroup.insights ?? [], id: \.id) { insight in
+            ForEach(Array(insights.enumerated()), id: \.element.id) { index, insight in
                 if let query = insight.query,
                    !Self.unsupportedDisplayModes.contains(insight.displayMode) {
                     ClusterInstrument(
                         query: Self.withDataSource(query, fallback: groupDataSource),
                         title: insight.title,
-                        type: insight.displayMode
+                        type: insight.displayMode,
+                        initialLoadDelay: Self.loadDelay(for: index)
                     )
                 } else {
                     UnsupportedInsightCard(title: insight.title)
                 }
             }
         }
+    }
+
+    private static func loadDelay(for index: Int) -> TimeInterval {
+        guard index >= viewportItemCount else { return 0 }
+        return TimeInterval(index - viewportItemCount + 1) * staggerInterval
     }
 
     /// Patches queries missing `dataSource` with the value from a sibling query.

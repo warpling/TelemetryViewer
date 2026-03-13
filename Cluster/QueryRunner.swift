@@ -16,6 +16,7 @@ struct QueryRunner: View {
     let query: CustomQuery
     let title: String
     let type: InsightDisplayMode
+    var initialLoadDelay: TimeInterval = 0
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -47,17 +48,12 @@ struct QueryRunner: View {
             }
 
             HStack(spacing: 3) {
-                if isLoading {
-                    ProgressView()
-                        .scaleEffect(0.75)
-                        .frame(height: 5)
-                }
                 Spacer()
                 if let queryResultWrapper = queryResultWrapper, queryResultWrapper.result != nil {
                     Button {
                         Task { await runQuery() }
                     } label: {
-                        RelativeTimestampLabel(date: queryResultWrapper.calculationFinishedAt, showRefreshIcon: isStale)
+                        RelativeTimestampLabel(date: queryResultWrapper.calculationFinishedAt, isLoading: isLoading, showRefreshIcon: isStale)
                     }
                     .buttonStyle(.plain)
                     .disabled(isLoading)
@@ -88,6 +84,10 @@ struct QueryRunner: View {
                 isCachedResult = true
             }
             activeQueryTask = Task {
+                if initialLoadDelay > 0 {
+                    try? await Task.sleep(nanoseconds: UInt64(initialLoadDelay * 1_000_000_000))
+                    guard !Task.isCancelled else { return }
+                }
                 await runQuery()
             }
         }
@@ -293,16 +293,22 @@ extension QueryRunner {
 
 private struct RelativeTimestampLabel: View {
     let date: Date
+    var isLoading: Bool = false
     let showRefreshIcon: Bool
 
     var body: some View {
         TimelineView(PeriodicTimelineSchedule(from: .now, by: 60)) { context in
             HStack(spacing: 3) {
-                if showRefreshIcon {
+                if isLoading {
+                    ProgressView()
+                        .scaleEffect(0.6)
+                        .frame(width: 12, height: 12)
+                } else if showRefreshIcon {
                     Image(systemName: "arrow.clockwise")
                 }
                 Text(Self.relativeTimeLabel(from: date, to: context.date))
             }
+            .animation(.easeInOut(duration: 0.2), value: isLoading)
         }
     }
 
