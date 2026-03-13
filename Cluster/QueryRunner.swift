@@ -16,6 +16,7 @@ struct QueryRunner: View {
     let query: CustomQuery
     let title: String
     let type: InsightDisplayMode
+    var initialLoadDelay: TimeInterval = 0
 
     @Environment(\.scenePhase) private var scenePhase
 
@@ -88,6 +89,10 @@ struct QueryRunner: View {
                 isCachedResult = true
             }
             activeQueryTask = Task {
+                if initialLoadDelay > 0 {
+                    try? await Task.sleep(nanoseconds: UInt64(initialLoadDelay * 1_000_000_000))
+                    guard !Task.isCancelled else { return }
+                }
                 await runQuery()
             }
         }

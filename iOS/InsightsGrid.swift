@@ -43,21 +43,31 @@ struct InsightsGrid: View {
             .first
     }
 
+    private static let viewportItemCount = 3
+    private static let staggerInterval: TimeInterval = 0.15
+
     var body: some View {
-        LazyVStack {
-            ForEach(insightGroup.insights ?? [], id: \.id) { insight in
+        let insights = insightGroup.insights ?? []
+        VStack {
+            ForEach(Array(insights.enumerated()), id: \.element.id) { index, insight in
                 if let query = insight.query,
                    !Self.unsupportedDisplayModes.contains(insight.displayMode) {
                     ClusterInstrument(
                         query: Self.withDataSource(query, fallback: groupDataSource),
                         title: insight.title,
-                        type: insight.displayMode
+                        type: insight.displayMode,
+                        initialLoadDelay: Self.loadDelay(for: index)
                     )
                 } else {
                     UnsupportedInsightCard(title: insight.title)
                 }
             }
         }
+    }
+
+    private static func loadDelay(for index: Int) -> TimeInterval {
+        guard index >= viewportItemCount else { return 0 }
+        return TimeInterval(index - viewportItemCount + 1) * staggerInterval
     }
 
     /// Patches queries missing `dataSource` with the value from a sibling query.
